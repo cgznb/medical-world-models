@@ -1,0 +1,337 @@
+{
+  "scope": "original training patients only, nested OOF development comparison",
+  "original_test_scored": false,
+  "patients": 521,
+  "clinical_baseline": {
+    "patients": 521,
+    "stages": {
+      "S0": {
+        "n": 521,
+        "positive": 118,
+        "brier": 0.17656327390607454,
+        "nll": 0.5466135144233704,
+        "auroc": 0.589245909912941,
+        "average_precision": 0.3013093618225913,
+        "probability_distribution": {
+          "n": 521,
+          "mean": 0.22696826312755325,
+          "std": 0.1290109374640521,
+          "min": 0.008019364438951015,
+          "max": 0.7267316579818726
+        },
+        "ct1_permutation": {
+          "n": 521,
+          "mean_absolute": 0.0,
+          "maximum_absolute": 0.0,
+          "root_mean_square": 0.0
+        }
+      },
+      "S1": {
+        "n": 521,
+        "positive": 118,
+        "brier": 0.17656327390607454,
+        "nll": 0.5466135144233704,
+        "auroc": 0.589245909912941,
+        "average_precision": 0.3013093618225913,
+        "probability_distribution": {
+          "n": 521,
+          "mean": 0.22696826312755325,
+          "std": 0.1290109374640521,
+          "min": 0.008019364438951015,
+          "max": 0.7267316579818726
+        },
+        "ct1_permutation": {
+          "n": 521,
+          "mean_absolute": 0.0,
+          "maximum_absolute": 0.0,
+          "root_mean_square": 0.0
+        }
+      },
+      "S2": {
+        "n": 521,
+        "positive": 118,
+        "brier": 0.17656327390607454,
+        "nll": 0.5466135144233704,
+        "auroc": 0.589245909912941,
+        "average_precision": 0.3013093618225913,
+        "probability_distribution": {
+          "n": 521,
+          "mean": 0.22696826312755325,
+          "std": 0.1290109374640521,
+          "min": 0.008019364438951015,
+          "max": 0.7267316579818726
+        },
+        "ct1_permutation": {
+          "n": 521,
+          "mean_absolute": 0.0,
+          "maximum_absolute": 0.0,
+          "root_mean_square": 0.0
+        }
+      }
+    },
+    "pcr": {
+      "n": 521,
+      "positive": 101,
+      "brier": 0.15763206458622095,
+      "nll": 0.4950610101222992,
+      "auroc": 0.592904290429043,
+      "average_precision": 0.22429909934418557,
+      "probability_distribution": {
+        "n": 521,
+        "mean": 0.19270150098438427,
+        "std": 0.0981819396469641,
+        "min": 0.00473739393055439,
+        "max": 0.48701536655426025
+      },
+      "ct1_permutation": {
+        "n": 521,
+        "mean_absolute": 0.0,
+        "maximum_absolute": 0.0,
+        "root_mean_square": 0.0
+      }
+    },
+    "mean_prefix_nll": 0.5466135144233704,
+    "s0_s1_difference": {
+      "n": 521,
+      "mean_absolute": 0.0,
+      "maximum_absolute": 0.0,
+      "root_mean_square": 0.0
+    }
+  },
+  "rows": [
+    {
+      "case": "token_control",
+      "mean_prefix_nll": 0.5650508403778076,
+      "s0_auroc": 0.5872061235647895,
+      "s1_auroc": 0.5788577196450351,
+      "s0_ap": 0.3174174057923317,
+      "s1_ap": 0.30397799999099556,
+      "pcr_auroc": 0.5894153701084394,
+      "shuffled_ct1_s1_auroc": 0.5773226227026117,
+      "shuffled_ct1_s1_nll": 0.5651746935729582,
+      "ct1_permutation_mae": 0.009066167255352304,
+      "fold_selected_epochs": [
+        11,
+        17,
+        22
+      ],
+      "fold_s0_auroc": [
+        0.6328584995251662,
+        0.5408582089552239,
+        0.6067738231917337
+      ],
+      "fold_s1_auroc": [
+        0.6229819563152896,
+        0.5389925373134328,
+        0.5941446613088405
+      ],
+      "absolute_ct1": {
+        "supported": false,
+        "reason": "model_does_not_export_absolute_CT_latents"
+      }
+    },
+    {
+      "case": "token_prior",
+      "mean_prefix_nll": 0.5437297224998474,
+      "s0_auroc": 0.5965428775707616,
+      "s1_auroc": 0.5988770660722547,
+      "s0_ap": 0.3155143267213481,
+      "s1_ap": 0.3181557676625577,
+      "pcr_auroc": 0.5931871758604432,
+      "shuffled_ct1_s1_auroc": 0.5979728308869916,
+      "shuffled_ct1_s1_nll": 0.5444016956769812,
+      "ct1_permutation_mae": 0.003008107573416034,
+      "fold_selected_epochs": [
+        11,
+        10,
+        9
+      ],
+      "fold_s0_auroc": [
+        0.6387464387464389,
+        0.5300373134328358,
+        0.6220818982013012
+      ],
+      "fold_s1_auroc": [
+        0.6433048433048433,
+        0.5305970149253731,
+        0.6228473019517796
+      ],
+      "absolute_ct1": {
+        "supported": false,
+        "reason": "model_does_not_export_absolute_CT_latents"
+      }
+    },
+    {
+      "case": "direct8",
+      "mean_prefix_nll": 0.5485076904296875,
+      "s0_auroc": 0.5892669386381798,
+      "s1_auroc": 0.5931782815325735,
+      "s0_ap": 0.3063644282178072,
+      "s1_ap": 0.31338817088928195,
+      "pcr_auroc": 0.5914427157001415,
+      "shuffled_ct1_s1_auroc": 0.5854607393699794,
+      "shuffled_ct1_s1_nll": 0.5529383661571946,
+      "ct1_permutation_mae": 0.014556580615514127,
+      "fold_selected_epochs": [
+        9,
+        2,
+        6
+      ],
+      "fold_s0_auroc": [
+        0.6169040835707502,
+        0.5363805970149254,
+        0.618446230386529
+      ],
+      "fold_s1_auroc": [
+        0.6241215574548907,
+        0.5419776119402986,
+        0.6134711060084195
+      ],
+      "absolute_ct1": {
+        "supported": true,
+        "patients": 521,
+        "elements": 8336,
+        "predicted_sse": 12451.03479525929,
+        "copy_ct0_sse": 12451.03479525929,
+        "training_mean_sse": 8176.873123975463,
+        "dimensions": 16,
+        "prediction_mse": 1.4936462086443485,
+        "copy_ct0_mse": 1.4936462086443485,
+        "training_mean_mse": 0.9809108833943694,
+        "prediction_r2_vs_training_mean": -0.5227134635061816,
+        "copy_ct0_r2_vs_training_mean": -0.5227134635061816,
+        "target": "absolute_CT1_in_each_inner_training_fitted_latent_space",
+        "pooled_definition": "sum_fold_squared_errors_divided_by_sum_fold_elements_or_baseline_errors"
+      }
+    },
+    {
+      "case": "direct32",
+      "mean_prefix_nll": 0.5448191165924072,
+      "s0_auroc": 0.5912646675358539,
+      "s1_auroc": 0.5961223030659881,
+      "s0_ap": 0.30402537187082135,
+      "s1_ap": 0.3095078317598279,
+      "pcr_auroc": 0.5959688826025461,
+      "shuffled_ct1_s1_auroc": 0.5890776801110317,
+      "shuffled_ct1_s1_nll": 0.5489954413235092,
+      "ct1_permutation_mae": 0.014238367565941502,
+      "fold_selected_epochs": [
+        2,
+        2,
+        2
+      ],
+      "fold_s0_auroc": [
+        0.6205128205128204,
+        0.5388059701492537,
+        0.6144278606965173
+      ],
+      "fold_s1_auroc": [
+        0.6254510921177588,
+        0.555223880597015,
+        0.6077305778798316
+      ],
+      "absolute_ct1": {
+        "supported": true,
+        "patients": 521,
+        "elements": 33344,
+        "predicted_sse": 54241.27633381187,
+        "copy_ct0_sse": 54241.27633381187,
+        "training_mean_sse": 31922.789450824188,
+        "dimensions": 64,
+        "prediction_mse": 1.626717740337448,
+        "copy_ct0_mse": 1.626717740337448,
+        "training_mean_mse": 0.9573773227814356,
+        "prediction_r2_vs_training_mean": -0.6991396199059747,
+        "copy_ct0_r2_vs_training_mean": -0.6991396199059747,
+        "target": "absolute_CT1_in_each_inner_training_fitted_latent_space",
+        "pooled_definition": "sum_fold_squared_errors_divided_by_sum_fold_elements_or_baseline_errors"
+      }
+    },
+    {
+      "case": "predictive8",
+      "mean_prefix_nll": 0.5479800701141357,
+      "s0_auroc": 0.5888673928586449,
+      "s1_auroc": 0.5923371325230264,
+      "s0_ap": 0.30727686562148493,
+      "s1_ap": 0.31045102942807323,
+      "pcr_auroc": 0.5933286185761434,
+      "shuffled_ct1_s1_auroc": 0.5860285149514237,
+      "shuffled_ct1_s1_nll": 0.5514937303623357,
+      "ct1_permutation_mae": 0.012852194909392472,
+      "fold_selected_epochs": [
+        12,
+        6,
+        10
+      ],
+      "fold_s0_auroc": [
+        0.6184235517568851,
+        0.5324626865671641,
+        0.6174894756984309
+      ],
+      "fold_s1_auroc": [
+        0.6197530864197531,
+        0.5389925373134329,
+        0.616532721010333
+      ],
+      "absolute_ct1": {
+        "supported": true,
+        "patients": 521,
+        "elements": 8336,
+        "predicted_sse": 10079.18687948776,
+        "copy_ct0_sse": 12451.03479525929,
+        "training_mean_sse": 8176.873123975463,
+        "dimensions": 16,
+        "prediction_mse": 1.2091155085757868,
+        "copy_ct0_mse": 1.4936462086443485,
+        "training_mean_mse": 0.9809108833943694,
+        "prediction_r2_vs_training_mean": -0.2326456246379205,
+        "copy_ct0_r2_vs_training_mean": -0.5227134635061816,
+        "target": "absolute_CT1_in_each_inner_training_fitted_latent_space",
+        "pooled_definition": "sum_fold_squared_errors_divided_by_sum_fold_elements_or_baseline_errors"
+      }
+    },
+    {
+      "case": "predictive32",
+      "mean_prefix_nll": 0.5467036366462708,
+      "s0_auroc": 0.589834714219624,
+      "s1_auroc": 0.5912436388106153,
+      "s0_ap": 0.30365804747773095,
+      "s1_ap": 0.3063891004838857,
+      "pcr_auroc": 0.5957802923149459,
+      "shuffled_ct1_s1_auroc": 0.5867645203347773,
+      "shuffled_ct1_s1_nll": 0.5489886223572904,
+      "ct1_permutation_mae": 0.011991019474231637,
+      "fold_selected_epochs": [
+        6,
+        6,
+        7
+      ],
+      "fold_s0_auroc": [
+        0.6235517568850902,
+        0.5307835820895523,
+        0.6127057022579411
+      ],
+      "fold_s1_auroc": [
+        0.6201329534662868,
+        0.5348880597014926,
+        0.614619211634137
+      ],
+      "absolute_ct1": {
+        "supported": true,
+        "patients": 521,
+        "elements": 33344,
+        "predicted_sse": 47899.873473528176,
+        "copy_ct0_sse": 54241.27633381187,
+        "training_mean_sse": 31922.789450824188,
+        "dimensions": 64,
+        "prediction_mse": 1.4365365125218383,
+        "copy_ct0_mse": 1.626717740337448,
+        "training_mean_mse": 0.9573773227814356,
+        "prediction_r2_vs_training_mean": -0.5004914763891815,
+        "copy_ct0_r2_vs_training_mean": -0.6991396199059747,
+        "target": "absolute_CT1_in_each_inner_training_fitted_latent_space",
+        "pooled_definition": "sum_fold_squared_errors_divided_by_sum_fold_elements_or_baseline_errors"
+      }
+    }
+  ]
+}

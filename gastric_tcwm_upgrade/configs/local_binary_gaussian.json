@@ -1,0 +1,12 @@
+{
+  "model": {},
+  "train": {
+    "seed": 17,
+    "epochs": 150,
+    "warmup_epochs": 15,
+    "batch_size": 32,
+    "patience": 25,
+    "amp": true,
+    "device": "cuda"
+  }
+}

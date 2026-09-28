@@ -1,0 +1,111 @@
+{
+  "role": "test",
+  "patients": 65,
+  "test_used_for_selection": false,
+  "model_lock_sha256": "a998ca63cec2622160526aaf859bd9434c59e4eab07865e6984c25b516313c0d",
+  "external_validation": false,
+  "samples": 32,
+  "seed": 1729,
+  "batch_size": 16,
+  "models": {
+    "original": {
+      "interpretation": "scenario_conditioned_association",
+      "causal_effects_identified": false,
+      "stages": {
+        "S0": {
+          "n": 65,
+          "positive": 15,
+          "brier": 0.17861730967543646,
+          "nll": 0.5431237354903667,
+          "auroc": 0.5493333333333333,
+          "average_precision": 0.2996203359760587
+        },
+        "S1": {
+          "n": 65,
+          "positive": 15,
+          "brier": 0.17861844558406562,
+          "nll": 0.5431266517869334,
+          "auroc": 0.548,
+          "average_precision": 0.29803303438875706
+        },
+        "S2": {
+          "n": 65,
+          "positive": 15,
+          "brier": 0.17861844558406562,
+          "nll": 0.5431266517869334,
+          "auroc": 0.548,
+          "average_precision": 0.29803303438875706
+        }
+      },
+      "selection_nll": 0.5431256890296936,
+      "pcr": {
+        "n": 65,
+        "positive": 13,
+        "brier": 0.16144087600555468,
+        "nll": 0.5091734650430254,
+        "auroc": 0.37573964497041423,
+        "average_precision": 0.28043015543115657
+      },
+      "bundle_sha256": "28ff9c4e7cd7145c351ec2df3f44f034d0d3dfe20271250e101d33a9c550d1ef"
+    },
+    "repaired": {
+      "interpretation": "scenario_conditioned_association",
+      "causal_effects_identified": false,
+      "stages": {
+        "S0": {
+          "n": 65,
+          "positive": 15,
+          "brier": 0.17097363099611787,
+          "nll": 0.5328910635711241,
+          "auroc": 0.6239999999999999,
+          "average_precision": 0.372499074217172
+        },
+        "S1": {
+          "n": 65,
+          "positive": 15,
+          "brier": 0.1709759104769231,
+          "nll": 0.5328963934653397,
+          "auroc": 0.6239999999999999,
+          "average_precision": 0.372499074217172
+        },
+        "S2": {
+          "n": 65,
+          "positive": 15,
+          "brier": 0.1709759104769231,
+          "nll": 0.5328963934653397,
+          "auroc": 0.6239999999999999,
+          "average_precision": 0.372499074217172
+        }
+      },
+      "selection_nll": 0.5328946709632874,
+      "pcr": {
+        "n": 65,
+        "positive": 13,
+        "brier": 0.16105895745412632,
+        "nll": 0.536686845471766,
+        "auroc": 0.584319526627219,
+        "average_precision": 0.27635659932824214
+      },
+      "bundle_sha256": "bab02137e61254b4a5c28091611e05485fdf5714c66a5cae133bc2d3dae1aa1e"
+    },
+    "clinical_only": {
+      "recurrence": {
+        "n": 65,
+        "positive": 15,
+        "brier": 0.17096189143569396,
+        "nll": 0.5328593279914147,
+        "auroc": 0.6253333333333333,
+        "average_precision": 0.3742147604916818
+      },
+      "pcr": {
+        "n": 65,
+        "positive": 13,
+        "brier": 0.16105719313678052,
+        "nll": 0.5366463548605088,
+        "auroc": 0.584319526627219,
+        "average_precision": 0.27635659932824214
+      },
+      "fit": "frozen training patients only; no test refit"
+    }
+  }
+}

@@ -1,0 +1,336 @@
+{
+  "schema": "tcwm-ct-dependency-probe-v1",
+  "case": "token_prior",
+  "patient_scope": "nested_outer_original_training_patients_only",
+  "outer_oof_patients": 521,
+  "original_validation_or_test_scored": false,
+  "excluded_original_holdouts": 130,
+  "samples": 32,
+  "batch_size": 16,
+  "seed": 1729,
+  "permutation_seed": 2718,
+  "device": "cuda",
+  "folds": [
+    {
+      "fold": 0,
+      "outer_patients": 174,
+      "excluded_original_holdouts": 130,
+      "bundle_sha256": "753b7ade0caeec3c5d4495a235aedab496c6844f38acec1c10651d3c5187ed3f",
+      "modes": {
+        "original": {
+          "S0": {
+            "n": 174,
+            "positive": 39,
+            "brier": 0.1681778506325202,
+            "nll": 0.5178436040878296,
+            "auroc": 0.6387464387464389,
+            "average_precision": 0.3375094091690501
+          },
+          "S1": {
+            "n": 174,
+            "positive": 39,
+            "brier": 0.16748075193608045,
+            "nll": 0.5159564018249512,
+            "auroc": 0.6433048433048433,
+            "average_precision": 0.35319791868882683
+          }
+        },
+        "permute_ct0": {
+          "S0": {
+            "n": 174,
+            "positive": 39,
+            "brier": 0.1729808895100851,
+            "nll": 0.5299159288406372,
+            "auroc": 0.6227920227920228,
+            "average_precision": 0.31690308118270266
+          },
+          "S1": {
+            "n": 174,
+            "positive": 39,
+            "brier": 0.1742591650083066,
+            "nll": 0.5340402722358704,
+            "auroc": 0.6127255460588794,
+            "average_precision": 0.3138381612778559
+          }
+        },
+        "permute_paired_ct0_ct1": {
+          "S0": {
+            "n": 174,
+            "positive": 39,
+            "brier": 0.1729808895100851,
+            "nll": 0.5299159288406372,
+            "auroc": 0.6227920227920228,
+            "average_precision": 0.31690308118270266
+          },
+          "S1": {
+            "n": 174,
+            "positive": 39,
+            "brier": 0.17357103060107656,
+            "nll": 0.5314570665359497,
+            "auroc": 0.6191832858499525,
+            "average_precision": 0.31354245961109245
+          }
+        }
+      }
+    },
+    {
+      "fold": 1,
+      "outer_patients": 174,
+      "excluded_original_holdouts": 130,
+      "bundle_sha256": "639012a6d9aa852d6e07ebe6c1c5841dfe634490083e4bfe9a7616f29171a42d",
+      "modes": {
+        "original": {
+          "S0": {
+            "n": 174,
+            "positive": 40,
+            "brier": 0.18385666282786592,
+            "nll": 0.5795327425003052,
+            "auroc": 0.5300373134328358,
+            "average_precision": 0.294617613566303
+          },
+          "S1": {
+            "n": 174,
+            "positive": 40,
+            "brier": 0.18366168495409585,
+            "nll": 0.5787874460220337,
+            "auroc": 0.5305970149253731,
+            "average_precision": 0.2942955198665028
+          }
+        },
+        "permute_ct0": {
+          "S0": {
+            "n": 174,
+            "positive": 40,
+            "brier": 0.1843537222737392,
+            "nll": 0.5768998861312866,
+            "auroc": 0.5520522388059702,
+            "average_precision": 0.29787647144555374
+          },
+          "S1": {
+            "n": 174,
+            "positive": 40,
+            "brier": 0.18380151218129223,
+            "nll": 0.5765351057052612,
+            "auroc": 0.5520522388059702,
+            "average_precision": 0.30274435307298264
+          }
+        },
+        "permute_paired_ct0_ct1": {
+          "S0": {
+            "n": 174,
+            "positive": 40,
+            "brier": 0.1843537222737392,
+            "nll": 0.5768998861312866,
+            "auroc": 0.5520522388059702,
+            "average_precision": 0.29787647144555374
+          },
+          "S1": {
+            "n": 174,
+            "positive": 40,
+            "brier": 0.1844144340710469,
+            "nll": 0.577046275138855,
+            "auroc": 0.5516791044776119,
+            "average_precision": 0.2963903450131846
+          }
+        }
+      }
+    },
+    {
+      "fold": 2,
+      "outer_patients": 173,
+      "excluded_original_holdouts": 130,
+      "bundle_sha256": "e48c88d4d283cf7fb534ab84eb31bd5254d8124dbe043db2da65b4f9aed86991",
+      "modes": {
+        "original": {
+          "S0": {
+            "n": 173,
+            "positive": 39,
+            "brier": 0.17280181458392324,
+            "nll": 0.5359675884246826,
+            "auroc": 0.6220818982013012,
+            "average_precision": 0.3457506618406585
+          },
+          "S1": {
+            "n": 173,
+            "positive": 39,
+            "brier": 0.1726580972527625,
+            "nll": 0.5352972149848938,
+            "auroc": 0.6228473019517796,
+            "average_precision": 0.3463209527955582
+          }
+        },
+        "permute_ct0": {
+          "S0": {
+            "n": 173,
+            "positive": 39,
+            "brier": 0.17539906902178623,
+            "nll": 0.5418639183044434,
+            "auroc": 0.6069651741293532,
+            "average_precision": 0.31513482499808637
+          },
+          "S1": {
+            "n": 173,
+            "positive": 39,
+            "brier": 0.1754719515984854,
+            "nll": 0.5420818328857422,
+            "auroc": 0.6060084194412553,
+            "average_precision": 0.3144821833258709
+          }
+        },
+        "permute_paired_ct0_ct1": {
+          "S0": {
+            "n": 173,
+            "positive": 39,
+            "brier": 0.17539906902178623,
+            "nll": 0.5418639183044434,
+            "auroc": 0.6069651741293532,
+            "average_precision": 0.31513482499808637
+          },
+          "S1": {
+            "n": 173,
+            "positive": 39,
+            "brier": 0.17527650070039652,
+            "nll": 0.5416846871376038,
+            "auroc": 0.6050516647531573,
+            "average_precision": 0.31426287850761875
+          }
+        }
+      }
+    }
+  ],
+  "modes": {
+    "original": {
+      "S0": {
+        "n": 521,
+        "positive": 118,
+        "brier": 0.17494955713075988,
+        "nll": 0.5444642901420593,
+        "auroc": 0.5965428775707616,
+        "average_precision": 0.3155143267213481,
+        "probability_change": {
+          "n": 521,
+          "mean_absolute": 0.0,
+          "maximum_absolute": 0.0,
+          "root_mean_square": 0.0
+        }
+      },
+      "S1": {
+        "n": 521,
+        "positive": 118,
+        "brier": 0.17460390564993972,
+        "nll": 0.5433624982833862,
+        "auroc": 0.5988770660722547,
+        "average_precision": 0.3181557676625577,
+        "probability_change": {
+          "n": 521,
+          "mean_absolute": 0.0,
+          "maximum_absolute": 0.0,
+          "root_mean_square": 0.0
+        }
+      }
+    },
+    "permute_ct0": {
+      "S0": {
+        "n": 521,
+        "positive": 118,
+        "brier": 0.17758207560682235,
+        "nll": 0.5495746731758118,
+        "auroc": 0.5914539260630021,
+        "average_precision": 0.2994858665231276,
+        "probability_change": {
+          "n": 521,
+          "mean_absolute": 0.0281971936541361,
+          "maximum_absolute": 0.13162630796432495,
+          "root_mean_square": 0.044055057643100526
+        },
+        "metric_delta_from_original": {
+          "auroc": -0.005088951507759565,
+          "average_precision": -0.016028460198220518,
+          "nll": 0.005110383033752441
+        }
+      },
+      "S1": {
+        "n": 521,
+        "positive": 118,
+        "brier": 0.1778487628743343,
+        "nll": 0.5509026050567627,
+        "auroc": 0.5876477267948017,
+        "average_precision": 0.2981527576955257,
+        "probability_change": {
+          "n": 521,
+          "mean_absolute": 0.027979874806460744,
+          "maximum_absolute": 0.13167941570281982,
+          "root_mean_square": 0.043618545221487885
+        },
+        "metric_delta_from_original": {
+          "auroc": -0.011229339277452954,
+          "average_precision": -0.020003009967032026,
+          "nll": 0.007540106773376465
+        }
+      }
+    },
+    "permute_paired_ct0_ct1": {
+      "S0": {
+        "n": 521,
+        "positive": 118,
+        "brier": 0.17758207560682235,
+        "nll": 0.5495746731758118,
+        "auroc": 0.5914539260630021,
+        "average_precision": 0.2994858665231276,
+        "probability_change": {
+          "n": 521,
+          "mean_absolute": 0.0281971936541361,
+          "maximum_absolute": 0.13162630796432495,
+          "root_mean_square": 0.044055057643100526
+        },
+        "metric_delta_from_original": {
+          "auroc": -0.005088951507759565,
+          "average_precision": -0.016028460198220518,
+          "nll": 0.005110383033752441
+        }
+      },
+      "S1": {
+        "n": 521,
+        "positive": 118,
+        "brier": 0.17775874371231876,
+        "nll": 0.550078809261322,
+        "auroc": 0.5904024898010682,
+        "average_precision": 0.29797938952728237,
+        "probability_change": {
+          "n": 521,
+          "mean_absolute": 0.027596391553341655,
+          "maximum_absolute": 0.13123226165771484,
+          "root_mean_square": 0.04370416680929454
+        },
+        "metric_delta_from_original": {
+          "auroc": -0.008474576271186418,
+          "average_precision": -0.02017637813527534,
+          "nll": 0.006716310977935791
+        }
+      }
+    }
+  },
+  "interpretation": "Fixed permutation sensitivity; not causal or proof of generalizable CT benefit",
+  "unchanged_inputs": [
+    "clinical",
+    "treatment",
+    "interval_days",
+    "surgery",
+    "image_valid",
+    "ct1_available_stage"
+  ],
+  "paired_permutation": "CT0 and CT1 from the same donor; recipient clinical/treatment/interval remain fixed",
+  "original_control_matches_existing_oof": true,
+  "clinical_only_reference": {
+    "S0": {
+      "auroc": 0.589245909912941,
+      "average_precision": 0.3013093618225913,
+      "nll": 0.5466135144233704
+    },
+    "S1": {
+      "auroc": 0.589245909912941,
+      "average_precision": 0.3013093618225913,
+      "nll": 0.5466135144233704
+    }
+  }
+}

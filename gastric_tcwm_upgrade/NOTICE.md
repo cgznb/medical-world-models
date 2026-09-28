@@ -1,0 +1,13 @@
+# Source, licensing, and scope notice
+
+Audited base: `cgznb/gastric-multistage-generated651`, commit `aec8cbe08157687fd447594c8a9406d6ee5a464d`.
+
+This is a complete standalone implementation of the **TCWM upgrade path**, with an installer for the existing project. It is not a mirror of every historical baseline, preprocessing module, and experiment in the original repository. Original repository licensing is not replaced by this distribution. The source installation and clinical/treatment encoders are required only for the legacy-cache bridge. Native-cache training and inference are self-contained.
+
+`src/stageworld_tcwm/backbone.py` adapts the user's existing Generated651 spatial and attention blocks. The inherited CLARITY two-way attention attribution is retained in `licenses/CLARITY_LICENSE.txt`. The remaining new modules are task-specific implementations informed by the sources documented in `docs/SOURCE_AUDIT.md`; they are not unmodified upstream reproductions and do not include upstream weights.
+
+DiT and Meta Flow Matching upstream repositories carry noncommercial CC-BY-NC notices. No full copies of those repositories or their weights are bundled; their algorithmic conditioning/path ideas inform the independently implemented small latent prior. No blanket license over third-party contributions is asserted. Review all relevant upstream licenses before redistributing a combined work or using it outside the intended research context.
+
+No patient data, CT images, clinical feature caches, patient-level labels or predictions, identification keys, or trained clinical weights are included. The original package's engineering tests used synthetic inputs. Subsequent adaptation, repair comparisons, and CT development experiments used an authorized private clinical cohort; only reviewed aggregate results are included in this public export. The repair study scored the original internal test partition once after model locking. The later CT development study did not score that test partition again. Clinical effectiveness, external validity, and causal effects have not been established, and reliable incremental benefit from CT/world-model components has not been demonstrated. Hypothetical treatment inputs do not make the model a causal estimator or a treatment recommender.
+
+This export contains the extension source and aggregate research reports, not the private training artifacts or a complete mirror of the original repository. The optional `scripts/build_full_repository.py` downloads the pinned original and installs the extension locally; it does not publish changes. Attribution and upstream licensing restrictions continue to apply to any combined repository.

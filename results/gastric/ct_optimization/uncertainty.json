@@ -1,0 +1,36 @@
+{
+  "candidate": "token_prior",
+  "reference": "clinical_only",
+  "draws": 2000,
+  "seed": 20260928,
+  "patients": 521,
+  "method": "paired, outcome-stratified patient bootstrap of fixed OOF predictions",
+  "deltas": {
+    "s0_auroc_delta": {
+      "observed": 0.007296967657820619,
+      "percentile_95": [
+        -0.007865268957395857,
+        0.022963893678765324
+      ]
+    },
+    "s1_auroc_delta": {
+      "observed": 0.009631156159313647,
+      "percentile_95": [
+        -0.005467994280186681,
+        0.02526075619295956
+      ]
+    },
+    "mean_prefix_nll_delta": {
+      "observed": -0.00288382638245821,
+      "percentile_95": [
+        -0.009690875257365405,
+        0.0035247528110630808
+      ]
+    }
+  },
+  "limitations": [
+    "Conditional on fitted folds and candidate selection; this does not rerun model fitting.",
+    "Overlapping CV training sets and model selection add uncertainty not represented here.",
+    "These intervals do not establish external generalization or treatment effects."
+  ]
+}

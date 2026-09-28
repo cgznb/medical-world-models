@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "breast-response-world-model"
+version = "0.1.0"
+description = "Image-grounded stochastic SymmFlow trajectories for landmark pCR prediction"
+requires-python = ">=3.10"
+dependencies = ["torch>=2.5", "numpy>=1.24", "PyYAML>=6", "scikit-learn>=1.1"]
+[project.optional-dependencies]
+monai = ["monai==1.5.1"]
+test = ["pytest>=8"]
+[project.scripts]
+responsewm = "responsewm.cli:main"
+[tool.setuptools.packages.find]
+where = ["src"]
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

@@ -1,0 +1,38 @@
+{
+  "observed_at_utc": "2026-09-28T14:15:16.927775+00:00",
+  "observed_at_asia_shanghai": "2026-09-28T22:15:16.927775+08:00",
+  "collection": "Read-only remote controller and aggregate stage-log snapshot",
+  "synthetic": false,
+  "cohort_role": "existing_development_protocol",
+  "independent_test": false,
+  "patients": {"train": 764, "development_validation": 102},
+  "paired_t0_t3_patients": {"train": 524, "development_validation": 86},
+  "controller": {"status": "running", "stage": "flow"},
+  "stages": {
+    "representation": {
+      "last_logged_step": 10000,
+      "budget_steps": 10000,
+      "latest_batch_loss": 0.3042345345020294,
+      "validation_last": {"selection_score": 3.9651582243833023, "selection_metric": "representation_validation_objective", "cases": 102},
+      "validation_best": {"selection_score": 0.7240664645773816, "selection_metric": "representation_validation_objective", "cases": 102}
+    },
+    "flow": {
+      "last_logged_step": 27990,
+      "budget_steps": 30000,
+      "latest_batch_loss": 1.4300596714019775,
+      "validation_last": {"selection_score": 1.4443264042629915, "selection_metric": "flow_validation_objective", "cases": 102},
+      "validation_best": {"selection_score": 1.372434700236601, "selection_metric": "flow_validation_objective", "cases": 102}
+    },
+    "readout": {"last_logged_step": null, "budget_steps": 3000, "validation_last": null, "validation_best": null},
+    "joint": {"last_logged_step": null, "budget_steps": 5000, "validation_last": null, "validation_best": null}
+  },
+  "final_pcr_metrics": null,
+  "limitations": [
+    "Representation and flow objectives are intermediate losses, not pCR AUROC or image-quality scores.",
+    "Best and latest validation files do not contain checkpoint step numbers; none are inferred here.",
+    "Latest batch losses are not full-cohort training estimates.",
+    "The frozen codec was selected using the same development-validation patients.",
+    "Upstream localizer patient overlap remains unverified.",
+    "This timestamped snapshot does not automatically update with the live run."
+  ]
+}

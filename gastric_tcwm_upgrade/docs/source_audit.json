@@ -1,0 +1,117 @@
+{
+  "audit_date": "2026-09-28",
+  "base_repository": "cgznb/gastric-multistage-generated651",
+  "base_commit": "aec8cbe08157687fd447594c8a9406d6ee5a464d",
+  "scope": "指定模块的源码审阅，不是整仓复现。blob SHA是单文件指纹，不是仓库commit；未猜测未返回的commit。",
+  "external_code_repositories_examined": 8,
+  "sources": [
+    {
+      "name": "CLARITY",
+      "repository": "DingTianxingjian/CLARITY",
+      "path": "Predictor/models/survival_module.py",
+      "blob_sha": "21e984ee04745348b8fc5151e4650a63616a4567",
+      "examined": "lines 1–250",
+      "paper": "https://arxiv.org/abs/2512.08029v4",
+      "status": "作者arXiv页面标注Accepted to ECCV 2026；v4为2026-09-19",
+      "adopted": "通过原项目保留pre-norm顺序双向attention；新增统一结局读取，不复制上游完整SurvivalModule",
+      "not_adopted": "策略优化、原训练数据/权重、将sigmoid自动解释为时间生存概率",
+      "license": "核验MIT，声明已保留"
+    },
+    {
+      "name": "DreamerV3",
+      "repository": "danijar/dreamerv3",
+      "path": "dreamerv3/rssm.py",
+      "blob_sha": "44b8e9ca5f01be7d6abeb91a2dc57a8364552d1a",
+      "examined": "lines 1–230",
+      "paper": "https://arxiv.org/abs/2301.04104",
+      "status": "DreamerV3作者论文/代码；本次Nature网页访问失败，不用失败页面支撑细节",
+      "adopted": "observe/imagine分离、平衡KL、free-nats的机制；本版独立实现Gaussian belief",
+      "not_adopted": "离散32×32 latent、原GRU核心、actor/critic/RL、原权重",
+      "license": "不打包上游源码/权重；不替上游指派许可"
+    },
+    {
+      "name": "Set Transformer",
+      "repository": "juho-lee/set_transformer",
+      "path": "modules.py",
+      "blob_sha": "3b7e698e14ef7b8e1ea0c419fe51d93e3ee04bf5",
+      "examined": "完整modules.py",
+      "paper": "https://proceedings.mlr.press/v97/lee19d.html",
+      "status": "ICML 2019，PMLR官方页面核验",
+      "adopted": "PMA learned seed pooling思路；用mask-safe MHA和FFN重新实现",
+      "not_adopted": "原模型整包、未经监督的医学语义slot命名",
+      "license": "本次未逐字核验其许可；没有打包上游文件"
+    },
+    {
+      "name": "DiT",
+      "repository": "facebookresearch/DiT",
+      "path": "models.py",
+      "blob_sha": "c90eeba7b2eee18b40b2128045248795b4b38d91",
+      "examined": "lines 95–140；另检查LICENSE.txt开头",
+      "paper": "https://arxiv.org/abs/2212.09748",
+      "status": "DiT作者代码；小潜变量速度场不等于图像DiT复现",
+      "adopted": "adaLN-Zero六路调制与残差门控的设计；独立小型PyTorch实现",
+      "not_adopted": "timm依赖、图像patchify/VAE、预训练DiT权重",
+      "license": "核验上游CC-BY-NC 4.0；未打包其源码或权重"
+    },
+    {
+      "name": "Meta Flow Matching",
+      "repository": "facebookresearch/flow_matching",
+      "path": "flow_matching/path/affine.py",
+      "blob_sha": "81cb7ed31f2434d03424ea9a5571a36bfc9f2681",
+      "examined": "lines 1–150",
+      "paper": "https://arxiv.org/abs/2412.06264",
+      "status": "作者官方Flow Matching库及指南",
+      "adopted": "仿射概率路径与速度监督；本版独立Heun采样器",
+      "not_adopted": "exact flow density、CNF散度计算、把KL(q||Gaussian)写成KL(q||flow)",
+      "license": "文件核验CC-by-NC声明；未打包其源码或权重"
+    },
+    {
+      "name": "Causal Transformer",
+      "repository": "Valentyn1997/CausalTransformer",
+      "path": "src/models/ct.py",
+      "blob_sha": "d2a3dfefdec3c6ad8e3889ffcd6e5cef68648ccf",
+      "examined": "lines 1–165",
+      "paper": "https://proceedings.mlr.press/v162/melnychuk22a.html",
+      "status": "ICML 2022，PMLR官方页面核验",
+      "adopted": "审查过去治疗/结局/状态与当前治疗分流、前缀mask边界；作为因果目标警示而非直接移植",
+      "not_adopted": "对抗治疗平衡、因果识别结论、动态治疗策略优化",
+      "license": "不打包上游源码/权重；不替上游指派许可"
+    },
+    {
+      "name": "pycox / PC-Hazard",
+      "repository": "havakv/pycox",
+      "path": "pycox/models/loss.py",
+      "blob_sha": "5345c755506148cac85cf63e7d1eda275d571a02",
+      "examined": "lines 130–173与170–255",
+      "paper": "https://arxiv.org/abs/1910.06724",
+      "status": "作者生存建模实现；PC-Hazard方法论文",
+      "adopted": "分段风险softplus与删失似然原理；独立实现连续暴露、多样本混合及竞争风险",
+      "not_adopted": "ranking loss、把排序分数当绝对风险、抄注释中sigmoid误写（代码实际softplus）",
+      "license": "不打包上游源码/权重；不替上游指派许可"
+    },
+    {
+      "name": "MeWM",
+      "repository": "scott-yjyang/MeWM",
+      "path": "Survival/model/dim1/TransMIL.py",
+      "blob_sha": "1850fea8cf280ede210b5ddf2293658ddb5bbdb2",
+      "examined": "完整TransMIL.py（请求1–190）",
+      "paper": "https://arxiv.org/abs/2506.02327",
+      "status": "医学世界模型作者论文/代码",
+      "adopted": "比较生成后结局读取与多实例聚合的选择；当前短CT网格保留精确attention",
+      "not_adopted": "Nyström/2D square padding/硬编码.cuda()，未把该文件复制进本包，未训练像素生成器",
+      "license": "本次未独立核对许可全文；没有打包该源码/权重"
+    }
+  ],
+  "paper_only": [
+    {
+      "name": "V-JEPA 2.1",
+      "paper": "https://arxiv.org/abs/2603.14482",
+      "code_integrated": false
+    },
+    {
+      "name": "LeWorldModel",
+      "paper": "https://arxiv.org/abs/2603.19312",
+      "code_integrated": false
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "real_data": true,
+  "clinical_performance_evaluation": false,
+  "latent_shape": [
+    24,
+    8,
+    32,
+    32
+  ],
+  "batch_size": 4,
+  "sampling": {
+    "train_samples": 2,
+    "train_steps": 20,
+    "inference_samples": 8,
+    "inference_steps": 20,
+    "method": "heun"
+  },
+  "stages": [
+    {
+      "stage": "representation",
+      "loss": 1.6921409368515015,
+      "gradient_norm": 5.617076396942139,
+      "seconds": 1.5610350128263235,
+      "peak_allocated_gib": 1.428145408630371,
+      "peak_reserved_gib": 1.58203125,
+      "finite_backward_optimizer_step": true
+    },
+    {
+      "stage": "flow",
+      "loss": 4.0568389892578125,
+      "gradient_norm": 0.9547818303108215,
+      "seconds": 0.46423689275979996,
+      "peak_allocated_gib": 1.5497550964355469,
+      "peak_reserved_gib": 1.5859375,
+      "finite_backward_optimizer_step": true
+    },
+    {
+      "stage": "readout",
+      "loss": 1.4664371013641357,
+      "gradient_norm": 4.383579730987549,
+      "seconds": 1.1800934989005327,
+      "peak_allocated_gib": 0.6918625831604004,
+      "peak_reserved_gib": 0.837890625,
+      "finite_backward_optimizer_step": true
+    },
+    {
+      "stage": "joint",
+      "loss": 5.992116451263428,
+      "gradient_norm": 8.803252220153809,
+      "seconds": 5.4472059570252895,
+      "peak_allocated_gib": 1.915473461151123,
+      "peak_reserved_gib": 1.96484375,
+      "finite_backward_optimizer_step": true
+    }
+  ],
+  "passed": true
+}

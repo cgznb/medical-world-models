@@ -1,0 +1,28 @@
+{
+  "model": {
+    "hidden": 64,
+    "latent_dim": 16,
+    "world_blocks": 2,
+    "surgery_blocks": 1,
+    "update_blocks": 1,
+    "readout_blocks": 1,
+    "readout_slots": 4,
+    "dropout": 0.3,
+    "observation_update": "residual",
+    "clinical_anchor": true,
+    "residual_scale": 0.25
+  },
+  "train": {
+    "seed": 17,
+    "epochs": 80,
+    "warmup_epochs": 0,
+    "batch_size": 8,
+    "patience": 15,
+    "max_optimizer_steps": 5280,
+    "amp": true,
+    "device": "cuda",
+    "learning_rate": 0.0001,
+    "weight_decay": 0.05,
+    "ct_weight": 0.01
+  }
+}

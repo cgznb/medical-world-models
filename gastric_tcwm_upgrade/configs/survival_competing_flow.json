@@ -1,0 +1,13 @@
+{
+  "model": {
+    "endpoint": "survival",
+    "causes": 2,
+    "prior": "flow"
+  },
+  "train": {
+    "device": "cuda",
+    "batch_size": 4,
+    "warmup_epochs": 25,
+    "epochs": 180
+  }
+}

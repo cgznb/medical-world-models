@@ -1,0 +1,9 @@
+{
+  "model": {
+    "endpoint": "survival",
+    "causes": 2
+  },
+  "train": {
+    "device": "cpu"
+  }
+}

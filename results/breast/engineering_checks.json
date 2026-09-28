@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-28",
+  "scope": "Tests rerun in the public breast_world_joint source export",
+  "command": "python -m pytest -q",
+  "python": "3.12.13",
+  "pytorch": "2.12.1+cu130",
+  "tests": {"passed": 41, "skipped": 1, "failed": 0},
+  "duration_seconds": 7.36,
+  "skipped_reason": "Optional MONAI parity test: MONAI not installed",
+  "clinical_performance_evaluation": false,
+  "real_data_preflight": "cuda_preflight.json",
+  "notes": [
+    "Engineering tests validate implementation contracts, not clinical efficacy.",
+    "The real-data CUDA preflight was recorded earlier on the training system and is not a new training run.",
+    "Old synthetic smoke metrics are not included as patient-performance evidence."
+  ]
+}

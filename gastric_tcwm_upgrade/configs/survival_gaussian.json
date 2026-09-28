@@ -1,0 +1,8 @@
+{
+  "model": {
+    "endpoint": "survival"
+  },
+  "train": {
+    "device": "cpu"
+  }
+}

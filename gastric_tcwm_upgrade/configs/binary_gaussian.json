@@ -1,0 +1,6 @@
+{
+  "model": {},
+  "train": {
+    "device": "cpu"
+  }
+}

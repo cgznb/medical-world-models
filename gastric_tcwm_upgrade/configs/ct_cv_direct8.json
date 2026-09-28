@@ -1,0 +1,37 @@
+{
+  "model": {
+    "hidden": 64,
+    "latent_dim": 16,
+    "world_blocks": 2,
+    "surgery_blocks": 1,
+    "update_blocks": 1,
+    "readout_blocks": 1,
+    "readout_slots": 4,
+    "dropout": 0.2,
+    "observation_update": "residual",
+    "clinical_anchor": true,
+    "residual_scale": 1,
+    "architecture": "predictive_ct",
+    "ct_rank": 8,
+    "predictive_transition": false
+  },
+  "train": {
+    "seed": 17,
+    "epochs": 80,
+    "warmup_epochs": 0,
+    "batch_size": 16,
+    "patience": 20,
+    "max_optimizer_steps": 1440,
+    "learning_rate": 0.0005,
+    "weight_decay": 0.01,
+    "ct_weight": 0,
+    "amp": true,
+    "device": "cuda",
+    "readout_learning_rate": 0.001,
+    "readout_l2": 0.05,
+    "kl_weight": 0,
+    "flow_weight": 0,
+    "samples_train": 4,
+    "samples_eval": 16
+  }
+}
