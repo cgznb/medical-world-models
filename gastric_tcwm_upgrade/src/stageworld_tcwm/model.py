@@ -12,7 +12,7 @@ from torch import nn
 from torch.nn import functional as F
 from .config import ModelConfig
 from .backbone import ConditionTokens, SpatialTransition, TwoWayFusion, CrossBlock, SetReadout, SurgeryTransition
-from .belief import GaussianParams, ObservationPosterior, StochasticInjector, sample_gaussian
+from .belief import GaussianParams, ObservationPosterior, StochasticInjector, sample_gaussian, validate_epsilon
 from .flow import ConditionalFlowPrior
 from .clinical import ClinicalAnchor
 
@@ -53,6 +53,21 @@ class OutcomeReadout(nn.Module):
         result = self.output(q).float()
         return result[:,0,0] if self.cfg.endpoint == "binary" else F.softplus(result)+1e-6
 
+class PooledOutcomeReadout(nn.Module):
+    """Shared stage readout over pooled baseline, reference, change and conditions."""
+    def __init__(self,cfg):
+        super().__init__()
+        h = cfg.hidden
+        self.output = nn.Sequential(nn.LayerNorm(4*h),nn.Linear(4*h,h),nn.GELU(),
+                                    nn.Dropout(cfg.dropout),nn.Linear(h,1))
+        nn.init.zeros_(self.output[-1].bias)
+
+    def forward(self,baseline,reference,conditions,entry):
+        pooled = torch.cat((baseline.mean(1),reference.mean(1),(reference-baseline).mean(1),
+                            conditions.mean(1)),dim=-1)
+        return self.output(pooled).squeeze(-1).float()
+
+
 class TreatmentBeliefWorld(nn.Module):
     def __init__(self,cfg: ModelConfig):
         super().__init__()
@@ -75,7 +90,7 @@ class TreatmentBeliefWorld(nn.Module):
         nn.init.zeros_(self.decoder[-1].bias)
         self.surgery = SurgeryTransition(h,cfg.surgery_blocks,cfg.dropout)
         self.surgery_context = nn.Embedding(4,h)
-        self.outcome = OutcomeReadout(cfg)
+        self.outcome = PooledOutcomeReadout(cfg) if cfg.readout_kind == "pooled" else OutcomeReadout(cfg)
         self.pcr_pool = SetReadout(h,4,2,cfg.dropout)
         self.pcr_output = nn.Sequential(nn.LayerNorm(h),nn.Linear(h,h),nn.GELU(),nn.Linear(h,1))
         if cfg.clinical_anchor:
@@ -167,7 +182,8 @@ class TreatmentBeliefWorld(nn.Module):
         result[present] = (source+.1*self.post_delta(updated-source)).reshape(-1,m,l,h)
         return result
 
-    def forward(self,batch,samples=4,seed=None,max_stage=2,compute_aux=True,force_gaussian=False):
+    def forward(self,batch,samples=4,seed=None,max_stage=2,compute_aux=True,force_gaussian=False,
+                epsilon=None,return_diagnostics=False):
         if samples < 1 or max_stage not in (0,1,2):
             raise ValueError("Invalid Monte Carlo samples or stage")
         raw = self.raw_condition(batch)
@@ -184,7 +200,9 @@ class TreatmentBeliefWorld(nn.Module):
         generator = None
         if seed is not None:
             generator = torch.Generator(device=ct0.device).manual_seed(seed)
-        epsilon = torch.randn((len(ct0),samples,self.cfg.latent_dim),device=ct0.device,generator=generator)
+        shape = (len(ct0),samples,self.cfg.latent_dim)
+        epsilon = (torch.randn(shape,device=ct0.device,generator=generator) if epsilon is None
+                   else validate_epsilon(epsilon,shape,ct0.device))
         prior_z = sample_gaussian(pmean,plogvar,epsilon)
         if self.flow is not None and not force_gaussian:
             steps = self.cfg.flow_train_steps if self.training else self.cfg.flow_eval_steps
@@ -195,11 +213,12 @@ class TreatmentBeliefWorld(nn.Module):
         references = [reference0]
         qmean, qlogvar = pmean, plogvar
         posterior_z = prior_z
+        updated = generated
+        observation_delta = None
         if max_stage >= 1 or compute_aux:
             observed = self.encode_image(batch["ct1"])
             qmean,qlogvar = self.posterior(deterministic,observed)
             posterior_z = sample_gaussian(qmean,qlogvar,epsilon)
-            observation_delta = None
             if self.cfg.observation_update == "residual" and max_stage >= 1:
                 observation_delta = self.observation_innovation(deterministic,observed)
             for stage in range(1,max_stage+1):
@@ -208,6 +227,8 @@ class TreatmentBeliefWorld(nn.Module):
                 state = self.injector(deterministic,z)
                 if observation_delta is not None:
                     state = state+torch.where(legal[:,None,None,None],observation_delta[:,None],0.)
+                if stage == 1:
+                    updated = state
                 reference = self.reference_transition(state,x[:,:32],batch["surgery"])
                 if stage == 2:
                     reference = self.update_postoperative(reference,batch)
@@ -224,13 +245,23 @@ class TreatmentBeliefWorld(nn.Module):
             predictions.append(output.reshape(len(ct0),samples,*output.shape[1:]))
         result = {"predictions": torch.stack(predictions,1), "pmean": pmean,"plogvar": plogvar,
                   "qmean": qmean,"qlogvar": qlogvar}
+        neural_residual = result["predictions"]
+        anchor_logit = ct0.new_zeros(len(ct0))
         if self.cfg.clinical_anchor:
-            result["predictions"] = (self.recurrence_anchor(batch["clinical"])[:,None,None]
-                                     + self.cfg.residual_scale*result["predictions"])
+            anchor_logit = self.recurrence_anchor(batch["clinical"])
+            neural_residual = self.cfg.residual_scale*neural_residual
+            result["predictions"] = anchor_logit[:,None,None]+neural_residual
+        if return_diagnostics:
+            result["diagnostics"] = {"deterministic":deterministic,"injected":generated,
+                "updated":updated,"reference":torch.stack(references,1),
+                "neural_residual":neural_residual,"anchor_logit":anchor_logit,
+                "readout":result["predictions"]}
         if compute_aux:
             qstate = self.injector(deterministic,posterior_z[:,:1])[:,0]
             result["features"] = ct0+self.decoder(qstate)*self.image_scale
             result["prior_features"] = ct0+self.decoder(generated[:,0])*self.image_scale
+            if self.cfg.observation_update == "residual" and max_stage >= 1:
+                result["updated_features"] = ct0+self.decoder(updated[:,0])*self.image_scale
             pcr_memory = torch.cat((flat_initial,generated.flatten(0,1),pcr_condition),1)
             result["pcr_logits"] = self.pcr_output(self.pcr_pool(pcr_memory).mean(1)).reshape(len(ct0),samples)
             if self.cfg.clinical_anchor:

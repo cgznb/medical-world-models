@@ -5,6 +5,7 @@ import torch
 from torch import nn
 
 from .clinical import ClinicalAnchor
+from .belief import validate_epsilon
 
 
 class PredictiveCTWorld(nn.Module):
@@ -121,15 +122,17 @@ class PredictiveCTWorld(nn.Module):
         baseline = baseline[:, None].expand_as(state)
         return torch.cat((baseline, state-baseline), -1)
 
-    def forward(self, batch, samples=4, seed=None, max_stage=2, compute_aux=True, force_gaussian=False):
+    def forward(self, batch, samples=4, seed=None, max_stage=2, compute_aux=True, force_gaussian=False,
+                epsilon=None, return_diagnostics=False):
         if samples < 1 or max_stage not in (0, 1, 2):
             raise ValueError("Invalid Monte Carlo samples or stage")
         baseline = self.encode_image(batch["ct0"])
         baseline = torch.where(batch["image_valid"][:, 0, None], baseline, 0.)
         pmean, plogvar = self.prior_parameters(baseline, batch)
         generator = None if seed is None else torch.Generator(device=baseline.device).manual_seed(seed)
-        epsilon = torch.randn((len(baseline), samples, self.state_dim), device=baseline.device,
-                              generator=generator)
+        shape = (len(baseline), samples, self.state_dim)
+        epsilon = (torch.randn(shape, device=baseline.device, generator=generator) if epsilon is None
+                   else validate_epsilon(epsilon, shape, baseline.device))
         generated = pmean[:, None]+(.5*plogvar).exp()[:, None]*epsilon
         states = [generated]
         qmean, qlogvar = pmean, plogvar
@@ -144,17 +147,27 @@ class PredictiveCTWorld(nn.Module):
                 legal = valid_ct1 & (batch["ct1_available_stage"] <= stage)
                 states.append(torch.where(legal[:, None, None], observed, generated))
         predictions = []
+        references = []
         for state in states:
             reference = self.reference_transition(state, batch["surgery"])
+            references.append(reference)
             predictions.append(self.outcome(self.readout_features(baseline, reference)).squeeze(-1).float())
         result = {"predictions": torch.stack(predictions, 1), "pmean": pmean, "plogvar": plogvar,
                   "qmean": qmean, "qlogvar": qlogvar, "baseline_ct_latent": baseline,
                   "predicted_ct_latent": pmean}
         if target is not None:
             result["target_ct_latent"] = target
+        neural_residual = result["predictions"]
+        anchor_logit = baseline.new_zeros(len(baseline))
         if self.cfg.clinical_anchor:
-            result["predictions"] = (self.recurrence_anchor(batch["clinical"])[:, None, None]
-                                     + self.cfg.residual_scale*result["predictions"])
+            anchor_logit = self.recurrence_anchor(batch["clinical"])
+            neural_residual = self.cfg.residual_scale*neural_residual
+            result["predictions"] = anchor_logit[:, None, None]+neural_residual
+        if return_diagnostics:
+            result["diagnostics"] = {"deterministic":pmean,"injected":generated,
+                "updated":states[min(1,len(states)-1)],"reference":torch.stack(references,1),
+                "neural_residual":neural_residual,"anchor_logit":anchor_logit,
+                "readout":result["predictions"]}
         if compute_aux:
             result["features"] = batch["ct0"]
             result["pcr_logits"] = self.pcr_output(self.readout_features(baseline, generated)).squeeze(-1).float()

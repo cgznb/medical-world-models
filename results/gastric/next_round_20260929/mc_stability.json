@@ -1,0 +1,75 @@
+{
+  "role": "inner_validation",
+  "patients": 70,
+  "original_test_or_validation_scored": false,
+  "independent_clinical_validation": false,
+  "stage_weights": [
+    0.5,
+    0.5,
+    0.0
+  ],
+  "schema": "public-gastric-mc-stability-v1",
+  "checkpoint_scope": "historical_selected_token_prior_fold_0",
+  "mc": {
+    "patients": 70,
+    "mc_seed_policy": "case_key",
+    "mc_antithetic": true,
+    "stage_weights": [
+      0.5,
+      0.5,
+      0.0
+    ],
+    "min_delta": 0.0001,
+    "recommended_samples_eval": 64,
+    "recommendation_rule": "K32_sd_at_least_half_min_delta_requires_relocking_at_K64",
+    "seed_selection_permitted": false,
+    "independent_clinical_validation": false,
+    "records": [
+      {
+        "samples": 16,
+        "seeds": [
+          17,
+          29,
+          43
+        ],
+        "selection_nll": [
+          0.5588498711585999,
+          0.5589500665664673,
+          0.5588269829750061
+        ],
+        "mc_nll_sd": 6.546316927978823e-05,
+        "sd_over_min_delta": 0.6546316927978822
+      },
+      {
+        "samples": 32,
+        "seeds": [
+          17,
+          29,
+          43
+        ],
+        "selection_nll": [
+          0.5588210225105286,
+          0.5589719414710999,
+          0.5588394403457642
+        ],
+        "mc_nll_sd": 8.233295971228551e-05,
+        "sd_over_min_delta": 0.823329597122855
+      },
+      {
+        "samples": 64,
+        "seeds": [
+          17,
+          29,
+          43
+        ],
+        "selection_nll": [
+          0.5588254928588867,
+          0.5589696168899536,
+          0.5588541626930237
+        ],
+        "mc_nll_sd": 7.62926026439737e-05,
+        "sd_over_min_delta": 0.762926026439737
+      }
+    ]
+  }
+}

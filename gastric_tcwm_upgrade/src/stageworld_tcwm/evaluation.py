@@ -7,6 +7,7 @@ import numpy as np
 import torch
 from sklearn.metrics import roc_auc_score,average_precision_score
 from .survival import mixture_binary_nll,mixture_survival_nll,competing_curves
+from .monte_carlo import cohort_case_keys,evaluation_epsilon
 
 
 def binary_metrics(y,p):
@@ -82,19 +83,39 @@ def ipcw_metrics(time,event,entry,p,horizon,km,min_g=.05):
 
 
 @torch.inference_mode()
-def collect_predictions(model,cohort,indices,samples=16,batch_size=16,seed=17):
+def collect_predictions(model,cohort,indices,samples=16,batch_size=16,seed=17,
+                        mc_seed_policy="batch_start",mc_antithetic=False,
+                        return_diagnostics=False,free_nats=.5):
+    if not len(indices) or batch_size < 1:
+        raise ValueError("Require nonempty evaluation rows and positive batch size")
     model.eval()
     device = next(model.parameters()).device
     predictions = []
+    health = []
     for start in range(0,len(indices),batch_size):
         rows = indices[start:start+batch_size]
         batch = cohort.batch(rows,device)
-        value = model(batch,samples=samples,seed=seed+start,compute_aux=False)["predictions"]
-        predictions.append(value.cpu())
-    return torch.cat(predictions)
+        batch_seed = seed+start if mc_seed_policy == "batch_start" else seed
+        epsilon = evaluation_epsilon(model,len(rows),samples,batch_seed,policy=mc_seed_policy,
+            case_keys=cohort_case_keys(cohort,rows),antithetic=mc_antithetic)
+        kwargs = {"epsilon":epsilon} if epsilon is not None else {}
+        if return_diagnostics:
+            kwargs["return_diagnostics"] = True
+        value = model(batch,samples=samples,seed=batch_seed,compute_aux=False,**kwargs)
+        predictions.append(value["predictions"].cpu())
+        if return_diagnostics:
+            from .diagnostics import branch_health_values
+            health.append(branch_health_values(value,batch,free_nats))
+    prediction = torch.cat(predictions)
+    if return_diagnostics:
+        from .diagnostics import summarize_branch_health
+        return prediction,summarize_branch_health(health)
+    return prediction
 
 
-def evaluate_predictions(pred,cohort,rows,cfg,train_rows=None,horizons=(12.,24.,36.)):
+def evaluate_predictions(pred,cohort,rows,cfg,train_rows=None,horizons=(12.,24.,36.),
+                         stage_weights=(1.,1.,1.)):
+    from .losses import patient_weighted_stage_mean
     batch = cohort.batch(rows)
     report = {"interpretation":"scenario_conditioned_association","causal_effects_identified":False,"stages":{}}
     all_nll = []
@@ -126,10 +147,16 @@ def evaluate_predictions(pred,cohort,rows,cfg,train_rows=None,horizons=(12.,24.,
         report["stages"][f"S{stage}"] = stats
         all_nll.append((valid,nll))
     # Same patient-normalized selection score as training; not a pooled prefix score.
-    sums = torch.zeros(len(rows))
-    counts = torch.zeros(len(rows))
-    for valid,loss in all_nll:
-        sums[valid] += loss
-        counts[valid] += 1
-    report["selection_nll"] = float((sums[counts>0]/counts[counts>0]).mean()) if (counts>0).any() else None
+    losses = torch.zeros((len(rows),3))
+    valid_stages = torch.zeros((len(rows),3),dtype=torch.bool)
+    for stage,(valid,loss) in enumerate(all_nll):
+        losses[valid,stage] = loss
+        valid_stages[:,stage] = valid
+    weights = torch.as_tensor(stage_weights,dtype=losses.dtype)
+    # The helper owns validation of stage weights, including empty target sets.
+    selection = patient_weighted_stage_mean(losses,valid_stages,stage_weights)
+    report["selection_nll"] = float(selection) if (valid_stages*weights).sum(1).gt(0).any() else None
+    report["legacy_three_stage_nll"] = float(patient_weighted_stage_mean(losses,valid_stages)) if valid_stages.any() else None
+    report["stage_weights"] = weights.tolist()
+    report["selection_definition"] = "weighted_stages_per_patient_then_mean_valid_patients"
     return report

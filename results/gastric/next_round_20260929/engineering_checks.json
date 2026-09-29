@@ -1,0 +1,125 @@
+{
+  "full_test_count": 176,
+  "full_test_status": "passed",
+  "inner_validation_patients_checked": 3,
+  "selected_kind": "clinical_baseline",
+  "completed_resume_recovery_best_report_byte_identical": true,
+  "optimizer_steps": 3,
+  "supervised_steps": 3,
+  "torch_version": "2.12.1+cu130",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "source_manifest_scope": "Post-fix verification and completed resume; initial training preceded the MC seed export metadata addition.",
+  "outer_fold_or_original_holdout_scored": false,
+  "schema": "public-gastric-engineering-checks-v1",
+  "evidence_scope": "original_training_environment_before_publication",
+  "inference_max_absolute_difference": {
+    "S0": 5.960464477539063e-08,
+    "S1": 5.960464477539063e-08,
+    "S2": 5.960464477539063e-08
+  },
+  "neural_last_inference_max_absolute_difference": {
+    "S0": 1.4901161193847656e-08,
+    "S1": 1.4901161193847656e-08,
+    "S2": 1.4901161193847656e-08
+  },
+  "observation_reconstruction_gradients": [
+    {
+      "prior": {
+        "present": true,
+        "norm": 0.0
+      },
+      "observation_attention": {
+        "present": true,
+        "norm": 9.931828799381037e-07
+      },
+      "observation_gate": {
+        "present": true,
+        "norm": 2.046477298733862e-08
+      },
+      "decoder": {
+        "present": true,
+        "norm": 0.000651294831186533
+      },
+      "outcome": {
+        "present": false,
+        "norm": 0.0
+      }
+    },
+    {
+      "prior": {
+        "present": true,
+        "norm": 0.0
+      },
+      "observation_attention": {
+        "present": true,
+        "norm": 1.587974793437752e-06
+      },
+      "observation_gate": {
+        "present": true,
+        "norm": 3.689870808898377e-08
+      },
+      "decoder": {
+        "present": true,
+        "norm": 0.0009873243980109692
+      },
+      "outcome": {
+        "present": false,
+        "norm": 0.0
+      }
+    }
+  ],
+  "source_sha256": {
+    "src/stageworld_tcwm/__init__.py": "d63195b4dc0e6066b6f829278c1ac05b35a7976f02e663305a2507b86f0f5de2",
+    "src/stageworld_tcwm/backbone.py": "d6fffd7ad84c3defe38682cdc4d13ce691b2cd4e78eb2f718d6ae2b4297b8bc7",
+    "src/stageworld_tcwm/belief.py": "04e6283ed441eb98aa7ab6dff8c3155e4af2881df006baf0a2fe4a342b7c4f7f",
+    "src/stageworld_tcwm/cli.py": "7233e93ca4450ba51e4ff06771c473fb184b65502e14b8c3112fa06d1d47df3c",
+    "src/stageworld_tcwm/clinical.py": "d9b4a27e4d6443d8bbc49437fdf8c517d1e4835e242a566706f93d69b702dada",
+    "src/stageworld_tcwm/config.py": "d25b16027811f90b0887c5b8e8f6d94abfd7d2eea6776854f9e99919c691ca1f",
+    "src/stageworld_tcwm/data.py": "f2cc88d1e5331d0fba1808afa1ccf26179efc2d962ef069b4e8c4696d4fbaeba",
+    "src/stageworld_tcwm/diagnostic_baselines.py": "166971f138b9d267d28c19aec37bceb25d1b10cbc1de1c200bd75358155576bc",
+    "src/stageworld_tcwm/diagnostics.py": "01167315134eed5ffebe8198f80b7321269d49e69270917e06bc36d3f5d6ccc6",
+    "src/stageworld_tcwm/evaluation.py": "e0c212e62c4e5f8c275a921d8c57e0bafb2b52ff91568dd7bef7ebf592f76b68",
+    "src/stageworld_tcwm/flow.py": "f5342ef4ee4849cc36aa6017c132c47dd1721b2c7fc842433265737bbe2a0b50",
+    "src/stageworld_tcwm/forecast_evaluation.py": "2aff420965951698114070aefae97e2307987362b720a58c92257a89cce19d6f",
+    "src/stageworld_tcwm/inference.py": "626adc62775ebf34e286f424704484e3f841ed1c5690c6610434494a97b6d05b",
+    "src/stageworld_tcwm/legacy.py": "07bbcf6d3b62ab6d305aedd395d25371f9f7308d1c7aeeac001e11f4049d87fe",
+    "src/stageworld_tcwm/losses.py": "f275a2a6b814ea2e766f1b7ac862cf0c929af500cda7f8d947304006b467c664",
+    "src/stageworld_tcwm/model.py": "8404e7dbb32aca48689d89921c4d0cc02f0fc13d166f007ea3e2111004df7022",
+    "src/stageworld_tcwm/monte_carlo.py": "d77fb0c49c9d4aedff29bc0fcde115abd59067e1efbc9d49f115bd0848f6a1fe",
+    "src/stageworld_tcwm/predictive.py": "68ead014289fe64af66927bc809cdc922d7961e6799af02364f50be0c5f9eb3a",
+    "src/stageworld_tcwm/support.py": "99de9413394818378f5764f72c36d4260fb362f21def20481539660995fe36ec",
+    "src/stageworld_tcwm/survival.py": "7cd9c4280f525750f054c5197bb71be65131000112d3897dc639e793f812d183",
+    "src/stageworld_tcwm/synthetic.py": "502554dfc4f5e71cbdf74edd1987622cdc10653fce17b9abdb2a6697b4e858ac",
+    "src/stageworld_tcwm/training.py": "631f5efe6d5ca3b880e0e6ab7c63b9746fe07b32efee1a9be1fa47e5f4f99412",
+    "scripts/build_full_repository.py": "265d2ae5e7dd66a5145c3a29b0859fc9ec34c4774b43c8df80a077f7bbfc6023",
+    "scripts/compare_repairs.py": "21d2fe4c9218bd0168351f06f20e0d79cb12aada95a9eb1c28d81f3382db16f1",
+    "scripts/evaluate_ct_cv.py": "b4991d3c3751388887dbc7eb78ed4648ef35d0fcfbd93c799d89593ea2d50789",
+    "scripts/evaluate_next_round.py": "7bc07462390b6d776b37889448218c4afd599820ed5b3f126beddc06e182ac3d",
+    "scripts/evaluate_token_forecast.py": "93bbd5c8b8540bd55e822c286b788bf3e47a901b9590832499f12ef65d60b19f",
+    "scripts/install_into_repo.py": "31a8acdda02af969961fbd2b4094d14f255370a40d1a1d66c2f75ac35850c03e",
+    "scripts/prepare_ct_folds.py": "587ce26aa4572a5846a5791200c274fc6b15d43a721459e9bae89092085f8325",
+    "scripts/prepare_local.py": "aeea72a804b4185a3686f53b8d85468d3a57ff0895f003d4e663186b98ee1431",
+    "scripts/probe_next_round.py": "bd889871392a0223dc5a5912534d5894f3366ae348ad00e80d82f9c66b1005d4",
+    "scripts/run_ct_cv.py": "057299bf10ff529f35d74294780765ad8712ff12822d92b7b49acbc976e36aba",
+    "scripts/run_diagnostic_baselines.py": "ce15bdcf5415f109f3a14a053c39873f8ba6ba6c78ec8a5def8ecfbce956f5c7",
+    "scripts/run_local.py": "914ab4932ebdb5d0ad71048840ca5c67e3c88abd697594bf7789e731e8de55e3",
+    "scripts/run_next_round.py": "5dff15653645336588e610fce75d21fb62f48e93dcb2516ae3f3d13cad8fcbf9",
+    "scripts/run_repair_study.py": "3ffaa4f8b2365d6fe7786ccde6f0c0260f519d2fc4b2f9f482cf418ed8f02a8c",
+    "scripts/run_tcwm.py": "36ff5b8d461b10dd687fc6211e0f92d08e47d05003b6a8249e8be3b747f12d80",
+    "scripts/run_validation.sh": "4bf54b8ea34de58207a86c41c61b6a3b882827a659e359761a3ff92986c15e91",
+    "configs/next/G0.json": "3c819db619002d44ed6a811243ebf4511f18d67c5948d817010d6c1a49c23bb6",
+    "configs/next/G1.json": "f1853c11913fc31691f1a3ecef90281f019832a983570efabca1971d924a1951",
+    "configs/next/G2.json": "ebee001473cfbebcdaada1a717e545bb9a2efb8f0cc589c6da9c498218c49777",
+    "configs/next/G3.json": "dcca2821814510071330707eea6f814c17d95f6efdff3c476fe5f25ff6cc077b"
+  },
+  "source_hash_scope": "original_training_source; public path adaptations may change file hashes",
+  "public_copy_test": {
+    "tests": 176,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "elapsed_seconds": 16.606,
+    "passed": 176,
+    "scope": "public_gastric_copy_full_pytest_suite"
+  }
+}

@@ -1,0 +1,1538 @@
+{
+  "model_checkpoints": 12,
+  "all_frozen_anchors_and_preprocessing_unchanged": true,
+  "all_exports_exactly_match_selected_best": true,
+  "total_actual_supervised_steps": 5400,
+  "partition": "inner_validation_only",
+  "patients_per_checkpoint": 70,
+  "samples": 64,
+  "mc_seed": 17,
+  "permutation_seed": 2718,
+  "mc_seed_policy": "case_key",
+  "mc_antithetic": true,
+  "stage_weights": [
+    0.5,
+    0.5,
+    0
+  ],
+  "original_validation_or_test_scored": false,
+  "outer_evaluation_scored": false,
+  "causal_effects_identified": false,
+  "independent_confirmation": false,
+  "all_prefix_checks_passed": true,
+  "limitations": [
+    "Input dependency does not establish prognostic benefit or a causal effect.",
+    "Positive permutation-minus-original NLL means this single permutation worsened the score; the opposite direction means it improved. Neither direction alone establishes reliable CT1 benefit.",
+    "These are already used inner-validation partitions and selected checkpoints. Patient exposures across folds and arms are not independent clinical observations.",
+    "One fixed available-patient permutation per checkpoint is descriptive; no permutation uncertainty or retraining uncertainty is estimated.",
+    "Common K64 and MC seed17 apply to every checkpoint. Antithetic draws are paired simulation units, not additional patients."
+  ],
+  "schema": "public-gastric-next-round-dependency-v1",
+  "max_boundary_difference": {
+    "S0_future_target_change": 0,
+    "pCR_S0_future_target_change": 0,
+    "S1_S2_without_new_information": 0,
+    "undeclared_future_treatment_change": 0
+  },
+  "arms": {
+    "G0": {
+      "CT0_S0_probability_mean_absolute_difference": [
+        0.015106231905519962,
+        0.018133077770471573,
+        0.027627654373645782
+      ],
+      "CT1_S1_probability_mean_absolute_difference": [
+        0.0008433973998762667,
+        0.0016731030773371458,
+        0.002366639906540513
+      ],
+      "CT1_permutation_minus_original_weighted_nll": [
+        -0.0013000965118408203,
+        0.000897824764251709,
+        -0.0008870363235473633
+      ],
+      "CT1_permutation_worsened_nll_folds": 1,
+      "CT1_permutation_improved_nll_folds": 2
+    },
+    "G1": {
+      "CT0_S0_probability_mean_absolute_difference": [
+        0.033140141516923904,
+        0.004092917311936617,
+        0.009587985463440418
+      ],
+      "CT1_S1_probability_mean_absolute_difference": [
+        0.0073047056794166565,
+        0.00017975315859075636,
+        0.001037727459333837
+      ],
+      "CT1_permutation_minus_original_weighted_nll": [
+        -0.0004082322120666504,
+        -1.6927719116210938e-05,
+        0.00037980079650878906
+      ],
+      "CT1_permutation_worsened_nll_folds": 1,
+      "CT1_permutation_improved_nll_folds": 2
+    },
+    "G2": {
+      "CT0_S0_probability_mean_absolute_difference": [
+        0.03329121321439743,
+        0.038455430418252945,
+        0.009604114107787609
+      ],
+      "CT1_S1_probability_mean_absolute_difference": [
+        0.00715161906555295,
+        0.0018426654860377312,
+        0.0010231566848233342
+      ],
+      "CT1_permutation_minus_original_weighted_nll": [
+        -0.0004566311836242676,
+        0.0026589632034301758,
+        0.00042998790740966797
+      ],
+      "CT1_permutation_worsened_nll_folds": 2,
+      "CT1_permutation_improved_nll_folds": 1
+    },
+    "G3": {
+      "CT0_S0_probability_mean_absolute_difference": [
+        0.049124542623758316,
+        0.011172652244567871,
+        0.06846988946199417
+      ],
+      "CT1_S1_probability_mean_absolute_difference": [
+        0.002256597625091672,
+        0.0004018802719656378,
+        0.002520977286621928
+      ],
+      "CT1_permutation_minus_original_weighted_nll": [
+        0.00047385692596435547,
+        -0.00010609626770019531,
+        -0.0007744431495666504
+      ],
+      "CT1_permutation_worsened_nll_folds": 1,
+      "CT1_permutation_improved_nll_folds": 2
+    }
+  },
+  "records": [
+    {
+      "case": "G0",
+      "fold": 0,
+      "role": "inner_validation",
+      "patients": 70,
+      "original_test_or_validation_scored": false,
+      "stage_weights": [
+        0.5,
+        0.5,
+        0
+      ],
+      "health": {
+        "raw_kl": 0.1610535212925502,
+        "free_nats_kl": 0.5,
+        "prior_active_units": 3,
+        "posterior_active_units": 3
+      },
+      "dependency": {
+        "samples": 64,
+        "seed": 17,
+        "permutation_seed": 2718,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "prefix_boundary_checks": {
+          "no_new_information_patients": 70,
+          "passed": true,
+          "max_absolute_logit_or_rate_difference": {
+            "S0_future_target_change": 0,
+            "pCR_S0_future_target_change": 0,
+            "S1_S2_without_new_information": 0,
+            "undeclared_future_treatment_change": 0
+          }
+        },
+        "perturbations": {
+          "CT0": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.0029964447021484375,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.015106231905519962,
+                "max_absolute_difference": 0.05036607384681702
+              },
+              "S1": {
+                "mean_absolute_difference": 0.014381365850567818,
+                "max_absolute_difference": 0.050701916217803955
+              },
+              "S2": {
+                "mean_absolute_difference": 0.014381365850567818,
+                "max_absolute_difference": 0.050701916217803955
+              }
+            }
+          },
+          "CT1": {
+            "eligible_patients": 70,
+            "selection_nll_difference": -0.0013000965118408203,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0,
+                "max_absolute_difference": 0
+              },
+              "S1": {
+                "mean_absolute_difference": 0.0008433973998762667,
+                "max_absolute_difference": 0.02215975522994995
+              },
+              "S2": {
+                "mean_absolute_difference": 0.0008433973998762667,
+                "max_absolute_difference": 0.02215975522994995
+              }
+            }
+          },
+          "paired_CT": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.0016438961029052734,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.015106231905519962,
+                "max_absolute_difference": 0.05036607384681702
+              },
+              "S1": {
+                "mean_absolute_difference": 0.01441179309040308,
+                "max_absolute_difference": 0.05123564600944519
+              },
+              "S2": {
+                "mean_absolute_difference": 0.01441179309040308,
+                "max_absolute_difference": 0.05123564600944519
+              }
+            }
+          },
+          "known_scenario": {
+            "eligible_patients": 70,
+            "selection_nll_difference": -6.091594696044922e-05,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 5.110347774461843e-05,
+                "max_absolute_difference": 0.0010228455066680908
+              },
+              "S1": {
+                "mean_absolute_difference": 9.024526661960408e-05,
+                "max_absolute_difference": 0.0028261691331863403
+              },
+              "S2": {
+                "mean_absolute_difference": 9.024526661960408e-05,
+                "max_absolute_difference": 0.0028261691331863403
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "G0",
+      "fold": 1,
+      "role": "inner_validation",
+      "patients": 70,
+      "original_test_or_validation_scored": false,
+      "stage_weights": [
+        0.5,
+        0.5,
+        0
+      ],
+      "health": {
+        "raw_kl": 0.17369703309876577,
+        "free_nats_kl": 0.5,
+        "prior_active_units": 1,
+        "posterior_active_units": 2
+      },
+      "dependency": {
+        "samples": 64,
+        "seed": 17,
+        "permutation_seed": 2718,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "prefix_boundary_checks": {
+          "no_new_information_patients": 70,
+          "passed": true,
+          "max_absolute_logit_or_rate_difference": {
+            "S0_future_target_change": 0,
+            "pCR_S0_future_target_change": 0,
+            "S1_S2_without_new_information": 0,
+            "undeclared_future_treatment_change": 0
+          }
+        },
+        "perturbations": {
+          "CT0": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.006205379962921143,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.018133077770471573,
+                "max_absolute_difference": 0.05161547660827637
+              },
+              "S1": {
+                "mean_absolute_difference": 0.018394500017166138,
+                "max_absolute_difference": 0.05154454708099365
+              },
+              "S2": {
+                "mean_absolute_difference": 0.018394500017166138,
+                "max_absolute_difference": 0.05154454708099365
+              }
+            }
+          },
+          "CT1": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.000897824764251709,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0,
+                "max_absolute_difference": 0
+              },
+              "S1": {
+                "mean_absolute_difference": 0.0016731030773371458,
+                "max_absolute_difference": 0.03327681124210358
+              },
+              "S2": {
+                "mean_absolute_difference": 0.0016731030773371458,
+                "max_absolute_difference": 0.03327681124210358
+              }
+            }
+          },
+          "paired_CT": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.005755722522735596,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.018133077770471573,
+                "max_absolute_difference": 0.05161547660827637
+              },
+              "S1": {
+                "mean_absolute_difference": 0.0182651337236166,
+                "max_absolute_difference": 0.05160069465637207
+              },
+              "S2": {
+                "mean_absolute_difference": 0.0182651337236166,
+                "max_absolute_difference": 0.05160069465637207
+              }
+            }
+          },
+          "known_scenario": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.00021505355834960938,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.00018975372950080782,
+                "max_absolute_difference": 0.005254477262496948
+              },
+              "S1": {
+                "mean_absolute_difference": 0.00024582797777839005,
+                "max_absolute_difference": 0.005953103303909302
+              },
+              "S2": {
+                "mean_absolute_difference": 0.00024582797777839005,
+                "max_absolute_difference": 0.005953103303909302
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "G0",
+      "fold": 2,
+      "role": "inner_validation",
+      "patients": 70,
+      "original_test_or_validation_scored": false,
+      "stage_weights": [
+        0.5,
+        0.5,
+        0
+      ],
+      "health": {
+        "raw_kl": 0.1666771454470498,
+        "free_nats_kl": 0.5,
+        "prior_active_units": 2,
+        "posterior_active_units": 2
+      },
+      "dependency": {
+        "samples": 64,
+        "seed": 17,
+        "permutation_seed": 2718,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "prefix_boundary_checks": {
+          "no_new_information_patients": 70,
+          "passed": true,
+          "max_absolute_logit_or_rate_difference": {
+            "S0_future_target_change": 0,
+            "pCR_S0_future_target_change": 0,
+            "S1_S2_without_new_information": 0,
+            "undeclared_future_treatment_change": 0
+          }
+        },
+        "perturbations": {
+          "CT0": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.023215293884277344,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.027627654373645782,
+                "max_absolute_difference": 0.07829505205154419
+              },
+              "S1": {
+                "mean_absolute_difference": 0.028560839593410492,
+                "max_absolute_difference": 0.07825994491577148
+              },
+              "S2": {
+                "mean_absolute_difference": 0.028560839593410492,
+                "max_absolute_difference": 0.07825994491577148
+              }
+            }
+          },
+          "CT1": {
+            "eligible_patients": 70,
+            "selection_nll_difference": -0.0008870363235473633,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0,
+                "max_absolute_difference": 0
+              },
+              "S1": {
+                "mean_absolute_difference": 0.002366639906540513,
+                "max_absolute_difference": 0.03750962018966675
+              },
+              "S2": {
+                "mean_absolute_difference": 0.002366639906540513,
+                "max_absolute_difference": 0.03750962018966675
+              }
+            }
+          },
+          "paired_CT": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.021282434463500977,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.027627654373645782,
+                "max_absolute_difference": 0.07829505205154419
+              },
+              "S1": {
+                "mean_absolute_difference": 0.028076699003577232,
+                "max_absolute_difference": 0.07821512222290039
+              },
+              "S2": {
+                "mean_absolute_difference": 0.028076699003577232,
+                "max_absolute_difference": 0.07821512222290039
+              }
+            }
+          },
+          "known_scenario": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.0008687376976013184,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.0013969873543828726,
+                "max_absolute_difference": 0.02139115333557129
+              },
+              "S1": {
+                "mean_absolute_difference": 0.0014521810226142406,
+                "max_absolute_difference": 0.022810757160186768
+              },
+              "S2": {
+                "mean_absolute_difference": 0.0014521810226142406,
+                "max_absolute_difference": 0.022810757160186768
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "G1",
+      "fold": 0,
+      "role": "inner_validation",
+      "patients": 70,
+      "original_test_or_validation_scored": false,
+      "stage_weights": [
+        0.5,
+        0.5,
+        0
+      ],
+      "health": {
+        "raw_kl": 0.2213944401059832,
+        "free_nats_kl": 0.5,
+        "prior_active_units": 6,
+        "posterior_active_units": 4
+      },
+      "dependency": {
+        "samples": 64,
+        "seed": 17,
+        "permutation_seed": 2718,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "prefix_boundary_checks": {
+          "no_new_information_patients": 70,
+          "passed": true,
+          "max_absolute_logit_or_rate_difference": {
+            "S0_future_target_change": 0,
+            "pCR_S0_future_target_change": 0,
+            "S1_S2_without_new_information": 0,
+            "undeclared_future_treatment_change": 0
+          }
+        },
+        "perturbations": {
+          "CT0": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.008940458297729492,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.033140141516923904,
+                "max_absolute_difference": 0.10669493675231934
+              },
+              "S1": {
+                "mean_absolute_difference": 0.03581064194440842,
+                "max_absolute_difference": 0.1189141571521759
+              },
+              "S2": {
+                "mean_absolute_difference": 0.03581064194440842,
+                "max_absolute_difference": 0.1189141571521759
+              }
+            }
+          },
+          "CT1": {
+            "eligible_patients": 70,
+            "selection_nll_difference": -0.0004082322120666504,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0,
+                "max_absolute_difference": 0
+              },
+              "S1": {
+                "mean_absolute_difference": 0.0073047056794166565,
+                "max_absolute_difference": 0.1181577742099762
+              },
+              "S2": {
+                "mean_absolute_difference": 0.0073047056794166565,
+                "max_absolute_difference": 0.1181577742099762
+              }
+            }
+          },
+          "paired_CT": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.006959319114685059,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.033140141516923904,
+                "max_absolute_difference": 0.10669493675231934
+              },
+              "S1": {
+                "mean_absolute_difference": 0.03431127592921257,
+                "max_absolute_difference": 0.11878940463066101
+              },
+              "S2": {
+                "mean_absolute_difference": 0.03431127592921257,
+                "max_absolute_difference": 0.11878940463066101
+              }
+            }
+          },
+          "known_scenario": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.00012367963790893555,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.0011791239958256483,
+                "max_absolute_difference": 0.04635953903198242
+              },
+              "S1": {
+                "mean_absolute_difference": 0.0007408274686895311,
+                "max_absolute_difference": 0.012236841022968292
+              },
+              "S2": {
+                "mean_absolute_difference": 0.0007408274686895311,
+                "max_absolute_difference": 0.012236841022968292
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "G1",
+      "fold": 1,
+      "role": "inner_validation",
+      "patients": 70,
+      "original_test_or_validation_scored": false,
+      "stage_weights": [
+        0.5,
+        0.5,
+        0
+      ],
+      "health": {
+        "raw_kl": 0.25086743916784016,
+        "free_nats_kl": 0.5017118734972817,
+        "prior_active_units": 8,
+        "posterior_active_units": 11
+      },
+      "dependency": {
+        "samples": 64,
+        "seed": 17,
+        "permutation_seed": 2718,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "prefix_boundary_checks": {
+          "no_new_information_patients": 70,
+          "passed": true,
+          "max_absolute_logit_or_rate_difference": {
+            "S0_future_target_change": 0,
+            "pCR_S0_future_target_change": 0,
+            "S1_S2_without_new_information": 0,
+            "undeclared_future_treatment_change": 0
+          }
+        },
+        "perturbations": {
+          "CT0": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.0016679167747497559,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.004092917311936617,
+                "max_absolute_difference": 0.012585878372192383
+              },
+              "S1": {
+                "mean_absolute_difference": 0.004014493897557259,
+                "max_absolute_difference": 0.012234985828399658
+              },
+              "S2": {
+                "mean_absolute_difference": 0.004014493897557259,
+                "max_absolute_difference": 0.012234985828399658
+              }
+            }
+          },
+          "CT1": {
+            "eligible_patients": 70,
+            "selection_nll_difference": -1.6927719116210938e-05,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0,
+                "max_absolute_difference": 0
+              },
+              "S1": {
+                "mean_absolute_difference": 0.00017975315859075636,
+                "max_absolute_difference": 0.002261936664581299
+              },
+              "S2": {
+                "mean_absolute_difference": 0.00017975315859075636,
+                "max_absolute_difference": 0.002261936664581299
+              }
+            }
+          },
+          "paired_CT": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.0017604827880859375,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.004092917311936617,
+                "max_absolute_difference": 0.012585878372192383
+              },
+              "S1": {
+                "mean_absolute_difference": 0.004148213192820549,
+                "max_absolute_difference": 0.012613058090209961
+              },
+              "S2": {
+                "mean_absolute_difference": 0.004148213192820549,
+                "max_absolute_difference": 0.012613058090209961
+              }
+            }
+          },
+          "known_scenario": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 6.9141387939453125e-06,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 5.867176514584571e-05,
+                "max_absolute_difference": 0.000570148229598999
+              },
+              "S1": {
+                "mean_absolute_difference": 6.143740756670013e-05,
+                "max_absolute_difference": 0.0005605220794677734
+              },
+              "S2": {
+                "mean_absolute_difference": 6.143740756670013e-05,
+                "max_absolute_difference": 0.0005605220794677734
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "G1",
+      "fold": 2,
+      "role": "inner_validation",
+      "patients": 70,
+      "original_test_or_validation_scored": false,
+      "stage_weights": [
+        0.5,
+        0.5,
+        0
+      ],
+      "health": {
+        "raw_kl": 0.2819625965186528,
+        "free_nats_kl": 0.5019159419195992,
+        "prior_active_units": 6,
+        "posterior_active_units": 12
+      },
+      "dependency": {
+        "samples": 64,
+        "seed": 17,
+        "permutation_seed": 2718,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "prefix_boundary_checks": {
+          "no_new_information_patients": 70,
+          "passed": true,
+          "max_absolute_logit_or_rate_difference": {
+            "S0_future_target_change": 0,
+            "pCR_S0_future_target_change": 0,
+            "S1_S2_without_new_information": 0,
+            "undeclared_future_treatment_change": 0
+          }
+        },
+        "perturbations": {
+          "CT0": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.007449448108673096,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.009587985463440418,
+                "max_absolute_difference": 0.03374511003494263
+              },
+              "S1": {
+                "mean_absolute_difference": 0.009441042318940163,
+                "max_absolute_difference": 0.03371924161911011
+              },
+              "S2": {
+                "mean_absolute_difference": 0.009441042318940163,
+                "max_absolute_difference": 0.03371924161911011
+              }
+            }
+          },
+          "CT1": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.00037980079650878906,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0,
+                "max_absolute_difference": 0
+              },
+              "S1": {
+                "mean_absolute_difference": 0.001037727459333837,
+                "max_absolute_difference": 0.019374758005142212
+              },
+              "S2": {
+                "mean_absolute_difference": 0.001037727459333837,
+                "max_absolute_difference": 0.019374758005142212
+              }
+            }
+          },
+          "paired_CT": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.007751584053039551,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.009587985463440418,
+                "max_absolute_difference": 0.03374511003494263
+              },
+              "S1": {
+                "mean_absolute_difference": 0.009618155658245087,
+                "max_absolute_difference": 0.033659279346466064
+              },
+              "S2": {
+                "mean_absolute_difference": 0.009618155658245087,
+                "max_absolute_difference": 0.033659279346466064
+              }
+            }
+          },
+          "known_scenario": {
+            "eligible_patients": 70,
+            "selection_nll_difference": -5.316734313964844e-05,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.00015904195606708527,
+                "max_absolute_difference": 0.0038002878427505493
+              },
+              "S1": {
+                "mean_absolute_difference": 0.00019727370818145573,
+                "max_absolute_difference": 0.006835624575614929
+              },
+              "S2": {
+                "mean_absolute_difference": 0.00019727370818145573,
+                "max_absolute_difference": 0.006835624575614929
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "G2",
+      "fold": 0,
+      "role": "inner_validation",
+      "patients": 70,
+      "original_test_or_validation_scored": false,
+      "stage_weights": [
+        0.5,
+        0.5,
+        0
+      ],
+      "health": {
+        "raw_kl": 0.22137301989964075,
+        "free_nats_kl": 0.5,
+        "prior_active_units": 5,
+        "posterior_active_units": 4
+      },
+      "dependency": {
+        "samples": 64,
+        "seed": 17,
+        "permutation_seed": 2718,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "prefix_boundary_checks": {
+          "no_new_information_patients": 70,
+          "passed": true,
+          "max_absolute_logit_or_rate_difference": {
+            "S0_future_target_change": 0,
+            "pCR_S0_future_target_change": 0,
+            "S1_S2_without_new_information": 0,
+            "undeclared_future_treatment_change": 0
+          }
+        },
+        "perturbations": {
+          "CT0": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.009359419345855713,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.03329121321439743,
+                "max_absolute_difference": 0.10731035470962524
+              },
+              "S1": {
+                "mean_absolute_difference": 0.03566117584705353,
+                "max_absolute_difference": 0.11894124746322632
+              },
+              "S2": {
+                "mean_absolute_difference": 0.03566117584705353,
+                "max_absolute_difference": 0.11894124746322632
+              }
+            }
+          },
+          "CT1": {
+            "eligible_patients": 70,
+            "selection_nll_difference": -0.0004566311836242676,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0,
+                "max_absolute_difference": 0
+              },
+              "S1": {
+                "mean_absolute_difference": 0.00715161906555295,
+                "max_absolute_difference": 0.11645156145095825
+              },
+              "S2": {
+                "mean_absolute_difference": 0.00715161906555295,
+                "max_absolute_difference": 0.11645156145095825
+              }
+            }
+          },
+          "paired_CT": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.007295131683349609,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.03329121321439743,
+                "max_absolute_difference": 0.10731035470962524
+              },
+              "S1": {
+                "mean_absolute_difference": 0.034633997827768326,
+                "max_absolute_difference": 0.11881405115127563
+              },
+              "S2": {
+                "mean_absolute_difference": 0.034633997827768326,
+                "max_absolute_difference": 0.11881405115127563
+              }
+            }
+          },
+          "known_scenario": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.00022232532501220703,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.0011198174906894565,
+                "max_absolute_difference": 0.04109078645706177
+              },
+              "S1": {
+                "mean_absolute_difference": 0.0007159727974794805,
+                "max_absolute_difference": 0.012374266982078552
+              },
+              "S2": {
+                "mean_absolute_difference": 0.0007159727974794805,
+                "max_absolute_difference": 0.012374266982078552
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "G2",
+      "fold": 1,
+      "role": "inner_validation",
+      "patients": 70,
+      "original_test_or_validation_scored": false,
+      "stage_weights": [
+        0.5,
+        0.5,
+        0
+      ],
+      "health": {
+        "raw_kl": 0.21804839202335902,
+        "free_nats_kl": 0.5,
+        "prior_active_units": 4,
+        "posterior_active_units": 6
+      },
+      "dependency": {
+        "samples": 64,
+        "seed": 17,
+        "permutation_seed": 2718,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "prefix_boundary_checks": {
+          "no_new_information_patients": 70,
+          "passed": true,
+          "max_absolute_logit_or_rate_difference": {
+            "S0_future_target_change": 0,
+            "pCR_S0_future_target_change": 0,
+            "S1_S2_without_new_information": 0,
+            "undeclared_future_treatment_change": 0
+          }
+        },
+        "perturbations": {
+          "CT0": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.014183580875396729,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.038455430418252945,
+                "max_absolute_difference": 0.11349713802337646
+              },
+              "S1": {
+                "mean_absolute_difference": 0.037865765392780304,
+                "max_absolute_difference": 0.1131652295589447
+              },
+              "S2": {
+                "mean_absolute_difference": 0.037865765392780304,
+                "max_absolute_difference": 0.1131652295589447
+              }
+            }
+          },
+          "CT1": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.0026589632034301758,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0,
+                "max_absolute_difference": 0
+              },
+              "S1": {
+                "mean_absolute_difference": 0.0018426654860377312,
+                "max_absolute_difference": 0.05073748528957367
+              },
+              "S2": {
+                "mean_absolute_difference": 0.0018426654860377312,
+                "max_absolute_difference": 0.05073748528957367
+              }
+            }
+          },
+          "paired_CT": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.01264190673828125,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.038455430418252945,
+                "max_absolute_difference": 0.11349713802337646
+              },
+              "S1": {
+                "mean_absolute_difference": 0.038045261055231094,
+                "max_absolute_difference": 0.11325004696846008
+              },
+              "S2": {
+                "mean_absolute_difference": 0.038045261055231094,
+                "max_absolute_difference": 0.11325004696846008
+              }
+            }
+          },
+          "known_scenario": {
+            "eligible_patients": 70,
+            "selection_nll_difference": -0.0002789497375488281,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.00034878787118941545,
+                "max_absolute_difference": 0.01819111406803131
+              },
+              "S1": {
+                "mean_absolute_difference": 0.0008882993133738637,
+                "max_absolute_difference": 0.03679215908050537
+              },
+              "S2": {
+                "mean_absolute_difference": 0.0008882993133738637,
+                "max_absolute_difference": 0.03679215908050537
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "G2",
+      "fold": 2,
+      "role": "inner_validation",
+      "patients": 70,
+      "original_test_or_validation_scored": false,
+      "stage_weights": [
+        0.5,
+        0.5,
+        0
+      ],
+      "health": {
+        "raw_kl": 0.28266860587256293,
+        "free_nats_kl": 0.5019363556589399,
+        "prior_active_units": 6,
+        "posterior_active_units": 12
+      },
+      "dependency": {
+        "samples": 64,
+        "seed": 17,
+        "permutation_seed": 2718,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "prefix_boundary_checks": {
+          "no_new_information_patients": 70,
+          "passed": true,
+          "max_absolute_logit_or_rate_difference": {
+            "S0_future_target_change": 0,
+            "pCR_S0_future_target_change": 0,
+            "S1_S2_without_new_information": 0,
+            "undeclared_future_treatment_change": 0
+          }
+        },
+        "perturbations": {
+          "CT0": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.007479965686798096,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.009604114107787609,
+                "max_absolute_difference": 0.03373599052429199
+              },
+              "S1": {
+                "mean_absolute_difference": 0.00947988498955965,
+                "max_absolute_difference": 0.03371211886405945
+              },
+              "S2": {
+                "mean_absolute_difference": 0.00947988498955965,
+                "max_absolute_difference": 0.03371211886405945
+              }
+            }
+          },
+          "CT1": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.00042998790740966797,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0,
+                "max_absolute_difference": 0
+              },
+              "S1": {
+                "mean_absolute_difference": 0.0010231566848233342,
+                "max_absolute_difference": 0.020391106605529785
+              },
+              "S2": {
+                "mean_absolute_difference": 0.0010231566848233342,
+                "max_absolute_difference": 0.020391106605529785
+              }
+            }
+          },
+          "paired_CT": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.007796347141265869,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.009604114107787609,
+                "max_absolute_difference": 0.03373599052429199
+              },
+              "S1": {
+                "mean_absolute_difference": 0.00965909007936716,
+                "max_absolute_difference": 0.03365239500999451
+              },
+              "S2": {
+                "mean_absolute_difference": 0.00965909007936716,
+                "max_absolute_difference": 0.03365239500999451
+              }
+            }
+          },
+          "known_scenario": {
+            "eligible_patients": 70,
+            "selection_nll_difference": -3.921985626220703e-05,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.00015532401448581368,
+                "max_absolute_difference": 0.0035204142332077026
+              },
+              "S1": {
+                "mean_absolute_difference": 0.0001912854058900848,
+                "max_absolute_difference": 0.0065269917249679565
+              },
+              "S2": {
+                "mean_absolute_difference": 0.0001912854058900848,
+                "max_absolute_difference": 0.0065269917249679565
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "G3",
+      "fold": 0,
+      "role": "inner_validation",
+      "patients": 70,
+      "original_test_or_validation_scored": false,
+      "stage_weights": [
+        0.5,
+        0.5,
+        0
+      ],
+      "health": {
+        "raw_kl": 0.220768575157438,
+        "free_nats_kl": 0.5001224245343889,
+        "prior_active_units": 5,
+        "posterior_active_units": 5
+      },
+      "dependency": {
+        "samples": 64,
+        "seed": 17,
+        "permutation_seed": 2718,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "prefix_boundary_checks": {
+          "no_new_information_patients": 70,
+          "passed": true,
+          "max_absolute_logit_or_rate_difference": {
+            "S0_future_target_change": 0,
+            "pCR_S0_future_target_change": 0,
+            "S1_S2_without_new_information": 0,
+            "undeclared_future_treatment_change": 0
+          }
+        },
+        "perturbations": {
+          "CT0": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.015931665897369385,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.049124542623758316,
+                "max_absolute_difference": 0.1521555781364441
+              },
+              "S1": {
+                "mean_absolute_difference": 0.048552293330430984,
+                "max_absolute_difference": 0.14975349605083466
+              },
+              "S2": {
+                "mean_absolute_difference": 0.048552293330430984,
+                "max_absolute_difference": 0.14975349605083466
+              }
+            }
+          },
+          "CT1": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.00047385692596435547,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0,
+                "max_absolute_difference": 0
+              },
+              "S1": {
+                "mean_absolute_difference": 0.002256597625091672,
+                "max_absolute_difference": 0.009722664952278137
+              },
+              "S2": {
+                "mean_absolute_difference": 0.002256597625091672,
+                "max_absolute_difference": 0.009722664952278137
+              }
+            }
+          },
+          "paired_CT": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.016192972660064697,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.049124542623758316,
+                "max_absolute_difference": 0.1521555781364441
+              },
+              "S1": {
+                "mean_absolute_difference": 0.04797319322824478,
+                "max_absolute_difference": 0.1491512656211853
+              },
+              "S2": {
+                "mean_absolute_difference": 0.04797319322824478,
+                "max_absolute_difference": 0.1491512656211853
+              }
+            }
+          },
+          "known_scenario": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.00031501054763793945,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.0006133089191280305,
+                "max_absolute_difference": 0.0032975971698760986
+              },
+              "S1": {
+                "mean_absolute_difference": 0.0006016356637701392,
+                "max_absolute_difference": 0.003441423177719116
+              },
+              "S2": {
+                "mean_absolute_difference": 0.0006016356637701392,
+                "max_absolute_difference": 0.003441423177719116
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "G3",
+      "fold": 1,
+      "role": "inner_validation",
+      "patients": 70,
+      "original_test_or_validation_scored": false,
+      "stage_weights": [
+        0.5,
+        0.5,
+        0
+      ],
+      "health": {
+        "raw_kl": 0.23095953379358564,
+        "free_nats_kl": 0.5,
+        "prior_active_units": 5,
+        "posterior_active_units": 3
+      },
+      "dependency": {
+        "samples": 64,
+        "seed": 17,
+        "permutation_seed": 2718,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "prefix_boundary_checks": {
+          "no_new_information_patients": 70,
+          "passed": true,
+          "max_absolute_logit_or_rate_difference": {
+            "S0_future_target_change": 0,
+            "pCR_S0_future_target_change": 0,
+            "S1_S2_without_new_information": 0,
+            "undeclared_future_treatment_change": 0
+          }
+        },
+        "perturbations": {
+          "CT0": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.0020803213119506836,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.011172652244567871,
+                "max_absolute_difference": 0.03938555717468262
+              },
+              "S1": {
+                "mean_absolute_difference": 0.011138318106532097,
+                "max_absolute_difference": 0.03927433490753174
+              },
+              "S2": {
+                "mean_absolute_difference": 0.011138318106532097,
+                "max_absolute_difference": 0.03927433490753174
+              }
+            }
+          },
+          "CT1": {
+            "eligible_patients": 70,
+            "selection_nll_difference": -0.00010609626770019531,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0,
+                "max_absolute_difference": 0
+              },
+              "S1": {
+                "mean_absolute_difference": 0.0004018802719656378,
+                "max_absolute_difference": 0.0023095011711120605
+              },
+              "S2": {
+                "mean_absolute_difference": 0.0004018802719656378,
+                "max_absolute_difference": 0.0023095011711120605
+              }
+            }
+          },
+          "paired_CT": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.001993834972381592,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.011172652244567871,
+                "max_absolute_difference": 0.03938555717468262
+              },
+              "S1": {
+                "mean_absolute_difference": 0.01106120366603136,
+                "max_absolute_difference": 0.03856492042541504
+              },
+              "S2": {
+                "mean_absolute_difference": 0.01106120366603136,
+                "max_absolute_difference": 0.03856492042541504
+              }
+            }
+          },
+          "known_scenario": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 2.3663043975830078e-05,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.00018394265498500317,
+                "max_absolute_difference": 0.001849547028541565
+              },
+              "S1": {
+                "mean_absolute_difference": 0.00018224204541184008,
+                "max_absolute_difference": 0.001939043402671814
+              },
+              "S2": {
+                "mean_absolute_difference": 0.00018224204541184008,
+                "max_absolute_difference": 0.001939043402671814
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "G3",
+      "fold": 2,
+      "role": "inner_validation",
+      "patients": 70,
+      "original_test_or_validation_scored": false,
+      "stage_weights": [
+        0.5,
+        0.5,
+        0
+      ],
+      "health": {
+        "raw_kl": 0.23786793606621878,
+        "free_nats_kl": 0.5008049632821764,
+        "prior_active_units": 6,
+        "posterior_active_units": 8
+      },
+      "dependency": {
+        "samples": 64,
+        "seed": 17,
+        "permutation_seed": 2718,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "prefix_boundary_checks": {
+          "no_new_information_patients": 70,
+          "passed": true,
+          "max_absolute_logit_or_rate_difference": {
+            "S0_future_target_change": 0,
+            "pCR_S0_future_target_change": 0,
+            "S1_S2_without_new_information": 0,
+            "undeclared_future_treatment_change": 0
+          }
+        },
+        "perturbations": {
+          "CT0": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.05249840021133423,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.06846988946199417,
+                "max_absolute_difference": 0.2920950651168823
+              },
+              "S1": {
+                "mean_absolute_difference": 0.06861992925405502,
+                "max_absolute_difference": 0.2904892861843109
+              },
+              "S2": {
+                "mean_absolute_difference": 0.06861992925405502,
+                "max_absolute_difference": 0.2904892861843109
+              }
+            }
+          },
+          "CT1": {
+            "eligible_patients": 70,
+            "selection_nll_difference": -0.0007744431495666504,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0,
+                "max_absolute_difference": 0
+              },
+              "S1": {
+                "mean_absolute_difference": 0.002520977286621928,
+                "max_absolute_difference": 0.017313510179519653
+              },
+              "S2": {
+                "mean_absolute_difference": 0.002520977286621928,
+                "max_absolute_difference": 0.017313510179519653
+              }
+            }
+          },
+          "paired_CT": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.05258399248123169,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.06846988946199417,
+                "max_absolute_difference": 0.2920950651168823
+              },
+              "S1": {
+                "mean_absolute_difference": 0.06879886239767075,
+                "max_absolute_difference": 0.29221490025520325
+              },
+              "S2": {
+                "mean_absolute_difference": 0.06879886239767075,
+                "max_absolute_difference": 0.29221490025520325
+              }
+            }
+          },
+          "known_scenario": {
+            "eligible_patients": 70,
+            "selection_nll_difference": 0.0008882880210876465,
+            "stages": {
+              "S0": {
+                "mean_absolute_difference": 0.0013655470684170723,
+                "max_absolute_difference": 0.007624775171279907
+              },
+              "S1": {
+                "mean_absolute_difference": 0.0013567107962444425,
+                "max_absolute_difference": 0.007988184690475464
+              },
+              "S2": {
+                "mean_absolute_difference": 0.0013567107962444425,
+                "max_absolute_difference": 0.007988184690475464
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "checkpoint_verification": {
+    "total_actual_supervised_steps": 5400,
+    "records": [
+      {
+        "case": "G0",
+        "fold": 0,
+        "frozen_anchor_and_preprocessing_unchanged": true,
+        "export_exactly_selected_best": true,
+        "actual_supervised_steps": 400,
+        "selected_supervised_steps": 150,
+        "selected_kind": "neural"
+      },
+      {
+        "case": "G0",
+        "fold": 1,
+        "frozen_anchor_and_preprocessing_unchanged": true,
+        "export_exactly_selected_best": true,
+        "actual_supervised_steps": 400,
+        "selected_supervised_steps": 150,
+        "selected_kind": "neural"
+      },
+      {
+        "case": "G0",
+        "fold": 2,
+        "frozen_anchor_and_preprocessing_unchanged": true,
+        "export_exactly_selected_best": true,
+        "actual_supervised_steps": 450,
+        "selected_supervised_steps": 200,
+        "selected_kind": "neural"
+      },
+      {
+        "case": "G1",
+        "fold": 0,
+        "frozen_anchor_and_preprocessing_unchanged": true,
+        "export_exactly_selected_best": true,
+        "actual_supervised_steps": 450,
+        "selected_supervised_steps": 200,
+        "selected_kind": "neural"
+      },
+      {
+        "case": "G1",
+        "fold": 1,
+        "frozen_anchor_and_preprocessing_unchanged": true,
+        "export_exactly_selected_best": true,
+        "actual_supervised_steps": 350,
+        "selected_supervised_steps": 100,
+        "selected_kind": "neural"
+      },
+      {
+        "case": "G1",
+        "fold": 2,
+        "frozen_anchor_and_preprocessing_unchanged": true,
+        "export_exactly_selected_best": true,
+        "actual_supervised_steps": 400,
+        "selected_supervised_steps": 150,
+        "selected_kind": "neural"
+      },
+      {
+        "case": "G2",
+        "fold": 0,
+        "frozen_anchor_and_preprocessing_unchanged": true,
+        "export_exactly_selected_best": true,
+        "actual_supervised_steps": 450,
+        "selected_supervised_steps": 200,
+        "selected_kind": "neural"
+      },
+      {
+        "case": "G2",
+        "fold": 1,
+        "frozen_anchor_and_preprocessing_unchanged": true,
+        "export_exactly_selected_best": true,
+        "actual_supervised_steps": 450,
+        "selected_supervised_steps": 200,
+        "selected_kind": "neural"
+      },
+      {
+        "case": "G2",
+        "fold": 2,
+        "frozen_anchor_and_preprocessing_unchanged": true,
+        "export_exactly_selected_best": true,
+        "actual_supervised_steps": 400,
+        "selected_supervised_steps": 150,
+        "selected_kind": "neural"
+      },
+      {
+        "case": "G3",
+        "fold": 0,
+        "frozen_anchor_and_preprocessing_unchanged": true,
+        "export_exactly_selected_best": true,
+        "actual_supervised_steps": 550,
+        "selected_supervised_steps": 300,
+        "selected_kind": "neural"
+      },
+      {
+        "case": "G3",
+        "fold": 1,
+        "frozen_anchor_and_preprocessing_unchanged": true,
+        "export_exactly_selected_best": true,
+        "actual_supervised_steps": 450,
+        "selected_supervised_steps": 200,
+        "selected_kind": "neural"
+      },
+      {
+        "case": "G3",
+        "fold": 2,
+        "frozen_anchor_and_preprocessing_unchanged": true,
+        "export_exactly_selected_best": true,
+        "actual_supervised_steps": 650,
+        "selected_supervised_steps": 400,
+        "selected_kind": "neural"
+      }
+    ]
+  }
+}

@@ -30,14 +30,19 @@ def main(argv=None):
     for k in ("data","split","run"):
         p.add_argument(f"--{k}",required=True)
     p.add_argument("--role",choices=("validation","test"),default="validation")
-    p.add_argument("--samples",type=int,default=32);p.add_argument("--device",default="cpu")
+    p.add_argument("--samples",type=int);p.add_argument("--device",default="cpu")
+    p.add_argument("--seed",type=int)
+    p.add_argument("--mc-seed-policy",choices=("batch_start","case_key"))
+    p.add_argument("--mc-antithetic",action=argparse.BooleanOptionalAction,default=None)
     p.add_argument("--overwrite",action="store_true")
     p=sub.add_parser("predict")
     for k in ("bundle","query","out"):
         p.add_argument(f"--{k}",required=True)
     p.add_argument("--stage",type=int,choices=(0,1,2),required=True)
     p.add_argument("--horizons",type=float,nargs="+")
-    p.add_argument("--samples",type=int,default=32);p.add_argument("--seed",type=int,default=17)
+    p.add_argument("--samples",type=int);p.add_argument("--seed",type=int)
+    p.add_argument("--mc-seed-policy",choices=("batch_start","case_key"))
+    p.add_argument("--mc-antithetic",action=argparse.BooleanOptionalAction,default=None)
     p.add_argument("--allow-extrapolation",action="store_true");p.add_argument("--device",default="cpu")
     p=sub.add_parser("legacy-convert")
     for k in ("pool","events","split","out"):
@@ -72,14 +77,26 @@ def main(argv=None):
             raise ValueError("Evaluation dataset/split differs from the locked training contract")
         predictor=Predictor(root/"inference.pt",args.device)
         cohort=Cohort.load(args.data);roles=split_indices(cohort,split)
-        pred=collect_predictions(predictor.model,cohort,roles[args.role],samples=args.samples)
-        report=evaluate_predictions(pred,cohort,roles[args.role],predictor.cfg,roles["train"])
+        if cohort.metadata.get("excluded_scoring_permitted") is False and set(split[args.role]) & set(cohort.metadata.get("excluded_ids",[])):
+            raise ValueError("Excluded original holdouts cannot be scored by this evaluation command")
+        evaluation=predictor.bundle.get("evaluation_config",{})
+        training=contract["contract"].get("train",{})
+        policy=args.mc_seed_policy or evaluation.get("mc_seed_policy",training.get("mc_seed_policy","batch_start"))
+        antithetic=args.mc_antithetic if args.mc_antithetic is not None else evaluation.get("mc_antithetic",training.get("mc_antithetic",False))
+        weights=evaluation.get("stage_weights",training.get("stage_weights",(1.,1.,1.)))
+        seed=args.seed if args.seed is not None else evaluation.get("mc_seed",17)
+        samples=args.samples if args.samples is not None else evaluation.get("samples_eval",32)
+        pred=collect_predictions(predictor.model,cohort,roles[args.role],samples=samples,
+            seed=seed,mc_seed_policy=policy,mc_antithetic=antithetic)
+        report=evaluate_predictions(pred,cohort,roles[args.role],predictor.cfg,roles["train"],stage_weights=weights)
+        report.update({"samples":samples,"seed":seed,"mc_seed_policy":policy,"mc_antithetic":antithetic})
         report.update({"role":args.role,"synthetic":cohort.metadata.get("synthetic",False),"external_validation":False})
         write_json(report,destination);print(json.dumps(report,indent=2))
     elif args.command=="predict":
         query=torch.load(args.query,map_location="cpu",weights_only=True)
         result=Predictor(args.bundle,args.device).predict(query,args.stage,samples=args.samples,seed=args.seed,
-                      horizons=args.horizons,allow_extrapolation=args.allow_extrapolation)
+                      horizons=args.horizons,allow_extrapolation=args.allow_extrapolation,
+                      mc_seed_policy=args.mc_seed_policy,mc_antithetic=args.mc_antithetic)
         write_json(jsonable(result),args.out);print(json.dumps(jsonable(result),indent=2))
     elif args.command=="legacy-convert":
         result=convert_legacy(args.pool,args.events,json.loads(Path(args.split).read_text()),args.out,args.acknowledge_retrospective)

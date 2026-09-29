@@ -1,0 +1,745 @@
+{
+  "endpoint": "CT1_cached_feature_forecasting",
+  "development_evidence_only": true,
+  "original_validation_or_test_scored": false,
+  "ranks": [
+    8,
+    32
+  ],
+  "samples": 32,
+  "mc_seed": 17,
+  "mc_seed_policy": "case_key",
+  "batch_size": 8,
+  "device": "cuda",
+  "fold_indices": [
+    0,
+    1,
+    2
+  ],
+  "full_outer_oof": true,
+  "forward_inputs": "CT0+clinical+explicit_scenario; CT1_post_labels_physically_removed",
+  "point_forecast": "mean_over_decoded_draws_of_fixed_token_mean_sd_features",
+  "set_scoring": "permutation_invariant_set_loss; no_cross_time_tokenwise_MSE",
+  "energy_score": "unbiased_finite_ensemble_pair_term_K_times_Kminus1; Euclidean_fixed_target_space",
+  "intervals": "marginal_latent_feature_90pct_prediction_coverage_not_clinical_confidence",
+  "limitations": [
+    "Reused development outer folds are not independent confirmation.",
+    "Different ranks define different targets; compare each skill to its own training mean.",
+    "Sample set loss is distinct from error of the decoded MC aggregate point prediction.",
+    "Ridge and Gaussian reference statistics use inner training only; ridge lambda is preset at 0.1.",
+    "Token grids are independently cropped sets, not anatomically registered CT pairs."
+  ],
+  "elapsed_seconds": 19.71469498705119,
+  "schema": "public-gastric-prior-forecast-evaluation-v1",
+  "checkpoint_scope": "historical_selected_token_prior_folds_before_G0_G1_G2_G3",
+  "source_sha256": {
+    "forecast_evaluation.py": "2aff420965951698114070aefae97e2307987362b720a58c92257a89cce19d6f",
+    "evaluate_token_forecast.py": "93bbd5c8b8540bd55e822c286b788bf3e47a901b9590832499f12ef65d60b19f"
+  },
+  "results": {
+    "8": {
+      "pooled_outer": {
+        "patients": 521,
+        "points": {
+          "training_CT1_mean": {
+            "patients": 521,
+            "elements": 8336,
+            "sse": 8284.269346536945,
+            "training_mean_sse": 8284.269346536945,
+            "mse": 0.9937943074060634,
+            "skill_vs_training_CT1_mean": 0.0
+          },
+          "copy_CT0": {
+            "patients": 521,
+            "elements": 8336,
+            "sse": 12644.915389379803,
+            "training_mean_sse": 8284.269346536945,
+            "mse": 1.5169044373056386,
+            "skill_vs_training_CT1_mean": -0.5263766616504
+          },
+          "ridge_CT0_condition": {
+            "patients": 521,
+            "elements": 8336,
+            "sse": 8640.166459788934,
+            "training_mean_sse": 8284.269346536945,
+            "mse": 1.036488298919018,
+            "skill_vs_training_CT1_mean": -0.04296059173893996
+          },
+          "prior_single_sample": {
+            "patients": 521,
+            "elements": 8336,
+            "sse": 14794.018212169689,
+            "training_mean_sse": 8284.269346536945,
+            "mse": 1.7747142768917572,
+            "skill_vs_training_CT1_mean": -0.7857963802630343
+          },
+          "prior_decoded_MC_mean": {
+            "patients": 521,
+            "elements": 8336,
+            "sse": 14792.955738659151,
+            "training_mean_sse": 8284.269346536945,
+            "mse": 1.7745868208564242,
+            "skill_vs_training_CT1_mean": -0.7856681283356652
+          }
+        },
+        "distributions": {
+          "prior": {
+            "energy_score": 5.139930317033643,
+            "marginal_90pct_coverage": 0.0017994241842610365,
+            "marginal_90pct_width": 0.0049986274461960925,
+            "mean_projected_variance": 4.540197614985452e-06
+          },
+          "training_Gaussian": {
+            "energy_score": 2.7383800343398774,
+            "marginal_90pct_coverage": 0.855926103646833,
+            "marginal_90pct_width": 3.021068003625558,
+            "mean_projected_variance": 0.9987433418140536
+          }
+        },
+        "sets_and_channel_moments": {
+          "prior_single_sample_set_loss": 0.6659217951622668,
+          "prior_expected_sample_set_loss": 0.6659110528264989,
+          "copy_CT0_set_loss": 0.7566545983193703,
+          "training_channel_mean_degenerate_set_loss": 0.8164018504679089,
+          "prior_MC_channel_mean_mse": 0.180173907936649,
+          "prior_MC_channel_sd_mse": 0.11081519202398933,
+          "prior_single_channel_mean_mse": 0.1801956576257658,
+          "prior_single_channel_sd_mse": 0.11081559833089129
+        }
+      },
+      "folds": [
+        {
+          "fold": 0,
+          "paired_outer_patients": 174,
+          "training_patients": 277,
+          "selected_epoch_zero_based": 10,
+          "provenance": {
+            "rank": 8,
+            "fit_patients": 277,
+            "projection_observations": 554,
+            "projection_fit": "shared_CT0_and_legal_CT1_patient_scan_channel_means",
+            "feature_level": "patient_aggregated_27_cached_tokens",
+            "normalization": "train_scan_mean_channel_center_and_population_sd_floor_0.05; shared_PCA; token_mean_and_population_sd; train_patient_feature_center_and_population_sd",
+            "missing_images": "zero_imputation_in_raw_projected_space_plus_observation_indicator",
+            "tabular_statistics_sha256": "c62638dc80e4c5c3d50a6d2edfa685af507df7dd296bb8936aa11d2bf7f0af09",
+            "different_ranks_define_different_target_spaces": true,
+            "target_normalization": "train_legal_paired_CT1_aggregated_mean_and_population_sd_floor_0.05",
+            "target_moment_statistics_sha256": "a41979f2c46057c0298f1d4021b75c796dc60ebba6e7463bf3da60767dedbc14",
+            "paired_training_patients": 277,
+            "ridge_lambda": 0.1,
+            "ridge_objective": "mean_patient_squared_error_per_target_channel+lambda*sum(weight_squared); free_intercept",
+            "ridge_selection": "preset_0.1_no_outer_or_original_holdout_tuning",
+            "gaussian_covariance": "training_CT1_population_full_covariance_plus_1e-6_identity",
+            "target_space_id": "a291de45591d2ba69cf9b39b2152f9e3df33c0b11c78375be05473e59ee25529",
+            "projection_space_id": "ad8e180bc4e223c6948768d9f1b87b23453171a38d99fad6267d339f92f2df60",
+            "encoder_provenance": {}
+          },
+          "points": {
+            "training_CT1_mean": {
+              "patients": 174,
+              "elements": 2784,
+              "sse": 2936.969686600025,
+              "training_mean_sse": 2936.969686600025,
+              "mse": 1.054946008117825,
+              "skill_vs_training_CT1_mean": 0.0
+            },
+            "copy_CT0": {
+              "patients": 174,
+              "elements": 2784,
+              "sse": 4451.644853854419,
+              "training_mean_sse": 2936.969686600025,
+              "mse": 1.599010364171846,
+              "skill_vs_training_CT1_mean": -0.5157272048687209
+            },
+            "ridge_CT0_condition": {
+              "patients": 174,
+              "elements": 2784,
+              "sse": 3070.253608407011,
+              "training_mean_sse": 2936.969686600025,
+              "mse": 1.102820980031254,
+              "skill_vs_training_CT1_mean": -0.04538144278951761
+            },
+            "prior_single_sample": {
+              "patients": 174,
+              "elements": 2784,
+              "sse": 5278.007771629223,
+              "training_mean_sse": 2936.969686600025,
+              "mse": 1.8958361248668185,
+              "skill_vs_training_CT1_mean": -0.7970930363054902
+            },
+            "prior_decoded_MC_mean": {
+              "patients": 174,
+              "elements": 2784,
+              "sse": 5277.479189018343,
+              "training_mean_sse": 2936.969686600025,
+              "mse": 1.8956462604232556,
+              "skill_vs_training_CT1_mean": -0.7969130607976425
+            }
+          },
+          "distributions": {
+            "prior": {
+              "energy_score": 5.31957713122776,
+              "marginal_90pct_coverage": 0.00035919540229885057,
+              "marginal_90pct_width": 0.00512405774669041,
+              "mean_projected_variance": 4.925196789766786e-06
+            },
+            "training_Gaussian": {
+              "energy_score": 2.7867779553721013,
+              "marginal_90pct_coverage": 0.8538074712643678,
+              "marginal_90pct_width": 3.0186198436464475,
+              "mean_projected_variance": 0.9939570250517221
+            }
+          },
+          "sets_and_channel_moments": {
+            "prior_single_sample_set_loss": 0.6831510471201491,
+            "prior_expected_sample_set_loss": 0.6831325552929407,
+            "copy_CT0_set_loss": 0.7737048878066841,
+            "training_channel_mean_degenerate_set_loss": 0.8281130160408459,
+            "prior_MC_channel_mean_mse": 0.18365761791837626,
+            "prior_MC_channel_sd_mse": 0.11196503608391203,
+            "prior_single_channel_mean_mse": 0.1836811163644681,
+            "prior_single_channel_sd_mse": 0.11196427989280087
+          }
+        },
+        {
+          "fold": 1,
+          "paired_outer_patients": 174,
+          "training_patients": 277,
+          "selected_epoch_zero_based": 9,
+          "provenance": {
+            "rank": 8,
+            "fit_patients": 277,
+            "projection_observations": 554,
+            "projection_fit": "shared_CT0_and_legal_CT1_patient_scan_channel_means",
+            "feature_level": "patient_aggregated_27_cached_tokens",
+            "normalization": "train_scan_mean_channel_center_and_population_sd_floor_0.05; shared_PCA; token_mean_and_population_sd; train_patient_feature_center_and_population_sd",
+            "missing_images": "zero_imputation_in_raw_projected_space_plus_observation_indicator",
+            "tabular_statistics_sha256": "af8dae09c3104a818854e73ec6628da285c1868b355727d2a131a5a48f7daf1c",
+            "different_ranks_define_different_target_spaces": true,
+            "target_normalization": "train_legal_paired_CT1_aggregated_mean_and_population_sd_floor_0.05",
+            "target_moment_statistics_sha256": "b47fa4169694b3c307781ab57db705a16e5f112d81f747fcfe3fab74143849f3",
+            "paired_training_patients": 277,
+            "ridge_lambda": 0.1,
+            "ridge_objective": "mean_patient_squared_error_per_target_channel+lambda*sum(weight_squared); free_intercept",
+            "ridge_selection": "preset_0.1_no_outer_or_original_holdout_tuning",
+            "gaussian_covariance": "training_CT1_population_full_covariance_plus_1e-6_identity",
+            "target_space_id": "bc42a0f6fe5863c84c64d71ce18ec268b0cbd50416cf42f288a9448dc3c72b60",
+            "projection_space_id": "b1c6a09173b404f34e3d03d171537ed44893f14366f6d23c5c9287057dbf03b9",
+            "encoder_provenance": {}
+          },
+          "points": {
+            "training_CT1_mean": {
+              "patients": 174,
+              "elements": 2784,
+              "sse": 2704.805848930344,
+              "training_mean_sse": 2704.805848930344,
+              "mse": 0.971553825046819,
+              "skill_vs_training_CT1_mean": 0.0
+            },
+            "copy_CT0": {
+              "patients": 174,
+              "elements": 2784,
+              "sse": 3987.294027034045,
+              "training_mean_sse": 2704.805848930344,
+              "mse": 1.4322176821242978,
+              "skill_vs_training_CT1_mean": -0.4741516580980776
+            },
+            "ridge_CT0_condition": {
+              "patients": 174,
+              "elements": 2784,
+              "sse": 2857.7545240769673,
+              "training_mean_sse": 2704.805848930344,
+              "mse": 1.0264922859471866,
+              "skill_vs_training_CT1_mean": -0.05654700695323811
+            },
+            "prior_single_sample": {
+              "patients": 174,
+              "elements": 2784,
+              "sse": 4844.873187251943,
+              "training_mean_sse": 2704.805848930344,
+              "mse": 1.740256173581876,
+              "skill_vs_training_CT1_mean": -0.7912092245615043
+            },
+            "prior_decoded_MC_mean": {
+              "patients": 174,
+              "elements": 2784,
+              "sse": 4844.636138244177,
+              "training_mean_sse": 2704.805848930344,
+              "mse": 1.7401710266681671,
+              "skill_vs_training_CT1_mean": -0.7911215846268824
+            }
+          },
+          "distributions": {
+            "prior": {
+              "energy_score": 5.090543520701839,
+              "marginal_90pct_coverage": 0.002514367816091954,
+              "marginal_90pct_width": 0.0050954293647952524,
+              "mean_projected_variance": 4.9329867691259265e-06
+            },
+            "training_Gaussian": {
+              "energy_score": 2.7396269843527468,
+              "marginal_90pct_coverage": 0.8477011494252874,
+              "marginal_90pct_width": 3.015771945767142,
+              "mean_projected_variance": 0.9985608370077297
+            }
+          },
+          "sets_and_channel_moments": {
+            "prior_single_sample_set_loss": 0.6601672604166228,
+            "prior_expected_sample_set_loss": 0.660172515902026,
+            "copy_CT0_set_loss": 0.7417046708622198,
+            "training_channel_mean_degenerate_set_loss": 0.8275374455013494,
+            "prior_MC_channel_mean_mse": 0.18485838757164177,
+            "prior_MC_channel_sd_mse": 0.11266377405531106,
+            "prior_single_channel_mean_mse": 0.18488031540108824,
+            "prior_single_channel_sd_mse": 0.11266415026681177
+          }
+        },
+        {
+          "fold": 2,
+          "paired_outer_patients": 173,
+          "training_patients": 278,
+          "selected_epoch_zero_based": 8,
+          "provenance": {
+            "rank": 8,
+            "fit_patients": 278,
+            "projection_observations": 556,
+            "projection_fit": "shared_CT0_and_legal_CT1_patient_scan_channel_means",
+            "feature_level": "patient_aggregated_27_cached_tokens",
+            "normalization": "train_scan_mean_channel_center_and_population_sd_floor_0.05; shared_PCA; token_mean_and_population_sd; train_patient_feature_center_and_population_sd",
+            "missing_images": "zero_imputation_in_raw_projected_space_plus_observation_indicator",
+            "tabular_statistics_sha256": "cd45eefade92d3a90a77bde59d39e992109bc3c892aceec8a57d64615c0d5d1d",
+            "different_ranks_define_different_target_spaces": true,
+            "target_normalization": "train_legal_paired_CT1_aggregated_mean_and_population_sd_floor_0.05",
+            "target_moment_statistics_sha256": "baff0896c30346cfd645783ee6248090ddb50ebe580bdf594265c9464420e3dd",
+            "paired_training_patients": 278,
+            "ridge_lambda": 0.1,
+            "ridge_objective": "mean_patient_squared_error_per_target_channel+lambda*sum(weight_squared); free_intercept",
+            "ridge_selection": "preset_0.1_no_outer_or_original_holdout_tuning",
+            "gaussian_covariance": "training_CT1_population_full_covariance_plus_1e-6_identity",
+            "target_space_id": "085daed4762f37b498a913f94b6d544207b31a4596a4be199a2904d210a6c870",
+            "projection_space_id": "1b4708d7b33f008e534a73131bb202a8fed14e1e84554c5a8e05a6c522c0eec7",
+            "encoder_provenance": {}
+          },
+          "points": {
+            "training_CT1_mean": {
+              "patients": 173,
+              "elements": 2768,
+              "sse": 2642.493811006575,
+              "training_mean_sse": 2642.493811006575,
+              "mse": 0.9546581687162482,
+              "skill_vs_training_CT1_mean": 0.0
+            },
+            "copy_CT0": {
+              "patients": 173,
+              "elements": 2768,
+              "sse": 4205.97650849134,
+              "training_mean_sse": 2642.493811006575,
+              "mse": 1.5195001837035187,
+              "skill_vs_training_CT1_mean": -0.5916693885800266
+            },
+            "ridge_CT0_condition": {
+              "patients": 173,
+              "elements": 2768,
+              "sse": 2712.158327304955,
+              "training_mean_sse": 2642.493811006575,
+              "mse": 0.9798259852980329,
+              "skill_vs_training_CT1_mean": -0.026363171034956334
+            },
+            "prior_single_sample": {
+              "patients": 173,
+              "elements": 2768,
+              "sse": 4671.1372532885225,
+              "training_mean_sse": 2642.493811006575,
+              "mse": 1.6875495857256222,
+              "skill_vs_training_CT1_mean": -0.7677003570764087
+            },
+            "prior_decoded_MC_mean": {
+              "patients": 173,
+              "elements": 2768,
+              "sse": 4670.840411396632,
+              "training_mean_sse": 2642.493811006575,
+              "mse": 1.6874423451577427,
+              "skill_vs_training_CT1_mean": -0.7675880230793888
+            }
+          },
+          "distributions": {
+            "prior": {
+              "energy_score": 5.0089173510912,
+              "marginal_90pct_coverage": 0.0025289017341040463,
+              "marginal_90pct_width": 0.004775110647801496,
+              "mean_projected_variance": 3.7579133997692987e-06
+            },
+            "training_Gaussian": {
+              "energy_score": 2.688448198722269,
+              "marginal_90pct_coverage": 0.8663294797687862,
+              "marginal_90pct_width": 3.0288569857280416,
+              "mean_projected_variance": 1.0037408848946663
+            }
+          },
+          "sets_and_channel_moments": {
+            "prior_single_sample_set_loss": 0.6543807501048711,
+            "prior_expected_sample_set_loss": 0.6543617117611659,
+            "copy_CT0_set_loss": 0.7545420954682235,
+            "training_channel_mean_degenerate_set_loss": 0.7934230276614944,
+            "prior_MC_channel_mean_mse": 0.17195850335104618,
+            "prior_MC_channel_sd_mse": 0.10779943399002097,
+            "prior_single_channel_mean_mse": 0.1719783150047236,
+            "prior_single_channel_sd_mse": 0.10780103978394084
+          }
+        }
+      ]
+    },
+    "32": {
+      "pooled_outer": {
+        "patients": 521,
+        "points": {
+          "training_CT1_mean": {
+            "patients": 521,
+            "elements": 33344,
+            "sse": 32425.09578182656,
+            "training_mean_sse": 32425.09578182656,
+            "mse": 0.9724416921133205,
+            "skill_vs_training_CT1_mean": 0.0
+          },
+          "copy_CT0": {
+            "patients": 521,
+            "elements": 33344,
+            "sse": 55052.1009877367,
+            "training_mean_sse": 32425.09578182656,
+            "mse": 1.651034698528572,
+            "skill_vs_training_CT1_mean": -0.6978238509504111
+          },
+          "ridge_CT0_condition": {
+            "patients": 521,
+            "elements": 33344,
+            "sse": 39347.23905999482,
+            "training_mean_sse": 32425.09578182656,
+            "mse": 1.1800395591409194,
+            "skill_vs_training_CT1_mean": -0.2134810433481571
+          },
+          "prior_single_sample": {
+            "patients": 521,
+            "elements": 33344,
+            "sse": 60358.460894283635,
+            "training_mean_sse": 32425.09578182656,
+            "mse": 1.8101745709658,
+            "skill_vs_training_CT1_mean": -0.8614736345085221
+          },
+          "prior_decoded_MC_mean": {
+            "patients": 521,
+            "elements": 33344,
+            "sse": 60355.43334808161,
+            "training_mean_sse": 32425.09578182656,
+            "mse": 1.8100837736348852,
+            "skill_vs_training_CT1_mean": -0.8613802640456438
+          }
+        },
+        "distributions": {
+          "prior": {
+            "energy_score": 10.500443338036485,
+            "marginal_90pct_coverage": 0.0011696257197696736,
+            "marginal_90pct_width": 0.0035422698231359767,
+            "mean_projected_variance": 2.4742249062798807e-06
+          },
+          "training_Gaussian": {
+            "energy_score": 5.479444800384753,
+            "marginal_90pct_coverage": 0.8599448176583493,
+            "marginal_90pct_width": 3.028221940869549,
+            "mean_projected_variance": 1.0033989887651231
+          }
+        },
+        "sets_and_channel_moments": {
+          "prior_single_sample_set_loss": 0.6659217951622668,
+          "prior_expected_sample_set_loss": 0.6659110528264989,
+          "copy_CT0_set_loss": 0.7566545983193703,
+          "training_channel_mean_degenerate_set_loss": 0.8164018504679089,
+          "prior_MC_channel_mean_mse": 0.180173907936649,
+          "prior_MC_channel_sd_mse": 0.11081519202398933,
+          "prior_single_channel_mean_mse": 0.1801956576257658,
+          "prior_single_channel_sd_mse": 0.11081559833089129
+        }
+      },
+      "folds": [
+        {
+          "fold": 0,
+          "paired_outer_patients": 174,
+          "training_patients": 277,
+          "selected_epoch_zero_based": 10,
+          "provenance": {
+            "rank": 32,
+            "fit_patients": 277,
+            "projection_observations": 554,
+            "projection_fit": "shared_CT0_and_legal_CT1_patient_scan_channel_means",
+            "feature_level": "patient_aggregated_27_cached_tokens",
+            "normalization": "train_scan_mean_channel_center_and_population_sd_floor_0.05; shared_PCA; token_mean_and_population_sd; train_patient_feature_center_and_population_sd",
+            "missing_images": "zero_imputation_in_raw_projected_space_plus_observation_indicator",
+            "tabular_statistics_sha256": "c62638dc80e4c5c3d50a6d2edfa685af507df7dd296bb8936aa11d2bf7f0af09",
+            "different_ranks_define_different_target_spaces": true,
+            "target_normalization": "train_legal_paired_CT1_aggregated_mean_and_population_sd_floor_0.05",
+            "target_moment_statistics_sha256": "28f0f1029ad7c17acbda36c4b4c2764195b5a9fd8e772b5a7a75078cb9a46cd2",
+            "paired_training_patients": 277,
+            "ridge_lambda": 0.1,
+            "ridge_objective": "mean_patient_squared_error_per_target_channel+lambda*sum(weight_squared); free_intercept",
+            "ridge_selection": "preset_0.1_no_outer_or_original_holdout_tuning",
+            "gaussian_covariance": "training_CT1_population_full_covariance_plus_1e-6_identity",
+            "target_space_id": "757c99a8548ebc61483bb713bf99b5fea43fe24bb8f68cda9da424401cd2692d",
+            "projection_space_id": "a3eeb846df3ed8d09f50a755d08b0158e1b93a1383c7b85d294a6e640c70d392",
+            "encoder_provenance": {}
+          },
+          "points": {
+            "training_CT1_mean": {
+              "patients": 174,
+              "elements": 11136,
+              "sse": 11249.245254978878,
+              "training_mean_sse": 11249.245254978878,
+              "mse": 1.0101692937301434,
+              "skill_vs_training_CT1_mean": 0.0
+            },
+            "copy_CT0": {
+              "patients": 174,
+              "elements": 11136,
+              "sse": 18804.590486758207,
+              "training_mean_sse": 11249.245254978878,
+              "mse": 1.688630611239063,
+              "skill_vs_training_CT1_mean": -0.6716313015253499
+            },
+            "ridge_CT0_condition": {
+              "patients": 174,
+              "elements": 11136,
+              "sse": 13569.02543949201,
+              "training_mean_sse": 11249.245254978878,
+              "mse": 1.2184828878854177,
+              "skill_vs_training_CT1_mean": -0.20621651781362016
+            },
+            "prior_single_sample": {
+              "patients": 174,
+              "elements": 11136,
+              "sse": 20738.042259453385,
+              "training_mean_sse": 11249.245254978878,
+              "mse": 1.8622523580687307,
+              "skill_vs_training_CT1_mean": -0.8435052120740987
+            },
+            "prior_decoded_MC_mean": {
+              "patients": 174,
+              "elements": 11136,
+              "sse": 20737.284886140584,
+              "training_mean_sse": 11249.245254978878,
+              "mse": 1.8621843468157853,
+              "skill_vs_training_CT1_mean": -0.8434378854850135
+            }
+          },
+          "distributions": {
+            "prior": {
+              "energy_score": 10.631855246669959,
+              "marginal_90pct_coverage": 0.0008081896551724138,
+              "marginal_90pct_width": 0.0035344152306784732,
+              "mean_projected_variance": 2.5450556944139255e-06
+            },
+            "training_Gaussian": {
+              "energy_score": 5.560024488316575,
+              "marginal_90pct_coverage": 0.8512931034482759,
+              "marginal_90pct_width": 3.0237807133102064,
+              "mean_projected_variance": 1.0009506485248014
+            }
+          },
+          "sets_and_channel_moments": {
+            "prior_single_sample_set_loss": 0.6831510471201491,
+            "prior_expected_sample_set_loss": 0.6831325552929407,
+            "copy_CT0_set_loss": 0.7737048878066841,
+            "training_channel_mean_degenerate_set_loss": 0.8281130160408459,
+            "prior_MC_channel_mean_mse": 0.18365761791837626,
+            "prior_MC_channel_sd_mse": 0.11196503608391203,
+            "prior_single_channel_mean_mse": 0.1836811163644681,
+            "prior_single_channel_sd_mse": 0.11196427989280087
+          }
+        },
+        {
+          "fold": 1,
+          "paired_outer_patients": 174,
+          "training_patients": 277,
+          "selected_epoch_zero_based": 9,
+          "provenance": {
+            "rank": 32,
+            "fit_patients": 277,
+            "projection_observations": 554,
+            "projection_fit": "shared_CT0_and_legal_CT1_patient_scan_channel_means",
+            "feature_level": "patient_aggregated_27_cached_tokens",
+            "normalization": "train_scan_mean_channel_center_and_population_sd_floor_0.05; shared_PCA; token_mean_and_population_sd; train_patient_feature_center_and_population_sd",
+            "missing_images": "zero_imputation_in_raw_projected_space_plus_observation_indicator",
+            "tabular_statistics_sha256": "af8dae09c3104a818854e73ec6628da285c1868b355727d2a131a5a48f7daf1c",
+            "different_ranks_define_different_target_spaces": true,
+            "target_normalization": "train_legal_paired_CT1_aggregated_mean_and_population_sd_floor_0.05",
+            "target_moment_statistics_sha256": "8ec26fe4ca0b2387dcd581bfbc7c6f363bc68d30a3441cc94b1c5b291e3eb321",
+            "paired_training_patients": 277,
+            "ridge_lambda": 0.1,
+            "ridge_objective": "mean_patient_squared_error_per_target_channel+lambda*sum(weight_squared); free_intercept",
+            "ridge_selection": "preset_0.1_no_outer_or_original_holdout_tuning",
+            "gaussian_covariance": "training_CT1_population_full_covariance_plus_1e-6_identity",
+            "target_space_id": "d025971dd060ebcaa414aced48a407434859f1a13e36c81fdfec24fbb1d9d9e3",
+            "projection_space_id": "ec036f5860ffe052367a53f3409bf45a65f94c2159d3c1aef6249c1ac2878cce",
+            "encoder_provenance": {}
+          },
+          "points": {
+            "training_CT1_mean": {
+              "patients": 174,
+              "elements": 11136,
+              "sse": 11150.674623400508,
+              "training_mean_sse": 11150.674623400508,
+              "mse": 1.0013177643139823,
+              "skill_vs_training_CT1_mean": 0.0
+            },
+            "copy_CT0": {
+              "patients": 174,
+              "elements": 11136,
+              "sse": 18147.769113760463,
+              "training_mean_sse": 11150.674623400508,
+              "mse": 1.6296488069109611,
+              "skill_vs_training_CT1_mean": -0.6275041400343653
+            },
+            "ridge_CT0_condition": {
+              "patients": 174,
+              "elements": 11136,
+              "sse": 13650.026043897351,
+              "training_mean_sse": 11150.674623400508,
+              "mse": 1.225756649056874,
+              "skill_vs_training_CT1_mean": -0.2241435164157486
+            },
+            "prior_single_sample": {
+              "patients": 174,
+              "elements": 11136,
+              "sse": 20333.497406751543,
+              "training_mean_sse": 11150.674623400508,
+              "mse": 1.8259246952901889,
+              "skill_vs_training_CT1_mean": -0.8235217234372716
+            },
+            "prior_decoded_MC_mean": {
+              "patients": 174,
+              "elements": 11136,
+              "sse": 20332.331609250643,
+              "training_mean_sse": 11150.674623400508,
+              "mse": 1.8258200080146052,
+              "skill_vs_training_CT1_mean": -0.8234171739332932
+            }
+          },
+          "distributions": {
+            "prior": {
+              "energy_score": 10.555523469945419,
+              "marginal_90pct_coverage": 0.0010775862068965517,
+              "marginal_90pct_width": 0.0037941888720081814,
+              "mean_projected_variance": 2.812539892224885e-06
+            },
+            "training_Gaussian": {
+              "energy_score": 5.55491787486793,
+              "marginal_90pct_coverage": 0.8562320402298851,
+              "marginal_90pct_width": 3.019157999832643,
+              "mean_projected_variance": 0.9982625432314277
+            }
+          },
+          "sets_and_channel_moments": {
+            "prior_single_sample_set_loss": 0.6601672604166228,
+            "prior_expected_sample_set_loss": 0.660172515902026,
+            "copy_CT0_set_loss": 0.7417046708622198,
+            "training_channel_mean_degenerate_set_loss": 0.8275374455013494,
+            "prior_MC_channel_mean_mse": 0.18485838757164177,
+            "prior_MC_channel_sd_mse": 0.11266377405531106,
+            "prior_single_channel_mean_mse": 0.18488031540108824,
+            "prior_single_channel_sd_mse": 0.11266415026681177
+          }
+        },
+        {
+          "fold": 2,
+          "paired_outer_patients": 173,
+          "training_patients": 278,
+          "selected_epoch_zero_based": 8,
+          "provenance": {
+            "rank": 32,
+            "fit_patients": 278,
+            "projection_observations": 556,
+            "projection_fit": "shared_CT0_and_legal_CT1_patient_scan_channel_means",
+            "feature_level": "patient_aggregated_27_cached_tokens",
+            "normalization": "train_scan_mean_channel_center_and_population_sd_floor_0.05; shared_PCA; token_mean_and_population_sd; train_patient_feature_center_and_population_sd",
+            "missing_images": "zero_imputation_in_raw_projected_space_plus_observation_indicator",
+            "tabular_statistics_sha256": "cd45eefade92d3a90a77bde59d39e992109bc3c892aceec8a57d64615c0d5d1d",
+            "different_ranks_define_different_target_spaces": true,
+            "target_normalization": "train_legal_paired_CT1_aggregated_mean_and_population_sd_floor_0.05",
+            "target_moment_statistics_sha256": "1f827f015385ffa33b96c4b9de0551437182b369c11f265c470573f0c1083e83",
+            "paired_training_patients": 278,
+            "ridge_lambda": 0.1,
+            "ridge_objective": "mean_patient_squared_error_per_target_channel+lambda*sum(weight_squared); free_intercept",
+            "ridge_selection": "preset_0.1_no_outer_or_original_holdout_tuning",
+            "gaussian_covariance": "training_CT1_population_full_covariance_plus_1e-6_identity",
+            "target_space_id": "c8e31c1005578a28c44090461cca9fcad02406f3066167392e8150b5dc390676",
+            "projection_space_id": "e543f94fc906157025564cc587e6b267d1dcfdc9fde4fc829254730f00159906",
+            "encoder_provenance": {}
+          },
+          "points": {
+            "training_CT1_mean": {
+              "patients": 173,
+              "elements": 11072,
+              "sse": 10025.175903447176,
+              "training_mean_sse": 10025.175903447176,
+              "mse": 0.9054530259616308,
+              "skill_vs_training_CT1_mean": 0.0
+            },
+            "copy_CT0": {
+              "patients": 173,
+              "elements": 11072,
+              "sse": 18099.741387218037,
+              "training_mean_sse": 10025.175903447176,
+              "mse": 1.6347309778918024,
+              "skill_vs_training_CT1_mean": -0.8054288085852346
+            },
+            "ridge_CT0_condition": {
+              "patients": 173,
+              "elements": 11072,
+              "sse": 12128.187576605458,
+              "training_mean_sse": 10025.175903447176,
+              "mse": 1.0953926640720248,
+              "skill_vs_training_CT1_mean": -0.2097730447238495
+            },
+            "prior_single_sample": {
+              "patients": 173,
+              "elements": 11072,
+              "sse": 19286.921228078707,
+              "training_mean_sse": 10025.175903447176,
+              "mse": 1.7419545906862994,
+              "skill_vs_training_CT1_mean": -0.923848659996765
+            },
+            "prior_decoded_MC_mean": {
+              "patients": 173,
+              "elements": 11072,
+              "sse": 19285.816852690383,
+              "training_mean_sse": 10025.175903447176,
+              "mse": 1.7418548457993481,
+              "skill_vs_training_CT1_mean": -0.9237384997961899
+            }
+          },
+          "distributions": {
+            "prior": {
+              "energy_score": 10.312873308820423,
+              "marginal_90pct_coverage": 0.0016257225433526012,
+              "marginal_90pct_width": 0.003296794589516565,
+              "mean_projected_variance": 2.062714127726387e-06
+            },
+            "training_Gaussian": {
+              "energy_score": 5.322489998880652,
+              "marginal_90pct_coverage": 0.8723807803468208,
+              "marginal_90pct_width": 3.0418051740241574,
+              "mean_projected_variance": 1.0110276172314752
+            }
+          },
+          "sets_and_channel_moments": {
+            "prior_single_sample_set_loss": 0.6543807501048711,
+            "prior_expected_sample_set_loss": 0.6543617117611659,
+            "copy_CT0_set_loss": 0.7545420954682235,
+            "training_channel_mean_degenerate_set_loss": 0.7934230276614944,
+            "prior_MC_channel_mean_mse": 0.17195850335104618,
+            "prior_MC_channel_sd_mse": 0.10779943399002097,
+            "prior_single_channel_mean_mse": 0.1719783150047236,
+            "prior_single_channel_sd_mse": 0.10780103978394084
+          }
+        }
+      ]
+    }
+  }
+}

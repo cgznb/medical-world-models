@@ -18,6 +18,8 @@ from stageworld_tcwm.data import Cohort, atomic_save, file_sha256, fingerprint, 
 from stageworld_tcwm.evaluation import binary_metrics
 from stageworld_tcwm.inference import Predictor
 from stageworld_tcwm.survival import mixture_binary_nll
+from stageworld_tcwm.losses import patient_weighted_stage_mean
+from stageworld_tcwm.monte_carlo import cohort_case_keys,evaluation_epsilon
 
 LATENT_KEYS = ("predicted_ct_latent", "target_ct_latent", "baseline_ct_latent")
 
@@ -177,7 +179,8 @@ def ct_summary(parts):
 
 
 @torch.inference_mode()
-def model_outer(model, fold, samples, batch_size, seed, permutation_seed):
+def model_outer(model, fold, samples, batch_size, seed, permutation_seed,
+                mc_seed_policy="batch_start",mc_antithetic=False):
     cohort, rows = fold["cohort"], fold["rows"]["outer_evaluation"]
     device = next(model.parameters()).device
     model.eval()
@@ -189,10 +192,15 @@ def model_outer(model, fold, samples, batch_size, seed, permutation_seed):
     for start in range(0, len(rows), batch_size):
         section = slice(start, start + batch_size)
         batch = cohort.batch(rows[section], device)
-        output = model(batch, samples=samples, seed=seed + start, max_stage=2, compute_aux=True)
+        batch_seed = seed+start if mc_seed_policy == "batch_start" else seed
+        kwargs = {}
+        if mc_seed_policy != "batch_start" or mc_antithetic:
+            kwargs["epsilon"] = evaluation_epsilon(model,len(batch["clinical"]),samples,batch_seed,
+                policy=mc_seed_policy,case_keys=cohort_case_keys(cohort,rows[section]),antithetic=mc_antithetic)
+        output = model(batch, samples=samples, seed=batch_seed, max_stage=2, compute_aux=True,**kwargs)
         modified = dict(batch)
         modified["ct1"] = cohort.tensors["ct1"][rows[permutation[section]]].to(device)
-        altered = model(modified, samples=samples, seed=seed + start, max_stage=2, compute_aux=True)
+        altered = model(modified, samples=samples, seed=batch_seed, max_stage=2, compute_aux=True,**kwargs)
         if not torch.equal(output["predictions"][:, 0], altered["predictions"][:, 0]):
             raise ValueError("S0 changed after CT1 permutation: stage boundary violated")
         if not torch.equal(output["pcr_logits"], altered["pcr_logits"]):
@@ -224,7 +232,7 @@ def model_outer(model, fold, samples, batch_size, seed, permutation_seed):
     return {**truth(cohort, rows), "patient_ids": list(cohort.metadata["outer_evaluation_ids"]), **values}, ct
 
 
-def summarize(values):
+def summarize(values,stage_weights=(1.,1.,1.)):
     stages = {}
     for stage in range(3):
         valid = values["prefix_valid"][:, stage] & values["binary_valid"]
@@ -245,8 +253,13 @@ def summarize(values):
     counts = endpoint_valid.sum(1)
     available = counts > 0
     patient_nll = torch.where(endpoint_valid, values["nll"], 0.).sum(1)[available] / counts[available]
+    weighted = patient_weighted_stage_mean(values["nll"],endpoint_valid,stage_weights)
+    weighted_available = (endpoint_valid*torch.as_tensor(stage_weights)).sum(1)>0
     return {"patients": len(values["patient_ids"]), "stages": stages, "pcr": pcr,
             "mean_prefix_nll": float(patient_nll.mean()) if available.any() else None,
+            "legacy_three_stage_nll": float(patient_nll.mean()) if available.any() else None,
+            "selection_nll":float(weighted) if weighted_available.any() else None,
+            "stage_weights":list(stage_weights),
             "s0_s1_difference": differences(values["probability"][paired, 0], values["probability"][paired, 1])}
 
 
@@ -287,11 +300,20 @@ def evaluate(folds_dir, runs_dir, cases, out, device="cpu", samples=32, batch_si
     private = {"schema": report["schema"], "clinical_baseline": baseline, "cases": {}}
     for case in cases:
         parts, ct_parts, records = [], [], []
+        case_weights = None
         for fold in folds:
             path = Path(runs_dir) / case / f"fold-{fold['index']}" / "inference.pt"
             predictor = Predictor(path, device=device)
             contract = verify_run(predictor, path, fold)
-            values, ct = model_outer(predictor.model, fold, samples, batch_size, seed, permutation_seed)
+            evaluation_config = predictor.bundle.get("evaluation_config",{})
+            training_config = contract.get("train",{})
+            weights = tuple(evaluation_config.get("stage_weights",training_config.get("stage_weights",(1.,1.,1.))))
+            if case_weights is not None and case_weights != weights:
+                raise ValueError("Stage weights must be identical across folds of a case")
+            case_weights = weights
+            policy = evaluation_config.get("mc_seed_policy",training_config.get("mc_seed_policy","batch_start"))
+            antithetic = evaluation_config.get("mc_antithetic",training_config.get("mc_antithetic",False))
+            values, ct = model_outer(predictor.model, fold, samples, batch_size, seed, permutation_seed,policy,antithetic)
             parts.append(values)
             ct_parts.append(ct)
             records.append({"fold": fold["index"], "inner_training_patients": len(fold["rows"]["train"]),
@@ -299,14 +321,15 @@ def evaluate(folds_dir, runs_dir, cases, out, device="cpu", samples=32, batch_si
                             "bundle_sha256": file_sha256(path), "contract_id": predictor.bundle["contract_id"],
                             "selected_epoch_zero_based": predictor.bundle["selected_epoch"],
                             "model_config": predictor.bundle["model_config"], "training_config": contract.get("train"),
-                            "outer": summarize(values), "absolute_ct1": ct_summary([ct])})
+                            "mc_seed_policy":policy,"mc_antithetic":antithetic,
+                            "outer": summarize(values,weights), "absolute_ct1": ct_summary([ct])})
             print(json.dumps({"case": case, "completed_fold": fold["index"], "outer_patients": len(values["patient_ids"])}), flush=True)
             del predictor
         pooled = pool_outer(parts, expected_ids)
         for key in ("binary", "pcr", "binary_valid", "pcr_valid", "prefix_valid"):
             if not torch.equal(pooled[key], baseline[key]):
                 raise ValueError("Cases do not evaluate the same OOF targets and validity masks")
-        report["cases"][case] = {"folds": records, "oof": summarize(pooled), "absolute_ct1": ct_summary(ct_parts)}
+        report["cases"][case] = {"folds": records, "oof": summarize(pooled,case_weights), "absolute_ct1": ct_summary(ct_parts)}
         private["cases"][case] = pooled
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True, mode=0o700)

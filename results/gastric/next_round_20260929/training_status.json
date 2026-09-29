@@ -1,0 +1,1697 @@
+{
+  "schema": "public-gastric-next-round-training-status-v1",
+  "records": [
+    {
+      "case": "G0",
+      "fold": 0,
+      "exit_code": 0,
+      "training": {
+        "selected_epoch": 8,
+        "best_validation_nll": 0.5769593119621277,
+        "parameter_count": 902210,
+        "test_evaluated": false,
+        "epochs_completed": 22,
+        "optimizer_steps": 400,
+        "supervised_steps": 400,
+        "selected_optimizer_steps": 150,
+        "selected_supervised_steps": 150,
+        "steps_per_full_epoch": 18,
+        "optimizer_step_budget": 1000,
+        "selection_policy": "validation_nll",
+        "selected_kind": "neural",
+        "baseline0_won": false,
+        "stage_weights": [
+          0.5,
+          0.5,
+          0.0
+        ],
+        "samples_eval": 64,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "training_patients_seen": 6158,
+        "train_patients": 277,
+        "train_events": 63,
+        "planned_epochs": 80,
+        "planned_optimizer_steps": 1000,
+        "actual_epochs": 23,
+        "actual_optimizer_steps": 400,
+        "budget_fulfilled": false,
+        "supervised_step_budget": 1000,
+        "validation_evaluations": 9,
+        "final_validation_nll": 0.6637672781944275,
+        "validation_used_for_checkpoint_selection": true,
+        "early_stopping_unit": "validation_cycle",
+        "stop_reason": "early_stopping",
+        "optimizer_groups": [
+          {
+            "name": "world",
+            "learning_rate": 0.0001,
+            "parameter_count": 688192
+          },
+          {
+            "name": "readout",
+            "learning_rate": 0.0001,
+            "parameter_count": 214018
+          }
+        ],
+        "task_counts": {
+          "endpoint": {
+            "effective_updates": 400,
+            "effective_targets": 6158
+          },
+          "pcr": {
+            "effective_updates": 400,
+            "effective_targets": 6158
+          },
+          "ct": {
+            "effective_updates": 400,
+            "effective_targets": 6158
+          },
+          "kl": {
+            "effective_updates": 400,
+            "effective_targets": 6158
+          },
+          "flow": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior_ct": {
+            "effective_updates": 400,
+            "effective_targets": 6158
+          },
+          "observation_recon": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "readout_l2": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          }
+        },
+        "baseline_candidates": [
+          {
+            "name": "baseline_initial",
+            "selected": true,
+            "optimizer_steps": 0,
+            "supervised_steps": 0,
+            "validation": {
+              "interpretation": "scenario_conditioned_association",
+              "causal_effects_identified": false,
+              "selection_nll": 0.5805100202560425,
+              "legacy_three_stage_nll": 0.5805100202560425,
+              "stage_weights": [
+                0.5,
+                0.5,
+                0.0
+              ],
+              "selection_definition": "weighted_stages_per_patient_then_mean_valid_patients",
+              "evaluated": true,
+              "used_for_checkpoint_selection": true,
+              "stages": {
+                "S0": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.5805099817289595,
+                  "brier": 0.1926151535596814,
+                  "auroc": 0.5069444444444444,
+                  "average_precision": 0.24653102006341593
+                },
+                "S1": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.5805099817289595,
+                  "brier": 0.1926151535596814,
+                  "auroc": 0.5069444444444444,
+                  "average_precision": 0.24653102006341593
+                },
+                "S2": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.5805099817289595,
+                  "brier": 0.1926151535596814,
+                  "auroc": 0.5069444444444444,
+                  "average_precision": 0.24653102006341593
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "G0",
+      "fold": 1,
+      "exit_code": 0,
+      "training": {
+        "selected_epoch": 8,
+        "best_validation_nll": 0.5138160586357117,
+        "parameter_count": 902210,
+        "test_evaluated": false,
+        "epochs_completed": 22,
+        "optimizer_steps": 400,
+        "supervised_steps": 400,
+        "selected_optimizer_steps": 150,
+        "selected_supervised_steps": 150,
+        "steps_per_full_epoch": 18,
+        "optimizer_step_budget": 1000,
+        "selection_policy": "validation_nll",
+        "selected_kind": "neural",
+        "baseline0_won": false,
+        "stage_weights": [
+          0.5,
+          0.5,
+          0.0
+        ],
+        "samples_eval": 64,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "training_patients_seen": 6158,
+        "train_patients": 277,
+        "train_events": 62,
+        "planned_epochs": 80,
+        "planned_optimizer_steps": 1000,
+        "actual_epochs": 23,
+        "actual_optimizer_steps": 400,
+        "budget_fulfilled": false,
+        "supervised_step_budget": 1000,
+        "validation_evaluations": 9,
+        "final_validation_nll": 0.5384351015090942,
+        "validation_used_for_checkpoint_selection": true,
+        "early_stopping_unit": "validation_cycle",
+        "stop_reason": "early_stopping",
+        "optimizer_groups": [
+          {
+            "name": "world",
+            "learning_rate": 0.0001,
+            "parameter_count": 688192
+          },
+          {
+            "name": "readout",
+            "learning_rate": 0.0001,
+            "parameter_count": 214018
+          }
+        ],
+        "task_counts": {
+          "endpoint": {
+            "effective_updates": 400,
+            "effective_targets": 6158
+          },
+          "pcr": {
+            "effective_updates": 400,
+            "effective_targets": 6158
+          },
+          "ct": {
+            "effective_updates": 400,
+            "effective_targets": 6158
+          },
+          "kl": {
+            "effective_updates": 400,
+            "effective_targets": 6158
+          },
+          "flow": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior_ct": {
+            "effective_updates": 400,
+            "effective_targets": 6158
+          },
+          "observation_recon": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "readout_l2": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          }
+        },
+        "baseline_candidates": [
+          {
+            "name": "baseline_initial",
+            "selected": true,
+            "optimizer_steps": 0,
+            "supervised_steps": 0,
+            "validation": {
+              "interpretation": "scenario_conditioned_association",
+              "causal_effects_identified": false,
+              "selection_nll": 0.5164207220077515,
+              "legacy_three_stage_nll": 0.5164207220077515,
+              "stage_weights": [
+                0.5,
+                0.5,
+                0.0
+              ],
+              "selection_definition": "weighted_stages_per_patient_then_mean_valid_patients",
+              "evaluated": true,
+              "used_for_checkpoint_selection": true,
+              "stages": {
+                "S0": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.516420722372381,
+                  "brier": 0.1702046356357408,
+                  "auroc": 0.6469907407407408,
+                  "average_precision": 0.37358204616446206
+                },
+                "S1": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.516420722372381,
+                  "brier": 0.1702046356357408,
+                  "auroc": 0.6469907407407408,
+                  "average_precision": 0.37358204616446206
+                },
+                "S2": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.516420722372381,
+                  "brier": 0.1702046356357408,
+                  "auroc": 0.6469907407407408,
+                  "average_precision": 0.37358204616446206
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "G0",
+      "fold": 2,
+      "exit_code": 0,
+      "training": {
+        "selected_epoch": 11,
+        "best_validation_nll": 0.6054985523223877,
+        "parameter_count": 902210,
+        "test_evaluated": false,
+        "epochs_completed": 25,
+        "optimizer_steps": 450,
+        "supervised_steps": 450,
+        "selected_optimizer_steps": 200,
+        "selected_supervised_steps": 200,
+        "steps_per_full_epoch": 18,
+        "optimizer_step_budget": 1000,
+        "selection_policy": "validation_nll",
+        "selected_kind": "neural",
+        "baseline0_won": false,
+        "stage_weights": [
+          0.5,
+          0.5,
+          0.0
+        ],
+        "samples_eval": 64,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "training_patients_seen": 6950,
+        "train_patients": 278,
+        "train_events": 63,
+        "planned_epochs": 80,
+        "planned_optimizer_steps": 1000,
+        "actual_epochs": 25,
+        "actual_optimizer_steps": 450,
+        "budget_fulfilled": false,
+        "supervised_step_budget": 1000,
+        "validation_evaluations": 10,
+        "final_validation_nll": 0.6779724359512329,
+        "validation_used_for_checkpoint_selection": true,
+        "early_stopping_unit": "validation_cycle",
+        "stop_reason": "early_stopping",
+        "optimizer_groups": [
+          {
+            "name": "world",
+            "learning_rate": 0.0001,
+            "parameter_count": 688192
+          },
+          {
+            "name": "readout",
+            "learning_rate": 0.0001,
+            "parameter_count": 214018
+          }
+        ],
+        "task_counts": {
+          "endpoint": {
+            "effective_updates": 450,
+            "effective_targets": 6950
+          },
+          "pcr": {
+            "effective_updates": 450,
+            "effective_targets": 6950
+          },
+          "ct": {
+            "effective_updates": 450,
+            "effective_targets": 6950
+          },
+          "kl": {
+            "effective_updates": 450,
+            "effective_targets": 6950
+          },
+          "flow": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior_ct": {
+            "effective_updates": 450,
+            "effective_targets": 6950
+          },
+          "observation_recon": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "readout_l2": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          }
+        },
+        "baseline_candidates": [
+          {
+            "name": "baseline_initial",
+            "selected": true,
+            "optimizer_steps": 0,
+            "supervised_steps": 0,
+            "validation": {
+              "interpretation": "scenario_conditioned_association",
+              "causal_effects_identified": false,
+              "selection_nll": 0.6141313314437866,
+              "legacy_three_stage_nll": 0.6141313314437866,
+              "stage_weights": [
+                0.5,
+                0.5,
+                0.0
+              ],
+              "selection_definition": "weighted_stages_per_patient_then_mean_valid_patients",
+              "evaluated": true,
+              "used_for_checkpoint_selection": true,
+              "stages": {
+                "S0": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.6141312948801114,
+                  "brier": 0.19881190588741585,
+                  "auroc": 0.47685185185185186,
+                  "average_precision": 0.31131824186705737
+                },
+                "S1": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.6141312948801114,
+                  "brier": 0.19881190588741585,
+                  "auroc": 0.47685185185185186,
+                  "average_precision": 0.31131824186705737
+                },
+                "S2": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.6141312948801114,
+                  "brier": 0.19881190588741585,
+                  "auroc": 0.47685185185185186,
+                  "average_precision": 0.31131824186705737
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "G1",
+      "fold": 0,
+      "exit_code": 0,
+      "training": {
+        "selected_epoch": 11,
+        "best_validation_nll": 0.569453775882721,
+        "parameter_count": 902210,
+        "test_evaluated": false,
+        "epochs_completed": 25,
+        "optimizer_steps": 450,
+        "supervised_steps": 450,
+        "selected_optimizer_steps": 200,
+        "selected_supervised_steps": 200,
+        "steps_per_full_epoch": 18,
+        "optimizer_step_budget": 1000,
+        "selection_policy": "validation_nll",
+        "selected_kind": "neural",
+        "baseline0_won": false,
+        "stage_weights": [
+          0.5,
+          0.5,
+          0.0
+        ],
+        "samples_eval": 64,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "training_patients_seen": 6925,
+        "train_patients": 277,
+        "train_events": 63,
+        "planned_epochs": 80,
+        "planned_optimizer_steps": 1000,
+        "actual_epochs": 25,
+        "actual_optimizer_steps": 450,
+        "budget_fulfilled": false,
+        "supervised_step_budget": 1000,
+        "validation_evaluations": 10,
+        "final_validation_nll": 0.6306241154670715,
+        "validation_used_for_checkpoint_selection": true,
+        "early_stopping_unit": "validation_cycle",
+        "stop_reason": "early_stopping",
+        "optimizer_groups": [
+          {
+            "name": "world",
+            "learning_rate": 2e-05,
+            "parameter_count": 688192
+          },
+          {
+            "name": "readout",
+            "learning_rate": 0.0001,
+            "parameter_count": 214018
+          }
+        ],
+        "task_counts": {
+          "endpoint": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "pcr": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "ct": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "kl": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "flow": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior_ct": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "observation_recon": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "readout_l2": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          }
+        },
+        "baseline_candidates": [
+          {
+            "name": "baseline_initial",
+            "selected": true,
+            "optimizer_steps": 0,
+            "supervised_steps": 0,
+            "validation": {
+              "interpretation": "scenario_conditioned_association",
+              "causal_effects_identified": false,
+              "selection_nll": 0.5805100202560425,
+              "legacy_three_stage_nll": 0.5805100202560425,
+              "stage_weights": [
+                0.5,
+                0.5,
+                0.0
+              ],
+              "selection_definition": "weighted_stages_per_patient_then_mean_valid_patients",
+              "evaluated": true,
+              "used_for_checkpoint_selection": true,
+              "stages": {
+                "S0": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.5805099817289595,
+                  "brier": 0.1926151535596814,
+                  "auroc": 0.5069444444444444,
+                  "average_precision": 0.24653102006341593
+                },
+                "S1": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.5805099817289595,
+                  "brier": 0.1926151535596814,
+                  "auroc": 0.5069444444444444,
+                  "average_precision": 0.24653102006341593
+                },
+                "S2": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.5805099817289595,
+                  "brier": 0.1926151535596814,
+                  "auroc": 0.5069444444444444,
+                  "average_precision": 0.24653102006341593
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "G1",
+      "fold": 1,
+      "exit_code": 0,
+      "training": {
+        "selected_epoch": 5,
+        "best_validation_nll": 0.5159499645233154,
+        "parameter_count": 902210,
+        "test_evaluated": false,
+        "epochs_completed": 19,
+        "optimizer_steps": 350,
+        "supervised_steps": 350,
+        "selected_optimizer_steps": 100,
+        "selected_supervised_steps": 100,
+        "steps_per_full_epoch": 18,
+        "optimizer_step_budget": 1000,
+        "selection_policy": "validation_nll",
+        "selected_kind": "neural",
+        "baseline0_won": false,
+        "stage_weights": [
+          0.5,
+          0.5,
+          0.0
+        ],
+        "samples_eval": 64,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "training_patients_seen": 5391,
+        "train_patients": 277,
+        "train_events": 62,
+        "planned_epochs": 80,
+        "planned_optimizer_steps": 1000,
+        "actual_epochs": 20,
+        "actual_optimizer_steps": 350,
+        "budget_fulfilled": false,
+        "supervised_step_budget": 1000,
+        "validation_evaluations": 8,
+        "final_validation_nll": 0.5742635130882263,
+        "validation_used_for_checkpoint_selection": true,
+        "early_stopping_unit": "validation_cycle",
+        "stop_reason": "early_stopping",
+        "optimizer_groups": [
+          {
+            "name": "world",
+            "learning_rate": 2e-05,
+            "parameter_count": 688192
+          },
+          {
+            "name": "readout",
+            "learning_rate": 0.0001,
+            "parameter_count": 214018
+          }
+        ],
+        "task_counts": {
+          "endpoint": {
+            "effective_updates": 350,
+            "effective_targets": 5391
+          },
+          "pcr": {
+            "effective_updates": 350,
+            "effective_targets": 5391
+          },
+          "ct": {
+            "effective_updates": 350,
+            "effective_targets": 5391
+          },
+          "kl": {
+            "effective_updates": 350,
+            "effective_targets": 5391
+          },
+          "flow": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior_ct": {
+            "effective_updates": 350,
+            "effective_targets": 5391
+          },
+          "observation_recon": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "readout_l2": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          }
+        },
+        "baseline_candidates": [
+          {
+            "name": "baseline_initial",
+            "selected": true,
+            "optimizer_steps": 0,
+            "supervised_steps": 0,
+            "validation": {
+              "interpretation": "scenario_conditioned_association",
+              "causal_effects_identified": false,
+              "selection_nll": 0.5164207220077515,
+              "legacy_three_stage_nll": 0.5164207220077515,
+              "stage_weights": [
+                0.5,
+                0.5,
+                0.0
+              ],
+              "selection_definition": "weighted_stages_per_patient_then_mean_valid_patients",
+              "evaluated": true,
+              "used_for_checkpoint_selection": true,
+              "stages": {
+                "S0": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.516420722372381,
+                  "brier": 0.1702046356357408,
+                  "auroc": 0.6469907407407408,
+                  "average_precision": 0.37358204616446206
+                },
+                "S1": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.516420722372381,
+                  "brier": 0.1702046356357408,
+                  "auroc": 0.6469907407407408,
+                  "average_precision": 0.37358204616446206
+                },
+                "S2": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.516420722372381,
+                  "brier": 0.1702046356357408,
+                  "auroc": 0.6469907407407408,
+                  "average_precision": 0.37358204616446206
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "G1",
+      "fold": 2,
+      "exit_code": 0,
+      "training": {
+        "selected_epoch": 8,
+        "best_validation_nll": 0.6098939180374146,
+        "parameter_count": 902210,
+        "test_evaluated": false,
+        "epochs_completed": 22,
+        "optimizer_steps": 400,
+        "supervised_steps": 400,
+        "selected_optimizer_steps": 150,
+        "selected_supervised_steps": 150,
+        "steps_per_full_epoch": 18,
+        "optimizer_step_budget": 1000,
+        "selection_policy": "validation_nll",
+        "selected_kind": "neural",
+        "baseline0_won": false,
+        "stage_weights": [
+          0.5,
+          0.5,
+          0.0
+        ],
+        "samples_eval": 64,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "training_patients_seen": 6180,
+        "train_patients": 278,
+        "train_events": 63,
+        "planned_epochs": 80,
+        "planned_optimizer_steps": 1000,
+        "actual_epochs": 23,
+        "actual_optimizer_steps": 400,
+        "budget_fulfilled": false,
+        "supervised_step_budget": 1000,
+        "validation_evaluations": 9,
+        "final_validation_nll": 0.6603517532348633,
+        "validation_used_for_checkpoint_selection": true,
+        "early_stopping_unit": "validation_cycle",
+        "stop_reason": "early_stopping",
+        "optimizer_groups": [
+          {
+            "name": "world",
+            "learning_rate": 2e-05,
+            "parameter_count": 688192
+          },
+          {
+            "name": "readout",
+            "learning_rate": 0.0001,
+            "parameter_count": 214018
+          }
+        ],
+        "task_counts": {
+          "endpoint": {
+            "effective_updates": 400,
+            "effective_targets": 6180
+          },
+          "pcr": {
+            "effective_updates": 400,
+            "effective_targets": 6180
+          },
+          "ct": {
+            "effective_updates": 400,
+            "effective_targets": 6180
+          },
+          "kl": {
+            "effective_updates": 400,
+            "effective_targets": 6180
+          },
+          "flow": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior_ct": {
+            "effective_updates": 400,
+            "effective_targets": 6180
+          },
+          "observation_recon": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "readout_l2": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          }
+        },
+        "baseline_candidates": [
+          {
+            "name": "baseline_initial",
+            "selected": true,
+            "optimizer_steps": 0,
+            "supervised_steps": 0,
+            "validation": {
+              "interpretation": "scenario_conditioned_association",
+              "causal_effects_identified": false,
+              "selection_nll": 0.6141313314437866,
+              "legacy_three_stage_nll": 0.6141313314437866,
+              "stage_weights": [
+                0.5,
+                0.5,
+                0.0
+              ],
+              "selection_definition": "weighted_stages_per_patient_then_mean_valid_patients",
+              "evaluated": true,
+              "used_for_checkpoint_selection": true,
+              "stages": {
+                "S0": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.6141312948801114,
+                  "brier": 0.19881190588741585,
+                  "auroc": 0.47685185185185186,
+                  "average_precision": 0.31131824186705737
+                },
+                "S1": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.6141312948801114,
+                  "brier": 0.19881190588741585,
+                  "auroc": 0.47685185185185186,
+                  "average_precision": 0.31131824186705737
+                },
+                "S2": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.6141312948801114,
+                  "brier": 0.19881190588741585,
+                  "auroc": 0.47685185185185186,
+                  "average_precision": 0.31131824186705737
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "G2",
+      "fold": 0,
+      "exit_code": 0,
+      "training": {
+        "selected_epoch": 11,
+        "best_validation_nll": 0.5692269802093506,
+        "parameter_count": 902210,
+        "test_evaluated": false,
+        "epochs_completed": 25,
+        "optimizer_steps": 450,
+        "supervised_steps": 450,
+        "selected_optimizer_steps": 200,
+        "selected_supervised_steps": 200,
+        "steps_per_full_epoch": 18,
+        "optimizer_step_budget": 1000,
+        "selection_policy": "validation_nll",
+        "selected_kind": "neural",
+        "baseline0_won": false,
+        "stage_weights": [
+          0.5,
+          0.5,
+          0.0
+        ],
+        "samples_eval": 64,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "training_patients_seen": 6925,
+        "train_patients": 277,
+        "train_events": 63,
+        "planned_epochs": 80,
+        "planned_optimizer_steps": 1000,
+        "actual_epochs": 25,
+        "actual_optimizer_steps": 450,
+        "budget_fulfilled": false,
+        "supervised_step_budget": 1000,
+        "validation_evaluations": 10,
+        "final_validation_nll": 0.6408358216285706,
+        "validation_used_for_checkpoint_selection": true,
+        "early_stopping_unit": "validation_cycle",
+        "stop_reason": "early_stopping",
+        "optimizer_groups": [
+          {
+            "name": "world",
+            "learning_rate": 2e-05,
+            "parameter_count": 688192
+          },
+          {
+            "name": "readout",
+            "learning_rate": 0.0001,
+            "parameter_count": 214018
+          }
+        ],
+        "task_counts": {
+          "endpoint": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "pcr": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "ct": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "kl": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "flow": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior_ct": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "observation_recon": {
+            "effective_updates": 450,
+            "effective_targets": 6243
+          },
+          "readout_l2": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          }
+        },
+        "baseline_candidates": [
+          {
+            "name": "baseline_initial",
+            "selected": true,
+            "optimizer_steps": 0,
+            "supervised_steps": 0,
+            "validation": {
+              "interpretation": "scenario_conditioned_association",
+              "causal_effects_identified": false,
+              "selection_nll": 0.5805100202560425,
+              "legacy_three_stage_nll": 0.5805100202560425,
+              "stage_weights": [
+                0.5,
+                0.5,
+                0.0
+              ],
+              "selection_definition": "weighted_stages_per_patient_then_mean_valid_patients",
+              "evaluated": true,
+              "used_for_checkpoint_selection": true,
+              "stages": {
+                "S0": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.5805099817289595,
+                  "brier": 0.1926151535596814,
+                  "auroc": 0.5069444444444444,
+                  "average_precision": 0.24653102006341593
+                },
+                "S1": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.5805099817289595,
+                  "brier": 0.1926151535596814,
+                  "auroc": 0.5069444444444444,
+                  "average_precision": 0.24653102006341593
+                },
+                "S2": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.5805099817289595,
+                  "brier": 0.1926151535596814,
+                  "auroc": 0.5069444444444444,
+                  "average_precision": 0.24653102006341593
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "G2",
+      "fold": 1,
+      "exit_code": 0,
+      "training": {
+        "selected_epoch": 11,
+        "best_validation_nll": 0.5155095458030701,
+        "parameter_count": 902210,
+        "test_evaluated": false,
+        "epochs_completed": 25,
+        "optimizer_steps": 450,
+        "supervised_steps": 450,
+        "selected_optimizer_steps": 200,
+        "selected_supervised_steps": 200,
+        "steps_per_full_epoch": 18,
+        "optimizer_step_budget": 1000,
+        "selection_policy": "validation_nll",
+        "selected_kind": "neural",
+        "baseline0_won": false,
+        "stage_weights": [
+          0.5,
+          0.5,
+          0.0
+        ],
+        "samples_eval": 64,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "training_patients_seen": 6925,
+        "train_patients": 277,
+        "train_events": 62,
+        "planned_epochs": 80,
+        "planned_optimizer_steps": 1000,
+        "actual_epochs": 25,
+        "actual_optimizer_steps": 450,
+        "budget_fulfilled": false,
+        "supervised_step_budget": 1000,
+        "validation_evaluations": 10,
+        "final_validation_nll": 0.5927079916000366,
+        "validation_used_for_checkpoint_selection": true,
+        "early_stopping_unit": "validation_cycle",
+        "stop_reason": "early_stopping",
+        "optimizer_groups": [
+          {
+            "name": "world",
+            "learning_rate": 2e-05,
+            "parameter_count": 688192
+          },
+          {
+            "name": "readout",
+            "learning_rate": 0.0001,
+            "parameter_count": 214018
+          }
+        ],
+        "task_counts": {
+          "endpoint": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "pcr": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "ct": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "kl": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "flow": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior_ct": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "observation_recon": {
+            "effective_updates": 450,
+            "effective_targets": 6243
+          },
+          "readout_l2": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          }
+        },
+        "baseline_candidates": [
+          {
+            "name": "baseline_initial",
+            "selected": true,
+            "optimizer_steps": 0,
+            "supervised_steps": 0,
+            "validation": {
+              "interpretation": "scenario_conditioned_association",
+              "causal_effects_identified": false,
+              "selection_nll": 0.5164207220077515,
+              "legacy_three_stage_nll": 0.5164207220077515,
+              "stage_weights": [
+                0.5,
+                0.5,
+                0.0
+              ],
+              "selection_definition": "weighted_stages_per_patient_then_mean_valid_patients",
+              "evaluated": true,
+              "used_for_checkpoint_selection": true,
+              "stages": {
+                "S0": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.516420722372381,
+                  "brier": 0.1702046356357408,
+                  "auroc": 0.6469907407407408,
+                  "average_precision": 0.37358204616446206
+                },
+                "S1": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.516420722372381,
+                  "brier": 0.1702046356357408,
+                  "auroc": 0.6469907407407408,
+                  "average_precision": 0.37358204616446206
+                },
+                "S2": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.516420722372381,
+                  "brier": 0.1702046356357408,
+                  "auroc": 0.6469907407407408,
+                  "average_precision": 0.37358204616446206
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "G2",
+      "fold": 2,
+      "exit_code": 0,
+      "training": {
+        "selected_epoch": 8,
+        "best_validation_nll": 0.6098553538322449,
+        "parameter_count": 902210,
+        "test_evaluated": false,
+        "epochs_completed": 22,
+        "optimizer_steps": 400,
+        "supervised_steps": 400,
+        "selected_optimizer_steps": 150,
+        "selected_supervised_steps": 150,
+        "steps_per_full_epoch": 18,
+        "optimizer_step_budget": 1000,
+        "selection_policy": "validation_nll",
+        "selected_kind": "neural",
+        "baseline0_won": false,
+        "stage_weights": [
+          0.5,
+          0.5,
+          0.0
+        ],
+        "samples_eval": 64,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "training_patients_seen": 6180,
+        "train_patients": 278,
+        "train_events": 63,
+        "planned_epochs": 80,
+        "planned_optimizer_steps": 1000,
+        "actual_epochs": 23,
+        "actual_optimizer_steps": 400,
+        "budget_fulfilled": false,
+        "supervised_step_budget": 1000,
+        "validation_evaluations": 9,
+        "final_validation_nll": 0.6651461124420166,
+        "validation_used_for_checkpoint_selection": true,
+        "early_stopping_unit": "validation_cycle",
+        "stop_reason": "early_stopping",
+        "optimizer_groups": [
+          {
+            "name": "world",
+            "learning_rate": 2e-05,
+            "parameter_count": 688192
+          },
+          {
+            "name": "readout",
+            "learning_rate": 0.0001,
+            "parameter_count": 214018
+          }
+        ],
+        "task_counts": {
+          "endpoint": {
+            "effective_updates": 400,
+            "effective_targets": 6180
+          },
+          "pcr": {
+            "effective_updates": 400,
+            "effective_targets": 6180
+          },
+          "ct": {
+            "effective_updates": 400,
+            "effective_targets": 6180
+          },
+          "kl": {
+            "effective_updates": 400,
+            "effective_targets": 6180
+          },
+          "flow": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior_ct": {
+            "effective_updates": 400,
+            "effective_targets": 6180
+          },
+          "observation_recon": {
+            "effective_updates": 400,
+            "effective_targets": 5598
+          },
+          "readout_l2": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          }
+        },
+        "baseline_candidates": [
+          {
+            "name": "baseline_initial",
+            "selected": true,
+            "optimizer_steps": 0,
+            "supervised_steps": 0,
+            "validation": {
+              "interpretation": "scenario_conditioned_association",
+              "causal_effects_identified": false,
+              "selection_nll": 0.6141313314437866,
+              "legacy_three_stage_nll": 0.6141313314437866,
+              "stage_weights": [
+                0.5,
+                0.5,
+                0.0
+              ],
+              "selection_definition": "weighted_stages_per_patient_then_mean_valid_patients",
+              "evaluated": true,
+              "used_for_checkpoint_selection": true,
+              "stages": {
+                "S0": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.6141312948801114,
+                  "brier": 0.19881190588741585,
+                  "auroc": 0.47685185185185186,
+                  "average_precision": 0.31131824186705737
+                },
+                "S1": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.6141312948801114,
+                  "brier": 0.19881190588741585,
+                  "auroc": 0.47685185185185186,
+                  "average_precision": 0.31131824186705737
+                },
+                "S2": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.6141312948801114,
+                  "brier": 0.19881190588741585,
+                  "auroc": 0.47685185185185186,
+                  "average_precision": 0.31131824186705737
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "G3",
+      "fold": 0,
+      "exit_code": 0,
+      "training": {
+        "selected_epoch": 16,
+        "best_validation_nll": 0.568405032157898,
+        "parameter_count": 709570,
+        "test_evaluated": false,
+        "epochs_completed": 30,
+        "optimizer_steps": 550,
+        "supervised_steps": 550,
+        "selected_optimizer_steps": 300,
+        "selected_supervised_steps": 300,
+        "steps_per_full_epoch": 18,
+        "optimizer_step_budget": 1000,
+        "selection_policy": "validation_nll",
+        "selected_kind": "neural",
+        "baseline0_won": false,
+        "stage_weights": [
+          0.5,
+          0.5,
+          0.0
+        ],
+        "samples_eval": 64,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "training_patients_seen": 8470,
+        "train_patients": 277,
+        "train_events": 63,
+        "planned_epochs": 80,
+        "planned_optimizer_steps": 1000,
+        "actual_epochs": 31,
+        "actual_optimizer_steps": 550,
+        "budget_fulfilled": false,
+        "supervised_step_budget": 1000,
+        "validation_evaluations": 12,
+        "final_validation_nll": 0.6555407047271729,
+        "validation_used_for_checkpoint_selection": true,
+        "early_stopping_unit": "validation_cycle",
+        "stop_reason": "early_stopping",
+        "optimizer_groups": [
+          {
+            "name": "world",
+            "learning_rate": 2e-05,
+            "parameter_count": 688192
+          },
+          {
+            "name": "readout",
+            "learning_rate": 0.0001,
+            "parameter_count": 21378
+          }
+        ],
+        "task_counts": {
+          "endpoint": {
+            "effective_updates": 550,
+            "effective_targets": 8470
+          },
+          "pcr": {
+            "effective_updates": 550,
+            "effective_targets": 8470
+          },
+          "ct": {
+            "effective_updates": 550,
+            "effective_targets": 8470
+          },
+          "kl": {
+            "effective_updates": 550,
+            "effective_targets": 8470
+          },
+          "flow": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior_ct": {
+            "effective_updates": 550,
+            "effective_targets": 8470
+          },
+          "observation_recon": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "readout_l2": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          }
+        },
+        "baseline_candidates": [
+          {
+            "name": "baseline_initial",
+            "selected": true,
+            "optimizer_steps": 0,
+            "supervised_steps": 0,
+            "validation": {
+              "interpretation": "scenario_conditioned_association",
+              "causal_effects_identified": false,
+              "selection_nll": 0.5805100202560425,
+              "legacy_three_stage_nll": 0.5805100202560425,
+              "stage_weights": [
+                0.5,
+                0.5,
+                0.0
+              ],
+              "selection_definition": "weighted_stages_per_patient_then_mean_valid_patients",
+              "evaluated": true,
+              "used_for_checkpoint_selection": true,
+              "stages": {
+                "S0": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.5805099817289595,
+                  "brier": 0.1926151535596814,
+                  "auroc": 0.5069444444444444,
+                  "average_precision": 0.24653102006341593
+                },
+                "S1": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.5805099817289595,
+                  "brier": 0.1926151535596814,
+                  "auroc": 0.5069444444444444,
+                  "average_precision": 0.24653102006341593
+                },
+                "S2": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.5805099817289595,
+                  "brier": 0.1926151535596814,
+                  "auroc": 0.5069444444444444,
+                  "average_precision": 0.24653102006341593
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "G3",
+      "fold": 1,
+      "exit_code": 0,
+      "training": {
+        "selected_epoch": 11,
+        "best_validation_nll": 0.5147796273231506,
+        "parameter_count": 709570,
+        "test_evaluated": false,
+        "epochs_completed": 25,
+        "optimizer_steps": 450,
+        "supervised_steps": 450,
+        "selected_optimizer_steps": 200,
+        "selected_supervised_steps": 200,
+        "steps_per_full_epoch": 18,
+        "optimizer_step_budget": 1000,
+        "selection_policy": "validation_nll",
+        "selected_kind": "neural",
+        "baseline0_won": false,
+        "stage_weights": [
+          0.5,
+          0.5,
+          0.0
+        ],
+        "samples_eval": 64,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "training_patients_seen": 6925,
+        "train_patients": 277,
+        "train_events": 62,
+        "planned_epochs": 80,
+        "planned_optimizer_steps": 1000,
+        "actual_epochs": 25,
+        "actual_optimizer_steps": 450,
+        "budget_fulfilled": false,
+        "supervised_step_budget": 1000,
+        "validation_evaluations": 10,
+        "final_validation_nll": 0.5806142091751099,
+        "validation_used_for_checkpoint_selection": true,
+        "early_stopping_unit": "validation_cycle",
+        "stop_reason": "early_stopping",
+        "optimizer_groups": [
+          {
+            "name": "world",
+            "learning_rate": 2e-05,
+            "parameter_count": 688192
+          },
+          {
+            "name": "readout",
+            "learning_rate": 0.0001,
+            "parameter_count": 21378
+          }
+        ],
+        "task_counts": {
+          "endpoint": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "pcr": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "ct": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "kl": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "flow": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior_ct": {
+            "effective_updates": 450,
+            "effective_targets": 6925
+          },
+          "observation_recon": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "readout_l2": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          }
+        },
+        "baseline_candidates": [
+          {
+            "name": "baseline_initial",
+            "selected": true,
+            "optimizer_steps": 0,
+            "supervised_steps": 0,
+            "validation": {
+              "interpretation": "scenario_conditioned_association",
+              "causal_effects_identified": false,
+              "selection_nll": 0.5164207220077515,
+              "legacy_three_stage_nll": 0.5164207220077515,
+              "stage_weights": [
+                0.5,
+                0.5,
+                0.0
+              ],
+              "selection_definition": "weighted_stages_per_patient_then_mean_valid_patients",
+              "evaluated": true,
+              "used_for_checkpoint_selection": true,
+              "stages": {
+                "S0": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.516420722372381,
+                  "brier": 0.1702046356357408,
+                  "auroc": 0.6469907407407408,
+                  "average_precision": 0.37358204616446206
+                },
+                "S1": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.516420722372381,
+                  "brier": 0.1702046356357408,
+                  "auroc": 0.6469907407407408,
+                  "average_precision": 0.37358204616446206
+                },
+                "S2": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.516420722372381,
+                  "brier": 0.1702046356357408,
+                  "auroc": 0.6469907407407408,
+                  "average_precision": 0.37358204616446206
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "G3",
+      "fold": 2,
+      "exit_code": 0,
+      "training": {
+        "selected_epoch": 22,
+        "best_validation_nll": 0.6022583246231079,
+        "parameter_count": 709570,
+        "test_evaluated": false,
+        "epochs_completed": 36,
+        "optimizer_steps": 650,
+        "supervised_steps": 650,
+        "selected_optimizer_steps": 400,
+        "selected_supervised_steps": 400,
+        "steps_per_full_epoch": 18,
+        "optimizer_step_budget": 1000,
+        "selection_policy": "validation_nll",
+        "selected_kind": "neural",
+        "baseline0_won": false,
+        "stage_weights": [
+          0.5,
+          0.5,
+          0.0
+        ],
+        "samples_eval": 64,
+        "mc_seed_policy": "case_key",
+        "mc_antithetic": true,
+        "training_patients_seen": 10040,
+        "train_patients": 278,
+        "train_events": 63,
+        "planned_epochs": 80,
+        "planned_optimizer_steps": 1000,
+        "actual_epochs": 37,
+        "actual_optimizer_steps": 650,
+        "budget_fulfilled": false,
+        "supervised_step_budget": 1000,
+        "validation_evaluations": 14,
+        "final_validation_nll": 0.6846509575843811,
+        "validation_used_for_checkpoint_selection": true,
+        "early_stopping_unit": "validation_cycle",
+        "stop_reason": "early_stopping",
+        "optimizer_groups": [
+          {
+            "name": "world",
+            "learning_rate": 2e-05,
+            "parameter_count": 688192
+          },
+          {
+            "name": "readout",
+            "learning_rate": 0.0001,
+            "parameter_count": 21378
+          }
+        ],
+        "task_counts": {
+          "endpoint": {
+            "effective_updates": 650,
+            "effective_targets": 10040
+          },
+          "pcr": {
+            "effective_updates": 650,
+            "effective_targets": 10040
+          },
+          "ct": {
+            "effective_updates": 650,
+            "effective_targets": 10040
+          },
+          "kl": {
+            "effective_updates": 650,
+            "effective_targets": 10040
+          },
+          "flow": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "prior_ct": {
+            "effective_updates": 650,
+            "effective_targets": 10040
+          },
+          "observation_recon": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          },
+          "readout_l2": {
+            "effective_updates": 0,
+            "effective_targets": 0
+          }
+        },
+        "baseline_candidates": [
+          {
+            "name": "baseline_initial",
+            "selected": true,
+            "optimizer_steps": 0,
+            "supervised_steps": 0,
+            "validation": {
+              "interpretation": "scenario_conditioned_association",
+              "causal_effects_identified": false,
+              "selection_nll": 0.6141313314437866,
+              "legacy_three_stage_nll": 0.6141313314437866,
+              "stage_weights": [
+                0.5,
+                0.5,
+                0.0
+              ],
+              "selection_definition": "weighted_stages_per_patient_then_mean_valid_patients",
+              "evaluated": true,
+              "used_for_checkpoint_selection": true,
+              "stages": {
+                "S0": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.6141312948801114,
+                  "brier": 0.19881190588741585,
+                  "auroc": 0.47685185185185186,
+                  "average_precision": 0.31131824186705737
+                },
+                "S1": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.6141312948801114,
+                  "brier": 0.19881190588741585,
+                  "auroc": 0.47685185185185186,
+                  "average_precision": 0.31131824186705737
+                },
+                "S2": {
+                  "n": 70,
+                  "positive": 16,
+                  "nll": 0.6141312948801114,
+                  "brier": 0.19881190588741585,
+                  "auroc": 0.47685185185185186,
+                  "average_precision": 0.31131824186705737
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

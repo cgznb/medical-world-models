@@ -24,8 +24,20 @@ candidates had OOF S1 AUROC 0.5989 versus 0.5892 for clinical-only; the paired
 original-validation S1 AUROC 0.5196 and was not promoted. The original test
 partition was not scored again during this CT study.
 
+The 2026-09-29 update adds explicit stage weights, an eligible zero-step
+clinical candidate, stable per-case Monte Carlo noise, branch diagnostics,
+observed-CT reconstruction and an optional pooled outcome readout. All four
+G0-G3 candidates completed three folds: 12 runs and 5,400 supervised updates.
+G0 OOF S1 AUROC was 0.5964 versus clinical 0.5892; the paired difference interval
+[-0.0025, 0.0166] crossed zero. None of the added ablations established a stable
+benefit, and the retained research checkpoint was not replaced. No original
+validation/test patients were rescored. This reuses development OOF folds and
+does not establish independent confirmation.
+
 - [Repair report and aggregate results](../results/gastric/repair/REPAIR_REPORT_ZH.md)
 - [CT development report and negative findings](../results/gastric/ct_optimization/CT_REPORT_ZH.md)
+- [Latest aggregate results](../results/gastric/next_round_20260929/README.md), [training report](docs/NEXT_ROUND_RESULTS.md), and [fixed-feature/forecast diagnostics](docs/NEXT_ROUND_DIAGNOSTICS.md)
+- [Next-round implementation](docs/NEXT_ROUND_CHANGES.md) and [protocol/reproduction](docs/NEXT_ROUND_PROTOCOL.md)
 - [Data adaptation](docs/LOCAL_ADAPTATION.md), [repair reproduction](docs/LOCAL_REPAIR.md), and [CT reproduction](docs/CT_OPTIMIZATION.md)
 - [Algorithm](docs/ALGORITHM_ZH.md), [data schema](docs/DATA_SCHEMA.md), and [source audit](docs/SOURCE_AUDIT.md)
 
@@ -46,8 +58,9 @@ python -m pip install -e '.[dev]'
 python -m pytest -q
 ```
 
-The public-export test result is recorded as aggregate counts in
-[test_summary.json](../results/gastric/test_summary.json).
+The latest public-copy test result is recorded as aggregate counts in
+[engineering_checks.json](../results/gastric/next_round_20260929/engineering_checks.json).
+The [older test summary](../results/gastric/test_summary.json) remains a historical record.
 
 ## Synthetic execution check
 

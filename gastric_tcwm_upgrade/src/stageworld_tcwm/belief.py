@@ -37,6 +37,14 @@ class StochasticInjector(nn.Module):
 def sample_gaussian(mean, logvar, epsilon):
     return mean[:,None] + (.5*logvar).exp()[:,None]*epsilon
 
+
+def validate_epsilon(epsilon, shape, device):
+    if (not isinstance(epsilon, torch.Tensor) or tuple(epsilon.shape) != tuple(shape)
+            or epsilon.device != device or not epsilon.is_floating_point()
+            or not torch.isfinite(epsilon).all()):
+        raise ValueError("epsilon must be a finite floating tensor with matching batch/sample/latent shape and device")
+    return epsilon.float()
+
 def diagonal_kl(q_mean,q_logvar,p_mean,p_logvar):
     # float32 log-density arithmetic, including under autocast.
     q_mean,q_logvar,p_mean,p_logvar = [x.float() for x in (q_mean,q_logvar,p_mean,p_logvar)]

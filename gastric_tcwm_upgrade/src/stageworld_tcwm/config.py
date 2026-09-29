@@ -2,6 +2,7 @@
 from dataclasses import dataclass, asdict
 import json
 from pathlib import Path
+import math
 
 @dataclass
 class ModelConfig:
@@ -29,6 +30,7 @@ class ModelConfig:
     architecture: str = "token_world"
     ct_rank: int = 16
     predictive_transition: bool = True
+    readout_kind: str = "attention"
 
     def validate(self):
         if self.hidden < 16 or self.hidden % 8 or self.latent_dim < 4 or self.latent_dim % 4:
@@ -45,6 +47,10 @@ class ModelConfig:
             raise ValueError("Unknown observation update")
         if self.architecture not in ("token_world", "predictive_ct"):
             raise ValueError("Unknown model architecture")
+        if self.readout_kind not in ("attention", "pooled"):
+            raise ValueError("Unknown readout kind")
+        if self.readout_kind == "pooled" and (self.architecture != "token_world" or self.endpoint != "binary"):
+            raise ValueError("Pooled readout currently requires a binary token-world model")
         if self.ct_rank < 1 or (self.architecture == "predictive_ct" and self.ct_rank > self.image_dim):
             raise ValueError("CT rank must be between 1 and image_dim")
         if self.architecture == "predictive_ct" and (self.endpoint != "binary" or
@@ -96,6 +102,14 @@ class TrainConfig:
     readout_l2: float = 0.0
     readout_learning_rate: float | None = None
     checkpoint_selection: str = "validation_nll"
+    stage_weights: tuple = (1., 1., 1.)
+    include_initial_baseline: bool = False
+    mc_seed_policy: str = "batch_start"
+    mc_antithetic: bool = False
+    validation_interval_steps: int | None = None
+    max_supervised_steps: int | None = None
+    gradient_probe_interval: int | None = None
+    observation_recon_weight: float = 0.0
 
     def validate(self):
         if min(self.epochs, self.batch_size, self.patience, self.samples_train, self.samples_eval) < 1:
@@ -117,8 +131,21 @@ class TrainConfig:
             raise ValueError("Readout learning rate must be positive")
         if self.checkpoint_selection not in ("validation_nll", "fixed_budget"):
             raise ValueError("Unknown checkpoint selection policy")
+        if self.mc_seed_policy not in ("batch_start", "case_key"):
+            raise ValueError("Unknown MC seed policy")
+        if (len(self.stage_weights) != 3 or
+                any(not math.isfinite(w) or w < 0 for w in self.stage_weights)):
+            raise ValueError("stage_weights must contain three finite nonnegative weights")
+        self.stage_weights = tuple(float(w) for w in self.stage_weights)
+        for name in ("validation_interval_steps", "max_supervised_steps", "gradient_probe_interval"):
+            value = getattr(self, name)
+            if value is not None and (isinstance(value, bool) or not isinstance(value, int) or value < 1):
+                raise ValueError(f"{name} must be a positive integer")
+        if self.checkpoint_selection == "fixed_budget" and self.include_initial_baseline:
+            raise ValueError("Initial baseline selection requires validation_nll selection")
         if min(self.weight_decay, self.free_nats, self.ct_weight, self.kl_weight, self.pcr_weight,
-               self.flow_weight, self.prior_weight, self.prior_ct_weight, self.readout_l2) < 0:
+               self.flow_weight, self.prior_weight, self.prior_ct_weight, self.readout_l2,
+               self.observation_recon_weight) < 0:
             raise ValueError("Loss weights must be nonnegative")
         return self
 

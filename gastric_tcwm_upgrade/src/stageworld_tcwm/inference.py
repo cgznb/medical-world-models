@@ -6,6 +6,7 @@ from .config import ModelConfig
 from .model import model_from_config
 from .survival import competing_curves
 from .support import support_flags
+from .monte_carlo import evaluation_epsilon,monte_carlo_standard_error
 
 ALLOWED = {"clinical","treatment","interval_days","surgery","ct0","ct1","image_valid",
            "ct1_available_stage","post","post_mask","entry","plan_available_stage"}
@@ -24,7 +25,11 @@ class Predictor:
             raise ValueError("Missing fitted preprocessing")
 
     @torch.inference_mode()
-    def predict(self,query,stage,*,samples=32,seed=17,horizons=None,allow_extrapolation=False):
+    def predict(self,query,stage,*,samples=None,seed=None,horizons=None,allow_extrapolation=False,
+                mc_seed_policy=None,mc_antithetic=None):
+        evaluation = self.bundle.get("evaluation_config",{})
+        samples = evaluation.get("samples_eval",32) if samples is None else samples
+        seed = evaluation.get("mc_seed",17) if seed is None else seed
         if stage not in (0,1,2) or samples < 2:
             raise ValueError("stage is 0/1/2; at least two Monte Carlo samples are required")
         if query.get("schema")!="tcwm-query-v1":
@@ -96,24 +101,33 @@ class Predictor:
         if not allow_extrapolation and any(x["warnings"] for x in flags):
             raise ValueError(f"Unsupported/sparse scenario. Research-only override is explicit: {flags}")
         tensors = {k:v.to(self.device) for k,v in tensors.items()}
-        output = self.model(tensors,samples=samples,seed=seed,max_stage=stage,compute_aux=False)["predictions"][:,stage]
+        mc_seed_policy = evaluation.get("mc_seed_policy","batch_start") if mc_seed_policy is None else mc_seed_policy
+        mc_antithetic = evaluation.get("mc_antithetic",False) if mc_antithetic is None else mc_antithetic
+        epsilon = evaluation_epsilon(self.model,b,samples,seed,policy=mc_seed_policy,
+            case_keys=query.get("case_keys"),antithetic=mc_antithetic)
+        kwargs = {"epsilon":epsilon} if epsilon is not None else {}
+        output = self.model(tensors,samples=samples,seed=seed,max_stage=stage,compute_aux=False,**kwargs)["predictions"][:,stage]
         result = {"stage":stage,"plan_source":source,"interpretation":"scenario_conditioned_association",
                   "causal_effects_identified":False,"clinical_validation":False,
                   "support":flags,"samples":samples,"seed":seed,
+                  "mc_seed_policy":mc_seed_policy,"mc_antithetic":mc_antithetic,
+                  "mc_independent_units":samples//2 if mc_antithetic else samples,
                   "uncertainty_note":"latent spread and Monte Carlo error, not clinical confidence intervals"}
         if self.cfg.endpoint=="binary":
             probabilities = output.sigmoid()
+            standard_error = monte_carlo_standard_error(probabilities,mc_antithetic)
             result.update({"recorded_status_probability":probabilities.mean(1).cpu(),
                            "latent_probability_std":probabilities.std(1,unbiased=False).cpu(),
-                           "monte_carlo_standard_error":(probabilities.std(1,unbiased=False)/samples**.5).cpu()})
+                           "monte_carlo_standard_error":standard_error.cpu() if standard_error is not None else None})
         else:
             horizons = torch.as_tensor(horizons,dtype=torch.float,device=self.device)
             survival,cif = competing_curves(output,horizons,tensors["entry"][:,stage],self.model.outcome.edges)
+            standard_error = monte_carlo_standard_error(cif[...,0],mc_antithetic)
             result.update({"horizons_months_since_origin":horizons.cpu(),"survival":survival.mean(1).cpu(),
                            "cumulative_incidence":cif.mean(1).cpu(),
                            "recurrence_probability":cif.mean(1)[...,0].cpu(),
                            "latent_recurrence_std":cif[...,0].std(1,unbiased=False).cpu(),
-                           "monte_carlo_standard_error":(cif[...,0].std(1,unbiased=False)/samples**.5).cpu(),
+                           "monte_carlo_standard_error":standard_error.cpu() if standard_error is not None else None,
                            "time_origin":self.bundle["metadata"]["time_origin"]})
         return result
 
