@@ -10,6 +10,7 @@ dependencies = ["torch>=2.5", "numpy>=1.24", "PyYAML>=6", "scikit-learn>=1.1"]
 [project.optional-dependencies]
 monai = ["monai==1.5.1"]
 test = ["pytest>=8"]
+report = ["matplotlib>=3.7"]
 [project.scripts]
 responsewm = "responsewm.cli:main"
 [tool.setuptools.packages.find]

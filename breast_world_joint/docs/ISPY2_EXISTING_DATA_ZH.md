@@ -15,7 +15,7 @@
 
 ## 运行配置
 
-当前正式训练使用 RTX 5090 32 GB、Python 3.12.3、PyTorch 2.12.1+cu130。
+本轮正式训练使用 RTX 5090 32 GB、Python 3.12.3、PyTorch 2.12.1+cu130，已于 2026-09-29 08:24:57（UTC+8）完成。
 以下命令从本项目目录执行，数据准备方式见 [README](../README.md)。
 
 正式配置为 `configs/ispy2_t0_t3_5090.yaml`，物理 batch=4、累积=1，有效 batch=4。四阶段预算依次为 10,000 / 30,000 / 3,000 / 5,000 优化步；每 100 步保存恢复点，每 250 步在全部 102 名验证患者上评估。验证仅用于 checkpoint 选择。
@@ -35,6 +35,14 @@ python -u scripts/run_existing_ispy2.py \
 
 `scripts/real_data_preflight.py` 使用真实完整尺寸 MRI latent，对四个生产阶段分别执行 loss、反向传播和 AdamW 更新，记录数值及 CUDA 峰值。预检使用临时模型，不改变正式训练模型，也不代表临床性能。公开聚合报告见 [cuda_preflight.json](../../results/breast/cuda_preflight.json)。
 
-原包 CPU 测试与新增适配测试共 41 项通过；MONAI 后端测试因未安装可选 MONAI 跳过。另核验临床 4 维、治疗 0 维、未来 MRI 全缺失时表征/读出/联合梯度有限，以及 joint 中断恢复后模型张量和 RNG 完全一致。
+历史预检中，原包 CPU 测试与新增适配测试共 41 项通过；MONAI 后端测试因未安装可选 MONAI 跳过。另核验临床 4 维、治疗 0 维、未来 MRI 全缺失时表征/读出/联合梯度有限，以及 joint 中断恢复后模型张量和 RNG 完全一致。本次公开副本的工程核验入口见 [VALIDATION.md](VALIDATION.md)，历史通过数不代替本轮测试记录。
 
-截至公开快照时间，representation 已完成，flow 仍在进行，readout/joint 尚未开始；精确时间与步数见 [乳腺结果](../../results/breast/README.md)。正式模型收敛、完整纵向实验、MRI 质量与 pCR 泛化性能仍需依据后续结果判断。
+四阶段已分别完成 10,000 / 30,000 / 3,000 / 5,000 步；选中检查点位于 250 / 12,500 / 250 / 750 步。后续阶段从前阶段 `best.pt` 开始，并非从末步检查点开始。2026-09-28 的进度快照仅为历史记录。
+
+## 完成后的开发验证
+
+102 名验证患者中有 32 名 pCR 阳性和 70 名阴性。原选模协议为每人 4 条生成轨迹、每条 20 步 Heun，对轨迹概率取均值。固定 0.5 阈值下，readout/best 的准确率为 74.51%、敏感度为 31.25%、特异度为 94.29%，对应 AUC 0.7096、AP 0.6230、NLL 0.5640；joint/best 对应为 73.53%、46.88%、85.71%，AUC 0.7136、AP 0.6067、NLL 0.5774。没有一份检查点在所有指标上更好。
+
+四份 readout/joint 的 best/last 权重均重新执行原验证函数，原记录五项标量完全复现。表征分类监督和联合后期存在过拟合；joint/last 的 AUC 下降至 0.6772、NLL 升至 0.7519，当前证据不支持原样增加训练步数。同模型的 T0-only 分支在 AUC、AP、NLL 上略优于加入生成未来的分支，尚未证明生成 T3 提高 pCR 预测性能。
+
+完整指标、阶段分项和重训建议见 [训练复核](../../results/breast/training_review_20260929/README.md)，机器可读汇总见 [summary.json](../../results/breast/training_review_20260929/summary.json)。四阶段优化已完成，完整纵向实验、解码 MRI 质量和独立测试泛化性能仍未验证。

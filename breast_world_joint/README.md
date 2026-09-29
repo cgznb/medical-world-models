@@ -50,13 +50,48 @@ Configuration, manifests, and cached arrays must remain unchanged within a run.
 
 ## Result scope
 
-The real run retains 764 training and 102 development-validation patients.
-There is no independent test set. At the recorded snapshot, representation
-had completed 10,000 steps and flow had reached 27,990 of 30,000 steps;
-readout and joint had not started. Their absence means no final pCR AUROC is
-available from this run. Intermediate representation/flow objectives must not
-be reported as pCR performance. See the timestamped
-[aggregate snapshot](../results/breast/training_snapshot.json).
+The real run completed all four stages on 2026-09-29 at 08:24:57 (UTC+8),
+using 10,000 / 30,000 / 3,000 / 5,000 optimization steps. Selected checkpoints
+are at steps 250 / 12,500 / 250 / 750. It retains 764 training and 102
+development-validation patients, including 32 validation pCR positives.
+There is no independent test set. The trained task is a single T0-to-T3
+interval; support for longitudinal inputs does not establish a trained or
+validated T0-to-T1-to-T2-to-T3 model.
+
+| Selected checkpoint | AUROC | AP | NLL | Accuracy | Sensitivity | Specificity |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| readout/best | 0.7096 | 0.6230 | 0.5640 | 74.51% | 31.25% | 94.29% |
+| joint/best | 0.7136 | 0.6067 | 0.5774 | 73.53% | 46.88% | 85.71% |
+
+Validation averages probabilities from four generated trajectories per patient,
+with 20 Heun steps per trajectory. Accuracy, sensitivity, and specificity use
+a fixed probability threshold of 0.5. AP is average precision, not a
+trapezoidal PR area. Readout selects the minimum NLL; joint selects the minimum
+`NLL + 0.05 * generation_objective`, rather than the highest AUROC.
+
+Re-running the original validation function reproduced all five logged scalar
+metrics exactly for the best and last readout/joint checkpoints. Representation
+classification and late joint training show overfitting. Joint/last AUROC is
+0.6772 with NLL 0.7519; longer training with the same setup is not supported by
+these results. The existing T0-only branches slightly outperform their
+generated-future counterparts on AUROC, AP, and NLL, so an incremental benefit
+from generated T3 has not been demonstrated. These are branch diagnostics,
+not independently trained ablations.
+
+See the [completed training review](../results/breast/training_review_20260929/README.md),
+[machine-readable summary](../results/breast/training_review_20260929/summary.json),
+and [training diagnostics](../results/breast/training_review_20260929/training_diagnostics.png).
+Intermediate representation/flow objectives are not pCR accuracy or decoded
+MRI quality. The [2026-09-28 snapshot](../results/breast/training_snapshot.json)
+is retained as a historical progress record.
+
+The review includes reproducible audit scripts in `scripts/audit_training.py`,
+`scripts/representation_components.py`, and `scripts/baseline_diagnostics.py`.
+They require authorized private manifests, training logs, and checkpoints;
+keep their inputs and raw reports outside tracked repository files. The
+repository-level `tools/export_breast_review.py` exports only approved aggregate
+fields. Install `python -m pip install -e '.[report]'` for the optional
+Matplotlib report dependency.
 
 The frozen VQ codec was selected using the same development-validation
 patients, and upstream localizer patient overlap remains unverified. These

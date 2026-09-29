@@ -1,0 +1,44 @@
+{
+  "date": "2026-09-29",
+  "scope": "Breast source publication and aggregate result review",
+  "python": "3.12.13",
+  "pytorch": "2.12.1+cu130",
+  "tests": {
+    "command": "python -m pytest -q",
+    "working_directory": "breast_world_joint",
+    "passed": 41,
+    "skipped": 1,
+    "failed": 0,
+    "duration_seconds": 7.79,
+    "skipped_reason": "Optional MONAI parity test: MONAI not installed"
+  },
+  "source_comparison": {
+    "original_runtime_adapter_test_python_files": 36,
+    "all_identical_to_training_source": true,
+    "new_analysis_scripts": [
+      "scripts/audit_training.py",
+      "scripts/representation_components.py",
+      "scripts/baseline_diagnostics.py"
+    ],
+    "model_or_training_behavior_changed": false
+  },
+  "syntax_check": {
+    "three_analysis_scripts": "passed",
+    "aggregate_exporter": "passed"
+  },
+  "real_data_review": {
+    "evidence_scope": "completed_training_environment_before_publication",
+    "classification_checkpoints_replayed": 4,
+    "all_five_stored_scalar_metrics_reproduced_exactly": true,
+    "representation_checkpoints_decomposed": 2,
+    "existing_model_branches_evaluated": 4,
+    "additional_training_updates": 0,
+    "independent_test_evaluated": false
+  },
+  "notes": [
+    "Engineering tests do not establish clinical efficacy.",
+    "No patient-level inputs, predictions, calibration bins or trained checkpoints are included.",
+    "The real-data scores use the same development-validation cohort as checkpoint selection.",
+    "Plot reproduction requires the optional report dependency; real-data replay requires authorized private inputs and CUDA."
+  ]
+}
