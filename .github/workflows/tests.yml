@@ -16,7 +16,7 @@ jobs:
       matrix:
         include:
           - project: gastric_tcwm_upgrade
-            extras: dev
+            extras: dev,timeline
           - project: breast_world_joint
             extras: test
     steps:

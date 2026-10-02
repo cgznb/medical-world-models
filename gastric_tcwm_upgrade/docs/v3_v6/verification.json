@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-02",
+  "scope": "public V3/V6 source, synthetic engineering inputs only",
+  "device": "cpu",
+  "full_gastric_suite": {
+    "passed": 443,
+    "skipped": 4,
+    "failed": 0,
+    "seconds": 25.41,
+    "skipped_reason": "optional integration with original legacy clinical encoder source"
+  },
+  "optional_legacy_integration": {
+    "passed": 4,
+    "failed": 0,
+    "inputs": "synthetic 651-patient fixtures; original legacy encoder provided explicitly"
+  },
+  "synthetic_demo": {
+    "passed": true,
+    "v3_parameters": 7182086,
+    "v6_parameters": 3658,
+    "v6_terminal_trainable_parameters": 201,
+    "stages": 4
+  },
+  "clinical_training_launched": false,
+  "clinical_test_rescored": false,
+  "publication_check": "passed on staged source; excludes patient data, weights, credentials and deployment paths",
+  "cli_help": [
+    {
+      "script": "run_terminal",
+      "exit_code": 0
+    },
+    {
+      "script": "run_four_stage",
+      "exit_code": 0
+    },
+    {
+      "script": "run_four_stage_ablation",
+      "exit_code": 0
+    },
+    {
+      "script": "run_modality",
+      "exit_code": 0
+    },
+    {
+      "script": "prepare_modality",
+      "exit_code": 0
+    },
+    {
+      "script": "prepare_modality_fixed",
+      "exit_code": 0
+    },
+    {
+      "script": "prepare_report_concepts",
+      "exit_code": 0
+    },
+    {
+      "script": "predict_modality",
+      "exit_code": 0
+    },
+    {
+      "script": "verify_terminal_run",
+      "exit_code": 0
+    },
+    {
+      "script": "audit_terminal_readiness",
+      "exit_code": 0
+    }
+  ],
+  "python": "3.12.13",
+  "versions": {
+    "torch": "2.12.1",
+    "numpy": "2.4.6",
+    "scikit-learn": "1.9.0",
+    "pytest": "9.1.1",
+    "torchdiffeq": "0.2.5",
+    "openpyxl": "3.1.5",
+    "jsonschema": "4.26.0"
+  }
+}

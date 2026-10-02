@@ -1,0 +1,435 @@
+{
+  "schema": "gastric-v3-v6-publication-source-v1",
+  "date": "2026-10-02",
+  "source": "original gastric training implementation; review names V3 and V6",
+  "private_paths_omitted": true,
+  "records": [
+    {
+      "path": "src/stageworld_tcwm/timeline_model.py",
+      "original_sha256": "67eebc118cbe4c585fd84f168415fae0a4c63c9fe6146ae27f3556d68bd5952a",
+      "published_sha256": "67eebc118cbe4c585fd84f168415fae0a4c63c9fe6146ae27f3556d68bd5952a",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/timeline_config.py",
+      "original_sha256": "f86cb91e2792e3ef5d0bfbb808e4a90f15dd1c718fbf2f98d6ccb6b3c7bbec2e",
+      "published_sha256": "f86cb91e2792e3ef5d0bfbb808e4a90f15dd1c718fbf2f98d6ccb6b3c7bbec2e",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/timeline_losses.py",
+      "original_sha256": "dbd93899d606a68fb65b9303823cd4b1615d7fad2683f408cfd8834ef36c2c42",
+      "published_sha256": "dbd93899d606a68fb65b9303823cd4b1615d7fad2683f408cfd8834ef36c2c42",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/timeline_training.py",
+      "original_sha256": "a9be68ae61149568a306dc4dc486d4b3eeed1bad12b0aa1d301f658861f8c6bd",
+      "published_sha256": "a9be68ae61149568a306dc4dc486d4b3eeed1bad12b0aa1d301f658861f8c6bd",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/timeline_data.py",
+      "original_sha256": "cb313377d7be3accc1fc6fc673917c013c6eb0f375ae0fb7980100fde12f4f50",
+      "published_sha256": "cb313377d7be3accc1fc6fc673917c013c6eb0f375ae0fb7980100fde12f4f50",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/event_encoder.py",
+      "original_sha256": "83ff94b2423935dccaeca614e3d870adda210ffae1bc3fc3be46d86ec6ec31c7",
+      "published_sha256": "83ff94b2423935dccaeca614e3d870adda210ffae1bc3fc3be46d86ec6ec31c7",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/event_jump.py",
+      "original_sha256": "39ff9685c8f50bab4ee0e6331378a87c53f220da3bd9e4d80a9199b21487128e",
+      "published_sha256": "39ff9685c8f50bab4ee0e6331378a87c53f220da3bd9e4d80a9199b21487128e",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/spatial_dynamics.py",
+      "original_sha256": "5502f503d208bffc0b96c0b2018723b71bd0d8715ae58aa3f4b7de3f259ecc83",
+      "published_sha256": "5502f503d208bffc0b96c0b2018723b71bd0d8715ae58aa3f4b7de3f259ecc83",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/continuous_drift.py",
+      "original_sha256": "579e171c00295b4e8f5db2183b5c74fa1a5b2aa671161227c9dc4c4d6cfc5bdd",
+      "published_sha256": "579e171c00295b4e8f5db2183b5c74fa1a5b2aa671161227c9dc4c4d6cfc5bdd",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/patient_state.py",
+      "original_sha256": "c04b16541e786c683d3b4517ae70ceacb3c1a5c587b4ceeda0701ec0c8e99e8a",
+      "published_sha256": "c04b16541e786c683d3b4517ae70ceacb3c1a5c587b4ceeda0701ec0c8e99e8a",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/modality_schema.py",
+      "original_sha256": "6ab51e5f08dd280a0e673277b3f69d4eb256f026035d77397a86f1f69f31bdc7",
+      "published_sha256": "6ab51e5f08dd280a0e673277b3f69d4eb256f026035d77397a86f1f69f31bdc7",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/modality_support.py",
+      "original_sha256": "08179f65b43749f8070b9050c56129197fe0ec7985297e3932107b36cc6ba938",
+      "published_sha256": "08179f65b43749f8070b9050c56129197fe0ec7985297e3932107b36cc6ba938",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/modality_data.py",
+      "original_sha256": "f5bb651cba899c74c848f478e6fa7cce0f95603b2570deaec6c84ab6cd1dc15c",
+      "published_sha256": "f5bb651cba899c74c848f478e6fa7cce0f95603b2570deaec6c84ab6cd1dc15c",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/modality_inference.py",
+      "original_sha256": "f29cda89815bf192627119f0e016861d121b9f7038eee125a29407c7ed201c83",
+      "published_sha256": "f29cda89815bf192627119f0e016861d121b9f7038eee125a29407c7ed201c83",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/terminal_readiness.py",
+      "original_sha256": "7c73be0a3a3e524e700b0bea64e36cd6646ccaad87a60f6754d24e07b720c217",
+      "published_sha256": "7c73be0a3a3e524e700b0bea64e36cd6646ccaad87a60f6754d24e07b720c217",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/report_concept_data.py",
+      "original_sha256": "bb0f4044d130d1b7f54e025295256725a93b2498487ba11fbc2ae59d2178d034",
+      "published_sha256": "f33de20c75e9d0d4b4e70f15fcb066553a519e19f0bbf5d5e706f4f45c1153da",
+      "unchanged": false
+    },
+    {
+      "path": "src/stageworld_tcwm/four_stage_model.py",
+      "original_sha256": "6596b2161e52009047d06bdd69a1cf40f6ff2892a7050e1056716ecc9dc0d970",
+      "published_sha256": "6596b2161e52009047d06bdd69a1cf40f6ff2892a7050e1056716ecc9dc0d970",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/four_stage_training.py",
+      "original_sha256": "b4d95b813e4365756dffd6effceb09d5ba3dd31299ec18a7847b7223c00e1dac",
+      "published_sha256": "b4d95b813e4365756dffd6effceb09d5ba3dd31299ec18a7847b7223c00e1dac",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/research_neural.py",
+      "original_sha256": "d63849746996469f3ebc4c935da693be9d4ff1e53c508fc9631ca979a10e70e4",
+      "published_sha256": "d63849746996469f3ebc4c935da693be9d4ff1e53c508fc9631ca979a10e70e4",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/research_baselines.py",
+      "original_sha256": "6de25fc87442cff22f2ae7b8c797f1cb87b3e61c1587a4157b84bf4703c3e84f",
+      "published_sha256": "6de25fc87442cff22f2ae7b8c797f1cb87b3e61c1587a4157b84bf4703c3e84f",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/run_terminal.py",
+      "original_sha256": "0e4ed8dbf032a2d056ea27b4a26fd1028cdb62471f62e5f84d9237e333fc0002",
+      "published_sha256": "79de75f9c85e81b02536ed01d8a0e186b9cbf43f48046e0cbb771cbc0915702e",
+      "unchanged": false
+    },
+    {
+      "path": "scripts/run_four_stage.py",
+      "original_sha256": "b3f3aa24d89f4469e316870fb5bde3fac4b02ff88d582fa1f3a2d77999584270",
+      "published_sha256": "b3f3aa24d89f4469e316870fb5bde3fac4b02ff88d582fa1f3a2d77999584270",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/run_four_stage_ablation.py",
+      "original_sha256": "c48b42274a7aed2d4b884725d224195a32f14efb289689e834f0f50ce5ee4949",
+      "published_sha256": "ba64c61cc66c01928f0c415b7b0ae85732bc2c5a653c5e7f92e5032fd6789b39",
+      "unchanged": false
+    },
+    {
+      "path": "scripts/run_modality.py",
+      "original_sha256": "665efba8260f530651cc1fe2afeffc0f83428178e880d1374d0c31af71cea284",
+      "published_sha256": "2141df0f3a7c8f506ab8397408662c70c2c9dba7a2be3b7a31b375f8033da890",
+      "unchanged": false
+    },
+    {
+      "path": "scripts/prepare_modality.py",
+      "original_sha256": "234c93d6e6493b8c44299de29bfe499f66f54acfe292207fc8f518ae75b663cd",
+      "published_sha256": "234c93d6e6493b8c44299de29bfe499f66f54acfe292207fc8f518ae75b663cd",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/prepare_modality_fixed.py",
+      "original_sha256": "0c0e6e0bfff253a59b52bbca54f7617eb4a60447b5fa0fb5b21304e55a4bfb67",
+      "published_sha256": "0c0e6e0bfff253a59b52bbca54f7617eb4a60447b5fa0fb5b21304e55a4bfb67",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/prepare_report_concepts.py",
+      "original_sha256": "8cdcc0abe8448415f94ca6d8e4f8d6a2c0ec682ae3f5313bcd78a9b4b1b79933",
+      "published_sha256": "abb704f0ebec67b33551ff1954681efd6ba5231bdb780a0b7ee58fa77b6e4e6b",
+      "unchanged": false
+    },
+    {
+      "path": "scripts/predict_modality.py",
+      "original_sha256": "1ccf77e211b44e9905c09d3c4601d5ca4c5ddfdd57b44bcc7ba7c59420307c5d",
+      "published_sha256": "1ccf77e211b44e9905c09d3c4601d5ca4c5ddfdd57b44bcc7ba7c59420307c5d",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/verify_terminal_run.py",
+      "original_sha256": "3e65bb77df0f95b66f14be73b191017acd78e902f2e904f6de341f5690b8a00f",
+      "published_sha256": "fd51a12223fc1cda7b11472b45ca27ddce9858f0f524280a8b2456d3a11bc1b3",
+      "unchanged": false
+    },
+    {
+      "path": "scripts/audit_terminal_readiness.py",
+      "original_sha256": "94cf37c115d833a8531aba15f4c185cbb942b08521cba10698f26893e884844f",
+      "published_sha256": "b1bdd3ef13b8e951db1fcee7150362f89589b2bc071614ec6b9321af9f43cbc8",
+      "unchanged": false
+    },
+    {
+      "path": "tests/modality_fixtures.py",
+      "original_sha256": "9418e54d999b4a84f6fc1e564f28f701b16c818400c3a722b6d828f0031c64c2",
+      "published_sha256": "9418e54d999b4a84f6fc1e564f28f701b16c818400c3a722b6d828f0031c64c2",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_four_stage_ablation_runner.py",
+      "original_sha256": "dd5e3e4b8c07745137116352748710f38248af2e027f927c956520625204de72",
+      "published_sha256": "dd5e3e4b8c07745137116352748710f38248af2e027f927c956520625204de72",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_four_stage_ablations.py",
+      "original_sha256": "9bbce022d8df2b378a7e9bcf4bd01ffe3d4052a68f63c2d7f1b113d03615408f",
+      "published_sha256": "9bbce022d8df2b378a7e9bcf4bd01ffe3d4052a68f63c2d7f1b113d03615408f",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_four_stage_adapter_model.py",
+      "original_sha256": "1605df63422aaf3623255b62e2a54945129139a172f779d3fdb51c497860acf0",
+      "published_sha256": "1605df63422aaf3623255b62e2a54945129139a172f779d3fdb51c497860acf0",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_four_stage_condition_encoding.py",
+      "original_sha256": "dea432ef77d1fc5ed6b123d98762c83be7543145117c88b4bbd00c9436d2b357",
+      "published_sha256": "dea432ef77d1fc5ed6b123d98762c83be7543145117c88b4bbd00c9436d2b357",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_four_stage_model.py",
+      "original_sha256": "08a20da955bd33861221f60001b64377013c793f04a940d11ee26d66497989c8",
+      "published_sha256": "08a20da955bd33861221f60001b64377013c793f04a940d11ee26d66497989c8",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_four_stage_runner.py",
+      "original_sha256": "bc5840f8ddd2d9935c889827e10dac164f49b282d6a2e9b5f92b2522ccef3e64",
+      "published_sha256": "bc5840f8ddd2d9935c889827e10dac164f49b282d6a2e9b5f92b2522ccef3e64",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_four_stage_training.py",
+      "original_sha256": "cee23444f2bd3b73534235bdd6f9bc34dc328e244fa4cb8db892ea02676cf5ac",
+      "published_sha256": "cee23444f2bd3b73534235bdd6f9bc34dc328e244fa4cb8db892ea02676cf5ac",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_modality_calendar.py",
+      "original_sha256": "5160b93d44a5c18878e2d62a10bc4ae1921f2c35e12dfd50ee0c7ae4393d119b",
+      "published_sha256": "5160b93d44a5c18878e2d62a10bc4ae1921f2c35e12dfd50ee0c7ae4393d119b",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_modality_data.py",
+      "original_sha256": "be5ecc2718d2e6adeb7583fa7e12794ce777a84c243828b01727372276764993",
+      "published_sha256": "be5ecc2718d2e6adeb7583fa7e12794ce777a84c243828b01727372276764993",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_modality_fixed_data.py",
+      "original_sha256": "58314d3c9a5967a1334c963b2ed339c75dac443d8cd1bacf2711d7f180d05fff",
+      "published_sha256": "549fc9be0a8e1ea314e177d52033284cbb6ae14af6fe1d0602ba9234cb2d5c78",
+      "unchanged": false
+    },
+    {
+      "path": "tests/test_modality_inference.py",
+      "original_sha256": "e242bed5e0f9f84953f81422611c0f219dffdd1b8d35df17b241c3168ff608a4",
+      "published_sha256": "e242bed5e0f9f84953f81422611c0f219dffdd1b8d35df17b241c3168ff608a4",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_modality_model.py",
+      "original_sha256": "41d265483f8798b71c59934894b3ef1398fb55b937555f8d66a83638e447b0d1",
+      "published_sha256": "41d265483f8798b71c59934894b3ef1398fb55b937555f8d66a83638e447b0d1",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_modality_runner.py",
+      "original_sha256": "1a30360edd65a5e01ffb5486705555eb5f8153de55c160348fd8a7f6440ebe94",
+      "published_sha256": "1a30360edd65a5e01ffb5486705555eb5f8153de55c160348fd8a7f6440ebe94",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_report_concept_data.py",
+      "original_sha256": "3e0d456bcd3b4f7ff14defa8d744dfbe5acc4be1da484fb0f038527b3078193e",
+      "published_sha256": "3e0d456bcd3b4f7ff14defa8d744dfbe5acc4be1da484fb0f038527b3078193e",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_report_concept_model.py",
+      "original_sha256": "4775afeec5471bfd56cfd0bc86577f1b075f6eadb62dc7d1627857e60962a5de",
+      "published_sha256": "4775afeec5471bfd56cfd0bc86577f1b075f6eadb62dc7d1627857e60962a5de",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_report_concept_training.py",
+      "original_sha256": "6876ee78503338e175c04de31fbfd81076de51ac187eb599d107808789ce8cb4",
+      "published_sha256": "6876ee78503338e175c04de31fbfd81076de51ac187eb599d107808789ce8cb4",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_research_baselines.py",
+      "original_sha256": "d410668d2180cb4d9942466963fe5299a282e6bc867408632707c74a136b7db6",
+      "published_sha256": "d410668d2180cb4d9942466963fe5299a282e6bc867408632707c74a136b7db6",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_research_neural.py",
+      "original_sha256": "b2ba656a5c7e347c6648021129c5f97d82d52091af068fd588e8cada53eef49a",
+      "published_sha256": "b2ba656a5c7e347c6648021129c5f97d82d52091af068fd588e8cada53eef49a",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_terminal_compact_model.py",
+      "original_sha256": "2d945437885b3b0eea5c1d3a26d92cb09c3b8a17866cd95a73ade2cdbe17fdbd",
+      "published_sha256": "2d945437885b3b0eea5c1d3a26d92cb09c3b8a17866cd95a73ade2cdbe17fdbd",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_terminal_inference.py",
+      "original_sha256": "7dbefa669397d938004bc96f1d00ed05f3c47b6a0d366068f83e80e6d4b10484",
+      "published_sha256": "7dbefa669397d938004bc96f1d00ed05f3c47b6a0d366068f83e80e6d4b10484",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_terminal_model.py",
+      "original_sha256": "16c856a542e8285534ab6cf26149459948d1b4fa1d2609f13e604fda9c6ed208",
+      "published_sha256": "16c856a542e8285534ab6cf26149459948d1b4fa1d2609f13e604fda9c6ed208",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_terminal_optimization_training.py",
+      "original_sha256": "3d3a888e6e7d0665e768330c5e743415ab1461ba16d92d2ad20390a56aeefb50",
+      "published_sha256": "3d3a888e6e7d0665e768330c5e743415ab1461ba16d92d2ad20390a56aeefb50",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_terminal_readiness.py",
+      "original_sha256": "fd8a40f51a2b995a9e2afad59dc30551b0fb8eb0d0153effa9ecc1f776e31e76",
+      "published_sha256": "fd8a40f51a2b995a9e2afad59dc30551b0fb8eb0d0153effa9ecc1f776e31e76",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_terminal_runner.py",
+      "original_sha256": "07bfb04387350974f979f917add224d81830eba56bc4cc0bfa6b9a5257dd9cfa",
+      "published_sha256": "07bfb04387350974f979f917add224d81830eba56bc4cc0bfa6b9a5257dd9cfa",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_terminal_selection_evaluation.py",
+      "original_sha256": "8609f7f1fef498161423e011147bc185bfe7c91a24281e88859a728a2d5e1371",
+      "published_sha256": "8609f7f1fef498161423e011147bc185bfe7c91a24281e88859a728a2d5e1371",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_terminal_support.py",
+      "original_sha256": "1f06ccffd5b5bf0f1ddbd8aa9e40a2f31475cf09d30df2c1c8fa3c585a3bf407",
+      "published_sha256": "1f06ccffd5b5bf0f1ddbd8aa9e40a2f31475cf09d30df2c1c8fa3c585a3bf407",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_terminal_training.py",
+      "original_sha256": "8656e7c0b1bf0ec7af15abe260ae345d4b6d7732175ba5e120c53f6bccbab1ae",
+      "published_sha256": "8656e7c0b1bf0ec7af15abe260ae345d4b6d7732175ba5e120c53f6bccbab1ae",
+      "unchanged": true
+    },
+    {
+      "path": "tests/test_timeline_training.py",
+      "original_sha256": "a77da4d2f92ccdf76145b975c0e9fd993fadb629dbf709f3694e769e741f4b55",
+      "published_sha256": "a77da4d2f92ccdf76145b975c0e9fd993fadb629dbf709f3694e769e741f4b55",
+      "unchanged": true
+    },
+    {
+      "path": "configs/terminal/optimization_v1.json",
+      "original_sha256": "d17595f64003405767521aa2316d86f68121cce231d8ccadd66d2dd518efbcd2",
+      "published_sha256": "d17595f64003405767521aa2316d86f68121cce231d8ccadd66d2dd518efbcd2",
+      "unchanged": true
+    },
+    {
+      "path": "configs/terminal/report_concepts_v1.json",
+      "original_sha256": "5f14d476e0430fdc3edfa55028123336784c88423e4e20aaa36aa7db6c8715b9",
+      "published_sha256": "5f14d476e0430fdc3edfa55028123336784c88423e4e20aaa36aa7db6c8715b9",
+      "unchanged": true
+    },
+    {
+      "path": "configs/terminal/state_v1.json",
+      "original_sha256": "54b0a09f679caf3226b614fc07d8da58cd5fcf2182158e3b3dfb96e2448ce847",
+      "published_sha256": "54b0a09f679caf3226b614fc07d8da58cd5fcf2182158e3b3dfb96e2448ce847",
+      "unchanged": true
+    },
+    {
+      "path": "configs/modality/dynamic_h128.json",
+      "original_sha256": "b2584a7c10111dcb4fd3b97eedb84158075764ef96e96d71ef0050b2e6ee2100",
+      "published_sha256": "b2584a7c10111dcb4fd3b97eedb84158075764ef96e96d71ef0050b2e6ee2100",
+      "unchanged": true
+    },
+    {
+      "path": "configs/modality/dynamic_h64.json",
+      "original_sha256": "8b1c20e63350967d0fc1a7f35785d34e7497eda20ec3d0aa5dcba08ff7a82986",
+      "published_sha256": "8b1c20e63350967d0fc1a7f35785d34e7497eda20ec3d0aa5dcba08ff7a82986",
+      "unchanged": true
+    },
+    {
+      "path": "configs/modality/static_h128.json",
+      "original_sha256": "6281e5b3ca52b0e078eba351e146875c38569f917e30dba1b376d5a634c0ca5d",
+      "published_sha256": "6281e5b3ca52b0e078eba351e146875c38569f917e30dba1b376d5a634c0ca5d",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/backbone.py",
+      "original_sha256": "d6fffd7ad84c3defe38682cdc4d13ce691b2cd4e78eb2f718d6ae2b4297b8bc7",
+      "published_sha256": "d6fffd7ad84c3defe38682cdc4d13ce691b2cd4e78eb2f718d6ae2b4297b8bc7",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/clinical.py",
+      "original_sha256": "d9b4a27e4d6443d8bbc49437fdf8c517d1e4835e242a566706f93d69b702dada",
+      "published_sha256": "d9b4a27e4d6443d8bbc49437fdf8c517d1e4835e242a566706f93d69b702dada",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/data.py",
+      "original_sha256": "f2cc88d1e5331d0fba1808afa1ccf26179efc2d962ef069b4e8c4696d4fbaeba",
+      "published_sha256": "f2cc88d1e5331d0fba1808afa1ccf26179efc2d962ef069b4e8c4696d4fbaeba",
+      "unchanged": true
+    },
+    {
+      "path": "src/stageworld_tcwm/report_schema.py",
+      "original_sha256": "b7b4f1e25fc9e25d272c2c323278414636c36b3bee235274482eedd78711290c",
+      "source": "original pathology experiment, pure-code evidence validator",
+      "published_sha256": "b7b4f1e25fc9e25d272c2c323278414636c36b3bee235274482eedd78711290c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/MULTISTAGE_STATE_REVISION_20261001.md",
+      "original_sha256": "01eab0aa1df83452da91ea352ea054609b18443a5a5964a7489babead6289cc2",
+      "published_sha256": "01eab0aa1df83452da91ea352ea054609b18443a5a5964a7489babead6289cc2",
+      "unchanged": true
+    },
+    {
+      "path": "docs/FOUR_STAGE_AUXILIARY_ADAPTER_EXPERIMENTS_20261001.md",
+      "original_sha256": "974c3bf7e5370152c36c9ea2e151896f7847d6a80cb472b48173fa8012d21098",
+      "published_sha256": "bdb7c426592964a5f81d0a5b236d125f5b140ccf780dcecb1e771b4054ccf4d8",
+      "unchanged": false
+    }
+  ]
+}

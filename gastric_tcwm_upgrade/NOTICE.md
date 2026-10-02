@@ -11,3 +11,15 @@ DiT and Meta Flow Matching upstream repositories carry noncommercial CC-BY-NC no
 No patient data, CT images, clinical feature caches, patient-level labels or predictions, identification keys, or trained clinical weights are included. The original package's engineering tests used synthetic inputs. Subsequent adaptation, repair comparisons, and CT development experiments used an authorized private clinical cohort; only reviewed aggregate results are included in this public export. The repair study scored the original internal test partition once after model locking. The later CT development study did not score that test partition again. Clinical effectiveness, external validity, and causal effects have not been established, and reliable incremental benefit from CT/world-model components has not been demonstrated. Hypothetical treatment inputs do not make the model a causal estimator or a treatment recommender.
 
 This export contains the extension source and aggregate research reports, not the private training artifacts or a complete mirror of the original repository. The optional `scripts/build_full_repository.py` downloads the pinned original and installs the extension locally; it does not publish changes. Attribution and upstream licensing restrictions continue to apply to any combined repository.
+
+The 2026-10-02 V3/V6 addition exports the original research implementation of
+the report-auxiliary Timeline model and the small four-stage adapter model.
+`src/stageworld_tcwm/report_schema.py` is the unchanged pure-code evidence
+validator from the same project's earlier pathology-supervision implementation
+(`gastric-pathology-supervision-v1`); it contains schema/validation logic, no
+patient reports, and imports the separately installed `jsonschema` package.
+Its original and published hashes are listed in `docs/v3_v6/source_manifest.json`.
+No third-party dependency source or model weights are vendored by this addition.
+V3 includes previously reported aggregate test results; V6 and its paired
+auxiliary comparison have only train/validation results. Publication does not
+establish clinically validated concepts or reliable treatment effects.

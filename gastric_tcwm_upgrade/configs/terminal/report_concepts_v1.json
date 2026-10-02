@@ -1,0 +1,32 @@
+{
+  "model": {
+    "objective": "terminal_state_v1",
+    "s1_report_concepts": true,
+    "hidden": 128,
+    "image_dim": 768,
+    "time_basis": "ordinal_stage",
+    "ablation": "dynamic",
+    "assimilate_ct1": false
+  },
+  "training": {
+    "seed": 17,
+    "batch_size": 8,
+    "accumulation_steps": 2,
+    "learning_rate": 0.0001,
+    "image_learning_rate": 0.00005,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0,
+    "max_optimizer_steps": 500,
+    "validation_interval": 50,
+    "checkpoint_interval": 10,
+    "minimum_optimizer_steps": 100,
+    "patience": 5,
+    "forecast_weight": 0.1,
+    "pcr_weight": 0.1,
+    "alignment_weight": 0.1,
+    "report_concept_weight": 0.0,
+    "assimilation_weight": 0.0,
+    "drift_weight": 0.0001,
+    "device": "cuda"
+  }
+}

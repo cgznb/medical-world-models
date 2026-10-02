@@ -10,7 +10,29 @@ The reviewed base is
 This directory provides the upgrade path, not every historical module from that
 repository. See [NOTICE.md](NOTICE.md) for attribution and licensing boundaries.
 
-## Results and scope
+## V3 / V6 publication (2026-10-02)
+
+Start with [the V3/V6 code guide, architecture diagrams and reproduction commands](docs/v3_v6/README.md).
+V3 is the H128 report-concept auxiliary experiment (`B-report-pilot`);
+V6 is the small four-stage `ct_pcr_adapter` experiment, with its paired
+`pcr_only_frozen` comparison and parent training runner. The current protocol is
+**651 patients, fixed train456 / validation65 / test130, split seed17**.
+These are review names, not historical Git tags.
+
+The V3 selected arm achieved test AUC 0.540799 but did not validate the report
+concepts against constant baselines. V6 selected the terminal epoch0 clinical
+reference in all ten seeds (validation AUC 0.724000); its test set has not been
+scored. See the guide for the exact supervision boundaries and interpretation.
+
+```bash
+python -m pip install -e '.[dev,timeline]'
+python scripts/demo_v3_v6.py
+```
+
+The following results and older reproduction commands are retained as historical
+protocols; their 521-patient folds and S1/S2 behavior do not describe V3/V6.
+
+## Historical results and scope
 
 The clinical-anchored repair reached recurrence AUROC 0.6232 on the original
 validation partition and 0.6240 on the internal test partition scored once
@@ -36,7 +58,7 @@ does not establish independent confirmation.
 
 - [Repair report and aggregate results](../results/gastric/repair/REPAIR_REPORT_ZH.md)
 - [CT development report and negative findings](../results/gastric/ct_optimization/CT_REPORT_ZH.md)
-- [Latest aggregate results](../results/gastric/next_round_20260929/README.md), [training report](docs/NEXT_ROUND_RESULTS.md), and [fixed-feature/forecast diagnostics](docs/NEXT_ROUND_DIAGNOSTICS.md)
+- [2026-09-29 aggregate results](../results/gastric/next_round_20260929/README.md), [training report](docs/NEXT_ROUND_RESULTS.md), and [fixed-feature/forecast diagnostics](docs/NEXT_ROUND_DIAGNOSTICS.md)
 - [Next-round implementation](docs/NEXT_ROUND_CHANGES.md) and [protocol/reproduction](docs/NEXT_ROUND_PROTOCOL.md)
 - [Data adaptation](docs/LOCAL_ADAPTATION.md), [repair reproduction](docs/LOCAL_REPAIR.md), and [CT reproduction](docs/CT_OPTIMIZATION.md)
 - [Algorithm](docs/ALGORITHM_ZH.md), [data schema](docs/DATA_SCHEMA.md), and [source audit](docs/SOURCE_AUDIT.md)
@@ -54,13 +76,13 @@ Python 3.11 or later is required. Install PyTorch for the intended CPU/CUDA
 environment, then run from this directory:
 
 ```bash
-python -m pip install -e '.[dev]'
+python -m pip install -e '.[dev,timeline]'
 python -m pytest -q
 ```
 
-The latest public-copy test result is recorded as aggregate counts in
-[engineering_checks.json](../results/gastric/next_round_20260929/engineering_checks.json).
-The [older test summary](../results/gastric/test_summary.json) remains a historical record.
+The V3/V6 publication checks are recorded in [verification.json](docs/v3_v6/verification.json).
+The [2026-09-29 engineering checks](../results/gastric/next_round_20260929/engineering_checks.json)
+and [older test summary](../results/gastric/test_summary.json) remain historical records.
 
 ## Synthetic execution check
 
@@ -115,8 +137,10 @@ auxiliary gastric pCR, not fixed-horizon survival probabilities. Actual
 treatment summaries and CT intervals are retrospective scenarios; predictions
 are associations, not causal treatment effects or treatment recommendations.
 The cohort is internal and previously used for development, not an external
-validation cohort. With no new postoperative observation, equal S1/S2 outputs
-are expected. CT1 never enters S0 or the pCR inference path.
+validation cohort. In the historical TCWM readout, absent a new postoperative
+observation, equal S1/S2 outputs were expected. V3/V6 instead implement explicit
+event transitions through all four stages and expose recurrence at factual S3.
+CT1 never enters S0 or the pCR inference path in these published recipes.
 
 Gaussian and Flow configurations, optional survival/competing-risk endpoints,
 and postoperative observation inputs are available in the implementation.
